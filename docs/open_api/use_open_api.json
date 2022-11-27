@@ -1,0 +1,1324 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Unsplash Semantic API",
+    "description": "The API for the Unsplash Semantic System",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/FRENTZROBERT/OpenAPI/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    }
+  ],
+  "paths": {
+    "/photos": {
+      "get": {
+        "tags": [
+          "Photos"
+        ],
+        "description": "Returns photos with or without filter criteria.",
+        "operationId": "getPhotos",
+        "parameters": [
+          {
+            "name": "photographerFirstName",
+            "in": "query",
+            "description": "The photographer's first name who took the photo.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Bob"
+            }
+          },
+          {
+            "name": "photographerLastName",
+            "in": "query",
+            "description": "The photographer's last name who took the photo.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Marley"
+            }
+          },
+          {
+            "name": "cameraMaker",
+            "in": "query",
+            "description": "The maker of the camera which took the photo.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Nikolon"
+            }
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "description": "The country where the photo was taken.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Italy"
+            }
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "description": "The city where the photo was taken.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Tarquinia"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The numbers of photos to return",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 10
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Offset used for pagination.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully returned all photos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Photo"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "examples": {
+                  "invalidPhotographerFirstName": {
+                    "value": {
+                      "code": 4292,
+                      "message": "Cannot read photographerFirstName parameter. Expected a string value."
+                    }
+                  },
+                  "invalidPhotographerLastName": {
+                    "value": {
+                      "code": 4632,
+                      "message": "Cannot read photographerLastName parameter. Expected a string value."
+                    }
+                  },
+                  "invalidCameraMaker": {
+                    "value": {
+                      "code": 4921,
+                      "message": "Cannot read cameraMaker parameter. Expected a string value."
+                    }
+                  },
+                  "invalidCountry": {
+                    "value": {
+                      "code": 4111,
+                      "message": "Cannot read country parameter. Expected a string value."
+                    }
+                  },
+                  "invalidCity": {
+                    "value": {
+                      "code": 4092,
+                      "message": "Cannot read city parameter. Expected a string value."
+                    }
+                  },
+                  "invalidLimit": {
+                    "value": {
+                      "code": 4091,
+                      "message": "Cannot read limit parameter. Expected an integer value."
+                    }
+                  },
+                  "invalidOffset": {
+                    "value": {
+                      "code": 4091,
+                      "message": "Cannot read offset parameter. Expected an integer value."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "code": 5124,
+                    "message": "Unexpected error occured. Please contact support."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/photos/{id}": {
+      "get": {
+        "tags": [
+          "Photos"
+        ],
+        "description": "Return photo based on id",
+        "operationId": "getPhotoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the photo to retrieve.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "0729a580-2240-11e6-9eb5-0002a5d5c51b"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully returned photo based on uuid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Photo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "examples": {
+                  "notFoundUuid": {
+                    "value": {
+                      "code": 4012,
+                      "message": "Cannot read Id parameter. Expected a uuid value."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found photo with given id.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "examples": {
+                  "invalidUuid": {
+                    "value": {
+                      "code": 4002,
+                      "message": "Photo with given id doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "code": 5124,
+                    "message": "Unexpected error occured. Please contact support."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/photos/{id}/augment": {
+      "get": {
+        "tags": [
+          "Photos"
+        ],
+        "description": "Return augmented photo based on Id.",
+        "operationId": "getAugmentedPhotoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the photo to retrieve.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "0729a580-2240-11e6-9eb5-0002a5d5c51b"
+            }
+          },
+          {
+            "name": "brightness",
+            "in": "query",
+            "description": "Adjusts the overall brightness of the image.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 70
+            }
+          },
+          {
+            "name": "sharpen",
+            "in": "query",
+            "description": "Sharpens the image using luminance providing crisp detail with minimal color artifacts.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 20
+            }
+          },
+          {
+            "name": "contrast",
+            "in": "query",
+            "description": "Adjusts the contrast of the image.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 30
+            }
+          },
+          {
+            "name": "saturation",
+            "in": "query",
+            "description": "Adjusts the saturation of the image.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 54
+            }
+          },
+          {
+            "name": "blur",
+            "in": "query",
+            "description": "Applies a Gaussian style blur to your image, smoothing out image noise.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 54
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully returned augmented photo based on uuid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhotoAugmentResponseBody"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "examples": {
+                  "notFoundUuid": {
+                    "value": {
+                      "code": 4012,
+                      "message": "Cannot read Id parameter. Expected a uuid value."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found photo with given id.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "examples": {
+                  "invalidUuid": {
+                    "value": {
+                      "code": 4002,
+                      "message": "Photo with given id doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "code": 5124,
+                    "message": "Unexpected error occured. Please contact support."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/photos/search": {
+      "get": {
+        "tags": [
+          "Photos"
+        ],
+        "description": "Return photos based on search value",
+        "operationId": "searchPhotosByValue",
+        "parameters": [
+          {
+            "name": "value",
+            "in": "query",
+            "description": "The value used for searching.",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "park"
+            }
+          },
+          {
+            "name": "photographerFirstName",
+            "in": "query",
+            "description": "The photographer's first name who took the photo.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Bob"
+            }
+          },
+          {
+            "name": "photographerLastName",
+            "in": "query",
+            "description": "The photographer's last name who took the photo.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Marley"
+            }
+          },
+          {
+            "name": "cameraMaker",
+            "in": "query",
+            "description": "The maker of the camera which took the photo.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Nikolon"
+            }
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "description": "The country where the photo was taken.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Italy"
+            }
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "description": "The city where the photo was taken.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Tarquinia"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The numbers of photos to return",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 10
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Offset used for pagination.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully returned photos based on search value.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Photo"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "examples": {
+                  "notFoundUuid": {
+                    "value": {
+                      "code": 4366,
+                      "message": "Cannot read value parameter. Expected a string value."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "code": 5124,
+                    "message": "Unexpected error occured. Please contact support."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collections": {
+      "get": {
+        "tags": [
+          "Collections"
+        ],
+        "description": "Returns all collections with or without search criteria.",
+        "operationId": "getCollections",
+        "parameters": [
+          {
+            "name": "photoId",
+            "in": "query",
+            "description": "Photo uuid contained in the collections to retrieve.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "0729a580-2240-11e6-9eb5-0002a5d5c51b"
+            }
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "Title of the collection to retrieve.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The numbers of collections to return",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 10
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Offset used for pagination.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully returned collections with or without search criteria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Collection"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "examples": {
+                  "invalidTitle": {
+                    "value": {
+                      "code": 4056,
+                      "message": "Cannot read title parameter. Expected a string value."
+                    }
+                  },
+                  "invalidPhotoUuid": {
+                    "value": {
+                      "code": 4032,
+                      "message": "Cannot read photoId parameter. Expected a uuid value."
+                    }
+                  },
+                  "invalidOffset": {
+                    "value": {
+                      "code": 4092,
+                      "message": "Cannot read offset parameter. Expected an integer value."
+                    }
+                  },
+                  "invalidLimit": {
+                    "value": {
+                      "code": 4091,
+                      "message": "Cannot read limit parameter. Expected an integer value."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "code": 5124,
+                    "message": "Unexpected error occured. Please contact support."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collections/{id}": {
+      "get": {
+        "tags": [
+          "Collections"
+        ],
+        "description": "Return collection based on id",
+        "operationId": "getCollectionById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Uuid of the collection to retrieve.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "0729a580-2240-11e6-9eb5-0002a5d5c51b"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully returned collection based on uuid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "examples": {
+                  "invalidUuid": {
+                    "value": {
+                      "code": 4056,
+                      "message": "Cannot read Id parameter. Expected a uuid value."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found collection with given id.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "examples": {
+                  "invalidUuid": {
+                    "value": {
+                      "code": 4002,
+                      "message": "Collection with given id doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "code": 5124,
+                    "message": "Unexpected error occured. Please contact support."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collections/search": {
+      "get": {
+        "tags": [
+          "Collections"
+        ],
+        "description": "Return collections based on search value.",
+        "operationId": "searchCollectionsByValue",
+        "parameters": [
+          {
+            "name": "value",
+            "in": "query",
+            "description": "The value used for searching.",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "park"
+            }
+          },
+          {
+            "name": "photoId",
+            "in": "query",
+            "description": "Photo uuid contained in the collections to retrieve.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "0729a580-2240-11e6-9eb5-0002a5d5c51b"
+            }
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "Title of the collection to retrieve.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The numbers of collections to return.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 10
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Offset used for pagination.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully returned collections based on search value.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Collection"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "examples": {
+                  "notFoundUuid": {
+                    "value": {
+                      "code": 4366,
+                      "message": "Cannot read value parameter. Expected a string value."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "code": 5124,
+                    "message": "Unexpected error occured. Please contact support."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/store/photos": {
+      "post": {
+        "tags": [
+          "DataPersistance"
+        ],
+        "description": "Create new photos data using files or json body.",
+        "operationId": "postPhotosData",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhotoPostBody"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Succesfully created new photos."
+          },
+          "400": {
+            "description": "Bad Request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "examples": {
+                  "invalidBody": {
+                    "value": {
+                      "code": 4232,
+                      "message": "Invalid request body."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "code": 5124,
+                    "message": "Unexpected error occured. Please contact support."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/store/collections": {
+      "post": {
+        "tags": [
+          "DataPersistance"
+        ],
+        "description": "Create new collections data using files or json body.",
+        "operationId": "postCollectionsData",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionPostBody"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Succesfully created new photos."
+          },
+          "400": {
+            "description": "Bad Request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                },
+                "examples": {
+                  "invalidBody": {
+                    "value": {
+                      "code": 4232,
+                      "message": "Invalid request body."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Unexpected error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "code": 5124,
+                    "message": "Unexpected error occured. Please contact support."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Photographer": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "bmarley"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "Bob"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Marley"
+          }
+        }
+      },
+      "Camera": {
+        "type": "object",
+        "properties": {
+          "maker": {
+            "type": "string",
+            "example": "Nikolon"
+          },
+          "model": {
+            "type": "string",
+            "example": "X1300"
+          }
+        }
+      },
+      "Location": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Antique - Etrurian Restaurant"
+          },
+          "country": {
+            "type": "string",
+            "example": "Italia"
+          },
+          "city": {
+            "type": "string",
+            "example": "Tarquinia"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double",
+            "example": 20.785
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double",
+            "example": -38.154
+          }
+        }
+      },
+      "Collection": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "0729a580-2240-11e6-9eb5-0002a5d5c51b"
+          },
+          "title": {
+            "type": "string",
+            "example": "Bob Marley"
+          },
+          "photosId": {
+            "type": "array",
+            "example": [
+              "5f8613f8-6db6-11ed-a1eb-0242ac120002",
+              "1434048c-6db6-11ed-a1eb-0242ac120002",
+              "c15b7d4c-d954-4438-bdb2-6a7debc8c948"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CollectionPostBody": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Bob Marley"
+          },
+          "photosId": {
+            "type": "array",
+            "example": [
+              "5f8613f8-6db6-11ed-a1eb-0242ac120002",
+              "1434048c-6db6-11ed-a1eb-0242ac120002",
+              "c15b7d4c-d954-4438-bdb2-6a7debc8c948"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Photo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "0729a580-2240-11e6-9eb5-0002a5d5c51b"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://unsplash.com/photos/XMyPniM9LF0"
+          },
+          "imageUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://images.unsplash.com/uploads/14119492946973137ce46/f1f2ebf3"
+          },
+          "submittedAt": {
+            "type": "string",
+            "format": "date"
+          },
+          "width": {
+            "type": "integer",
+            "format": "double"
+          },
+          "height": {
+            "type": "integer",
+            "format": "double"
+          },
+          "aspectRatio": {
+            "type": "integer",
+            "format": "double"
+          },
+          "description": {
+            "type": "string",
+            "example": "Hello World"
+          },
+          "photographer": {
+            "$ref": "#/components/schemas/Photographer"
+          },
+          "camera": {
+            "$ref": "#/components/schemas/Camera"
+          },
+          "iso": {
+            "type": "number",
+            "example": 500
+          },
+          "apertureValue": {
+            "type": "number",
+            "format": "double",
+            "example": 1.5
+          },
+          "focalLength": {
+            "type": "number",
+            "example": 500
+          },
+          "exposureTime": {
+            "type": "string",
+            "example": "1/500"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "views": {
+            "type": "number",
+            "example": 1000
+          },
+          "downloads": {
+            "type": "number",
+            "example": 1000
+          }
+        }
+      },
+      "PhotoAugmentResponseBody": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "0729a580-2240-11e6-9eb5-0002a5d5c51b"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://unsplash.com/photos/XMyPniM9LF0"
+          },
+          "imageUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://images.unsplash.com/uploads/14119492946973137ce46/f1f2ebf3?ixid=2yJhcHBfaWQiOjEyMDd9&bri=60&con=32&blur=20"
+          },
+          "width": {
+            "type": "integer",
+            "format": "double"
+          },
+          "height": {
+            "type": "integer",
+            "format": "double"
+          },
+          "aspectRatio": {
+            "type": "integer",
+            "format": "double"
+          }
+        }
+      },
+      "PhotoPostBody": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://unsplash.com/photos/XMyPniM9LF0"
+          },
+          "imageUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://images.unsplash.com/uploads/14119492946973137ce46/f1f2ebf3"
+          },
+          "submittedAt": {
+            "type": "string",
+            "format": "date"
+          },
+          "width": {
+            "type": "integer",
+            "format": "double"
+          },
+          "height": {
+            "type": "integer",
+            "format": "double"
+          },
+          "aspectRatio": {
+            "type": "integer",
+            "format": "double"
+          },
+          "description": {
+            "type": "string",
+            "example": "Hello World"
+          },
+          "photographer": {
+            "$ref": "#/components/schemas/Photographer"
+          },
+          "camera": {
+            "$ref": "#/components/schemas/Camera"
+          },
+          "iso": {
+            "type": "number",
+            "example": 500
+          },
+          "apertureValue": {
+            "type": "number",
+            "format": "double",
+            "example": 1.5
+          },
+          "focalLength": {
+            "type": "number",
+            "example": 500
+          },
+          "exposureTime": {
+            "type": "string",
+            "example": "1/500"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "views": {
+            "type": "number",
+            "example": 1000
+          },
+          "downloads": {
+            "type": "number",
+            "example": 1000
+          }
+        }
+      },
+      "ApiError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
