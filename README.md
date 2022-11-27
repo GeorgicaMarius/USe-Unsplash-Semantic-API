@@ -1,5 +1,3 @@
-# USe-Unsplash-Semantic-API
-
 <div align="center">
 
   <img src="docs/scholarly_reports/resources/images/logo_use.png" alt="logo" width="200" height="auto" />
