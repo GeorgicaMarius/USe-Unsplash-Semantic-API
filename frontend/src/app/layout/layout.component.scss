@@ -1,0 +1,25 @@
+@import 'src/app/styles/variables';
+
+.layout-container{
+  height: 100%;
+  background-color: $wisp-pink;
+
+  .layout-content{
+    display: flex;
+  }
+  .sidenav-container{
+    background: transparent;
+
+    .sidenav{
+      background-color: white;
+    }
+
+    .sidenav-content{
+      height: 93.2vh;
+      margin-left: 16px;
+      margin-right: 16px;
+      background-color: $wisp-pink;
+    }
+  }
+}
+

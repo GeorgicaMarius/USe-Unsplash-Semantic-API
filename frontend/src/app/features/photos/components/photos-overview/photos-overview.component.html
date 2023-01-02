@@ -1,0 +1,15 @@
+<div class="photos-container">
+  <div class="top-container">
+    <app-search-bar></app-search-bar>
+  </div>
+  <div class="bottom-container">
+    <div class="photos-overview-container">
+      <app-panel-header></app-panel-header>
+      <div class="photos-content">
+        <app-photo-card *ngFor="let photo of photos"></app-photo-card>
+      </div>
+      <app-panel-footer></app-panel-footer>
+    </div>
+  </div>
+</div>
+

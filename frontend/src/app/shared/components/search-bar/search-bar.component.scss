@@ -1,0 +1,18 @@
+@import 'src/app/styles/variables';
+
+:host{
+  .search-bar-container{
+    width: 30vw;
+    margin-top: 16px;
+    min-width: 200px;
+
+    ::ng-deep{
+      .mat-mdc-text-field-wrapper{
+        background-color: $heavy-metal;
+      }
+    }
+
+  }
+}
+
+
