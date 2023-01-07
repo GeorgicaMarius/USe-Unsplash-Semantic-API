@@ -13,6 +13,7 @@ Program that converts data from .tsv files from [Unsplash Lite Dataset](https://
 
 Notes:
 
+- the result rdf model file is available [here](https://drive.google.com/file/d/1i_KNnYsORsSu4mzoT4ocs2JC79v4fudi/view)
 - use provided `photos.tsv` and `keywords.tsv` from [Google Drive](https://drive.google.com/drive/folders/14MGJOAdQSFFSElGMqmUlvdJnnvcudCe3) that have some additional fixes like trouble causing characters removed/replaced
 - in `Main.java` set the path to directory where the .tsv files are, run and `use_model.rdf` will be generated
 - run Fuseki with UI using `apache-jena-fuseki-4.7.0\fuseki-server.bat` or `fuseki-server` ([docs](https://jena.apache.org/documentation/fuseki2/fuseki-webapp.html))
