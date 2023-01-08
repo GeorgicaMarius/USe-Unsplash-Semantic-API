@@ -10,6 +10,12 @@ public class USE {
 
     public static final Property downloadsCount;
     public static final Property viewsCount;
+    public static final Property exifCameraMake;
+    public static final Property exifCameraModel;
+    public static final Property exifIso;
+    public static final Property exifApertureValue;
+    public static final Property exifFocalLength;
+    public static final Property exifExposureTime;
 
     public USE() {
     }
@@ -25,5 +31,11 @@ public class USE {
     static {
         downloadsCount = m.createProperty(uri, "downloadsCount");
         viewsCount = m.createProperty(uri, "viewsCount");
+        exifCameraMake = m.createProperty(uri, "exifCameraMake");
+        exifCameraModel = m.createProperty(uri, "exifCameraModel");
+        exifIso = m.createProperty(uri, "exifIso");
+        exifApertureValue = m.createProperty(uri, "exifApertureValue");
+        exifFocalLength = m.createProperty(uri, "exifFocalLength");
+        exifExposureTime = m.createProperty(uri, "exifExposureTime");
     }
 }

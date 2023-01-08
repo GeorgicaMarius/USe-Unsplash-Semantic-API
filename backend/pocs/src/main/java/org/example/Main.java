@@ -14,9 +14,9 @@ public class Main {
         UsePhotoQueryDto photo1 = UseDsQueryHelper.getPhotoById("IpIenETtzXM");
         System.out.println(photo1);
 
-//        List<UsePhotoQueryDto> photos = UseDsQueryHelper.getPhotosByKeyword("tulips", 0, 10);
-//        List<UsePhotoQueryDto> photos = UseDsQueryHelper.getPhotosByCountry("Romania", 0, 10);
-//        List<UsePhotoQueryDto> photos = UseDsQueryHelper.getPhotosByCity("New York", 0, 10);
+//        List<UsePhotoQueryDto> photos = UseDsQueryHelper.searchPhotosByKeyword("tulips", 0, 10);
+//        List<UsePhotoQueryDto> photos = UseDsQueryHelper.filterPhotosByCountry("Romania", 0, 10);
+//        List<UsePhotoQueryDto> photos = UseDsQueryHelper.filterPhotosByCity("New York", 0, 10);
 //        for(UsePhotoQueryDto photo: photos) {
 //            System.out.println(photo);
 //        }

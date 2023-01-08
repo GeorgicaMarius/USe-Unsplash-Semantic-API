@@ -50,7 +50,7 @@ public class PhotoBean {
     public String exifCameraModel;
 
     @CsvBindByName(column = "exif_iso")
-    public Integer exifIso;
+    public String exifIso;
 
     @CsvBindByName(column = "exif_aperture_value")
     public String exifApertureValue;
@@ -117,7 +117,7 @@ public class PhotoBean {
                 "\tphotographerLastName='" + photographerLastName + '\'' + "\n" +
                 "\texifCameraMake='" + exifCameraMake + '\'' + "\n" +
                 "\texifCameraModel='" + exifCameraModel + '\'' + "\n" +
-                "\texifIso=" + exifIso + "\n" +
+                "\texifIso='" + exifIso + '\'' + "\n" +
                 "\texifApertureValue='" + exifApertureValue + '\'' + "\n" +
                 "\texifFocalLength='" + exifFocalLength + '\'' + "\n" +
                 "\texifExposureTime='" + exifExposureTime + '\'' + "\n" +

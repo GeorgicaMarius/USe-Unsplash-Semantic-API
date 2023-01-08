@@ -26,6 +26,12 @@ public class UseDsQueryHelper {
             "            schema:contentLocation ?bnContentLocation ;\n" +
             "            use:downloadsCount ?statsDownloads ;\n" +
             "            use:viewsCount ?statsViews ;\n" +
+            "            use:exifCameraMake ?exifCameraMake ;\n" +
+            "            use:exifCameraModel ?exifCameraModel ;\n" +
+            "            use:exifIso ?exifIso ;\n" +
+            "            use:exifApertureValue ?exifApertureValue ;\n" +
+            "            use:exifFocalLength ?exifFocalLength ;\n" +
+            "            use:exifExposureTime ?exifExposureTime ;\n" +
             "            schema:author ?bnAuthor.\n" +
             "  ?bnAssociatedMedia rdf:type schema:MediaObject ;\n" +
             "                     schema:contentUrl ?photoImageUrl ;\n" +
@@ -52,6 +58,12 @@ public class UseDsQueryHelper {
         photo.photoKeywords = sol.getLiteral("photoKeywords").getString();
         photo.statsDownloads = sol.getLiteral("statsDownloads").getInt();
         photo.statsViews = sol.getLiteral("statsViews").getInt();
+        photo.exifCameraMake = sol.getLiteral("exifCameraMake").getString();
+        photo.exifCameraModel = sol.getLiteral("exifCameraModel").getString();
+        photo.exifIso = sol.getLiteral("exifIso").getString();
+        photo.exifApertureValue = sol.getLiteral("exifApertureValue").getString();
+        photo.exifFocalLength = sol.getLiteral("exifFocalLength").getString();
+        photo.exifExposureTime = sol.getLiteral("exifExposureTime").getString();
         photo.photoImageUrl = sol.getLiteral("photoImageUrl").getString();
         photo.photoSubmittedAt = sol.getLiteral("photoSubmittedAt").getLong();
         photo.photoWidth = sol.getLiteral("photoWidth").getInt();
@@ -103,19 +115,19 @@ public class UseDsQueryHelper {
         return (photos.size() != 0) ? photos.get(0) : null;
     }
 
-    public static List<UsePhotoQueryDto> getPhotosByKeyword(String photoKeyword, Integer offset, Integer limit) {
+    public static List<UsePhotoQueryDto> searchPhotosByKeyword(String photoKeyword, Integer offset, Integer limit) {
         String filterBlock = "  FILTER (regex (?photoKeywords, \"" + photoKeyword + "\", \"i\"))\n";
         String sortBlock = "ORDER BY ASC(?photoSubmittedAt)\n";
         return executeBasicQuery(filterBlock, sortBlock, offset, limit);
     }
 
-    public static List<UsePhotoQueryDto> getPhotosByCountry(String photoLocationCountry, Integer offset, Integer limit) {
+    public static List<UsePhotoQueryDto> filterPhotosByCountry(String photoLocationCountry, Integer offset, Integer limit) {
         String filterBlock = "  FILTER (?photoLocationCountry = \"" + photoLocationCountry + "\")\n";
         String sortBlock = "ORDER BY ASC(?photoSubmittedAt)\n";
         return executeBasicQuery(filterBlock, sortBlock, offset, limit);
     }
 
-    public static List<UsePhotoQueryDto> getPhotosByCity(String photoLocationCity, Integer offset, Integer limit) {
+    public static List<UsePhotoQueryDto> filterPhotosByCity(String photoLocationCity, Integer offset, Integer limit) {
         String filterBlock = "  FILTER (?photoLocationCity = \"" + photoLocationCity + "\")\n";
         String sortBlock = "ORDER BY ASC(?photoSubmittedAt)\n";
         return executeBasicQuery(filterBlock, sortBlock, offset, limit);

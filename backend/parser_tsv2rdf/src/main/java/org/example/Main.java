@@ -51,6 +51,14 @@ public class Main {
                         .addLiteral(SCHEMA.identifier, photo.photoId)
                         .addLiteral(SCHEMA.sameAs, photo.photoUrl)
                         .addLiteral(SCHEMA.description, photo.photoDescription)
+                        .addLiteral(USE.downloadsCount, photo.statsDownloads)
+                        .addLiteral(USE.viewsCount, photo.statsViews)
+                        .addLiteral(USE.exifCameraMake, photo.exifCameraMake)
+                        .addLiteral(USE.exifCameraModel, photo.exifCameraModel)
+                        .addLiteral(USE.exifIso, photo.exifIso)
+                        .addLiteral(USE.exifApertureValue, photo.exifApertureValue)
+                        .addLiteral(USE.exifFocalLength, photo.exifFocalLength)
+                        .addLiteral(USE.exifExposureTime, photo.exifExposureTime)
                         .addProperty(SCHEMA.associatedMedia,
                                 model.createResource()
                                         .addProperty(RDF.type, SCHEMA.MediaObject)
@@ -66,20 +74,6 @@ public class Main {
                                         .addLiteral(SCHEMA.longitude, photo.photoLocationLongitude)
                                         .addLiteral(SCHEMA.latitude, photo.photoLocationLatitude)
                                         .addLiteral(SCHEMA.name, photo.photoLocationName))
-                        /* Replaced interactionStatistic with direct use:downloadsCount and use:viewsCount */
-                        /*
-                        .addProperty(SCHEMA.interactionStatistic,
-                                model.createResource()
-                                        .addProperty(RDF.type, SCHEMA.InteractionCounter)
-                                        .addLiteral(SCHEMA.interactionType, "ViewAction")
-                                        .addLiteral(SCHEMA.userInteractionCount, photo.statsViews))
-                        .addProperty(SCHEMA.interactionStatistic,
-                                model.createResource()
-                                        .addProperty(RDF.type, SCHEMA.InteractionCounter)
-                                        .addLiteral(SCHEMA.interactionType, "DownloadAction")
-                                        .addLiteral(SCHEMA.userInteractionCount, photo.statsDownloads)) */
-                        .addLiteral(USE.downloadsCount, photo.statsDownloads)
-                        .addLiteral(USE.viewsCount, photo.statsViews)
                         .addProperty(SCHEMA.author,
                                 model.createResource()
                                         .addProperty(RDF.type, SCHEMA.Person)

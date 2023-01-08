@@ -8,6 +8,12 @@ public class UsePhotoQueryDto {
     public String photoKeywords;
     public Integer statsDownloads;
     public Integer statsViews;
+    public String exifCameraMake;
+    public String exifCameraModel;
+    public String exifIso;
+    public String exifApertureValue;
+    public String exifFocalLength;
+    public String exifExposureTime;
     public String photoImageUrl;
     public Long photoSubmittedAt;
     public Integer photoWidth;
@@ -30,6 +36,12 @@ public class UsePhotoQueryDto {
                 "\tphotoKeywords='" + photoKeywords + '\'' + "\n" +
                 "\tstatsDownloads=" + statsDownloads + "\n" +
                 "\tstatsViews=" + statsViews + "\n" +
+                "\texifCameraMake='" + exifCameraMake + '\'' + "\n" +
+                "\texifCameraModel='" + exifCameraModel + '\'' + "\n" +
+                "\texifIso='" + exifIso + '\'' + "\n" +
+                "\texifApertureValue='" + exifApertureValue + '\'' + "\n" +
+                "\texifFocalLength='" + exifFocalLength + '\'' + "\n" +
+                "\texifExposureTime='" + exifExposureTime + '\'' + "\n" +
                 "\tphotoImageUrl='" + photoImageUrl + '\'' + "\n" +
                 "\tphotoSubmittedAt=" + photoSubmittedAt + "\n" +
                 "\tphotoWidth=" + photoWidth + "\n" +
