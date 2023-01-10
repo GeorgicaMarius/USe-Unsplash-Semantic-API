@@ -28,5 +28,12 @@ Notes:
 
 Project that contains some Proof of Concept (pocs) code for using Apache Jena to call and retrieve data from SPARQL endpoints:
 
-- `UseDsQueryHelper` contains queries for retrieving data from the local Fuseki SPARQL endpoint
+- `UseDsPhotoQueryHelper` contains photo queries for the local Fuseki SPARQL endpoint
+- `UseDsCollectionQueryHelper` contains collection queries for the local Fuseki SPARQL endpoint
 - `DbpediaDsQueryHelper` contains queries for the DBpedia SPARQL enpoint
+
+---
+
+## use-api
+
+Spring Boot Web REST API project, serving as the Backend for the Angular Frontend project.
