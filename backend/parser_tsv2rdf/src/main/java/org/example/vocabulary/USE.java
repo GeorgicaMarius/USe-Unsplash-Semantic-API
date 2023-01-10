@@ -24,7 +24,7 @@ public class USE {
         return uri;
     }
 
-    public static String getCURIE(String localName) {
+    public static String getResUri(String localName) {
         return uri + localName;
     }
 

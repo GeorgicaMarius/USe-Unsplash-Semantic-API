@@ -2,10 +2,10 @@ package org.example;
 
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.RDF;
+import org.apache.jena.vocabulary.RDFS;
+import org.example.models.CollectionBean;
 import org.example.models.KeywordBean;
 import org.example.models.PhotoBean;
 import org.example.vocabulary.SCHEMA;
@@ -21,8 +21,10 @@ public class Main {
     private static final String basePath = "C:\\Users\\User03\\Desktop\\wade\\use-files\\";
     private static final String photosTsvFilePath = basePath + "photos.tsv";
     private static final String keywordsTsvFilePath = basePath + "keywords.tsv";
-    private static final String outputRdfNoKeywordsFilePath = basePath + "temp_model.rdf";
-    private static final String outputRdfWithKeywordsFilePath = basePath + "use_model.rdf";
+    private static final String collectionsTsvFilePath = basePath + "collections.tsv";
+    private static final String outputRdfNoKeywordsFilePath = basePath + "temp_model1.rdf";
+    private static final String outputRdfWithKeywordsFilePath = basePath + "temp_model2.rdf";
+    private static final String outputRdfWithCollectionsFilePath = basePath + "use_model.rdf";
 
 
     private static void createRdfModelFromPhotosTsv() throws IOException {
@@ -46,7 +48,7 @@ public class Main {
 
                 // create the resource and add the properties cascading style
                 Resource photoRes
-                        = model.createResource(USE.getCURIE(photo.photoId))
+                        = model.createResource(USE.getResUri(photo.photoId))
                         .addProperty(RDF.type, SCHEMA.Photograph)
                         .addLiteral(SCHEMA.identifier, photo.photoId)
                         .addLiteral(SCHEMA.sameAs, photo.photoUrl)
@@ -128,7 +130,7 @@ public class Main {
                         // if first keyword entry from a new photoId group - save keywords for previous photoId
                         //   except when is also first keyword from file
                         if (previousPhotoId != null) {
-                            Resource photoRes = model.getResource(USE.getCURIE(previousPhotoId));
+                            Resource photoRes = model.getResource(USE.getResUri(previousPhotoId));
                             photoRes.addLiteral(SCHEMA.keywords, keywordsComp.toString());
                         }
 
@@ -139,7 +141,7 @@ public class Main {
             }
             // save keywords for the last photoId
             System.out.println("Last keyword entry: " + previousPhotoId);
-            Resource photoRes = model.getResource(USE.getCURIE(previousPhotoId));
+            Resource photoRes = model.getResource(USE.getResUri(previousPhotoId));
             assert keywordsComp != null; // only if file has no keyword entry...
             photoRes.addLiteral(SCHEMA.keywords, keywordsComp.toString());
 
@@ -148,10 +150,49 @@ public class Main {
         }
     }
 
+    private static void addCollectionsToRdfModel() throws IOException {
+        // create an empty model
+        Model model = ModelFactory.createDefaultModel();
+
+        try (FileReader model_fr = new FileReader(outputRdfWithKeywordsFilePath, StandardCharsets.UTF_8);
+             FileReader collections_fr = new FileReader(collectionsTsvFilePath, StandardCharsets.UTF_8);
+             FileWriter model_with_collections_fw = new FileWriter(outputRdfWithCollectionsFilePath, StandardCharsets.UTF_8)) {
+
+            // read the RDF/XML file
+            model.read(model_fr, "");
+
+            CsvToBean<CollectionBean> csvToBean = new CsvToBeanBuilder<CollectionBean>(collections_fr)
+                    .withType(CollectionBean.class)
+                    .withSeparator('\t')
+                    .build();
+
+            for (CollectionBean collectionBean : csvToBean) {
+                // System.out.println(collectionBean);
+
+                // if bag for collection does NOT exist, create bag, add identifier, label, etc.
+                Bag collection = model.getBag(USE.getResUri(collectionBean.collectionId));
+                if (!model.contains(collection, null, (RDFNode) null)) {
+                    collection = model.createBag(USE.getResUri(collectionBean.collectionId));
+                    collection.addLiteral(SCHEMA.identifier, collectionBean.collectionId);
+                    collection.addLiteral(RDFS.label, collectionBean.collectionTitle);
+                }
+
+                // add photo to collection
+                Resource photoEntry = model.getResource(USE.getResUri(collectionBean.photoId));
+                collection.add(photoEntry);
+            }
+
+            // write the model in XML form to a file
+            model.write(model_with_collections_fw);
+        }
+    }
+
     public static void main(String[] args) throws IOException {
 
         createRdfModelFromPhotosTsv();
 
         addKeywordsToRdfModel();
+
+        addCollectionsToRdfModel();
     }
 }

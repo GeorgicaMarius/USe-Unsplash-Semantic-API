@@ -7,7 +7,7 @@ import org.example.models.UsePhotoQueryDto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UseDsQueryHelper {
+public class UseDsPhotoQueryHelper {
     private static final String useDatasetEndpointUrl = "http://localhost:3030/use_dataset/sparql";
 
     private static final String prefixesBlock = "" +
