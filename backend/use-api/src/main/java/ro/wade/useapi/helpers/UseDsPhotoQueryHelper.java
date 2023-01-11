@@ -80,8 +80,10 @@ public class UseDsPhotoQueryHelper {
     }
 
     private static List<UsePhotoQueryDto> executeBasicQuery(String filterBlock, String sortBlock, Integer offset, Integer limit) {
-        ParameterizedSparqlString pss = new ParameterizedSparqlString();
+        if (filterBlock == null) filterBlock = "";
+        if (sortBlock == null) sortBlock = "";
 
+        ParameterizedSparqlString pss = new ParameterizedSparqlString();
         pss.setCommandText("" +
                 prefixesBlock +
                 "\n" +
