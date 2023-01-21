@@ -2,21 +2,30 @@ package ro.wade.useapi.helpers;
 
 import org.apache.jena.query.*;
 import org.apache.jena.sparql.exec.http.QueryExecutionHTTP;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import ro.wade.useapi.models.UsePhotoQueryDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class UseDsPhotoQueryHelper {
-    private static final String useDatasetEndpointUrl = "http://localhost:3030/use_dataset/sparql";
+    private final String useDatasetEndpointUrl;
 
-    private static final String prefixesBlock = "" +
+    @Autowired
+    public UseDsPhotoQueryHelper(@Value("${use.dataset.endpoint}") String useDatasetEndpointUrl) {
+        this.useDatasetEndpointUrl = useDatasetEndpointUrl;
+    }
+
+    private final String prefixesBlock = "" +
             "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
             "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
             "PREFIX schema: <http://schema.org/>\n" +
             "PREFIX use: <http://use.ro/>\n";
 
-    private static final String createVarsForAllFieldsBlock = "" +
+    private final String createVarsForAllFieldsBlock = "" +
             "  ?photoRes rdf:type schema:Photograph ;\n" +
             "            schema:identifier ?photoId ;\n" +
             "            schema:sameAs ?photoUrl ;\n" +
@@ -50,7 +59,7 @@ public class UseDsPhotoQueryHelper {
             "            schema:callSign ?photographerUsername .\n";
 
 
-    private static UsePhotoQueryDto querySolutionToPhotoDto(QuerySolution sol) {
+    private UsePhotoQueryDto querySolutionToPhotoDto(QuerySolution sol) {
         UsePhotoQueryDto photo = new UsePhotoQueryDto();
         photo.photoId = sol.getLiteral("photoId").getString();
         photo.photoUrl = sol.getLiteral("photoUrl").getString();
@@ -79,7 +88,7 @@ public class UseDsPhotoQueryHelper {
         return photo;
     }
 
-    private static List<UsePhotoQueryDto> executeBasicQuery(String filterBlock, String sortBlock, Integer offset, Integer limit) {
+    private List<UsePhotoQueryDto> executeBasicQuery(String filterBlock, String sortBlock, Integer offset, Integer limit) {
         if (filterBlock == null) filterBlock = "";
         if (sortBlock == null) sortBlock = "";
 
@@ -111,13 +120,13 @@ public class UseDsPhotoQueryHelper {
         return photos;
     }
 
-    public static UsePhotoQueryDto getPhotoById(String photoId) {
+    public UsePhotoQueryDto getPhotoById(String photoId) {
         String filterBlock = "  FILTER (?photoId = \"" + photoId + "\")\n";
         List<UsePhotoQueryDto> photos = executeBasicQuery(filterBlock, "", 0, 1);
         return (photos.size() != 0) ? photos.get(0) : null;
     }
 
-    public static List<UsePhotoQueryDto> getPhotosFilter(
+    public List<UsePhotoQueryDto> getPhotosFilter(
             Integer offset,
             Integer limit,
             String photographerFirstName,
@@ -141,7 +150,7 @@ public class UseDsPhotoQueryHelper {
         return executeBasicQuery(filterBlock, sortBlock, offset, limit);
     }
 
-    public static List<UsePhotoQueryDto> getPhotosSearch(
+    public List<UsePhotoQueryDto> getPhotosSearch(
             Integer offset,
             Integer limit,
             String photographerFirstName,

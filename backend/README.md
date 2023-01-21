@@ -36,4 +36,17 @@ Project that contains some Proof of Concept (pocs) code for using Apache Jena to
 
 ## use-api
 
-Spring Boot Web REST API project, serving as the Backend for the Angular Frontend project.
+Spring Boot Web REST API project, serving as the backend for the Angular frontend project. Offers operations for:
+
+- photos: query, search, filter, offset and limits
+- collections: query, search, filter, offset and limits
+- additional data: from DBpedia, about cities
+
+Use `src\main\resources\application.properties` to configure:
+
+- `fuseki.server.start`: `True` or `False` - if to start embedded Fuseki server (available at port 3330)
+  - ⚠ Don't forget to add model file into resources folder: `src\main\resources\use_model.rdf`
+- `use.dataset.endpoint`: URL to Fuseki SPARQL endpoint
+  - `http://localhost:3030/use_dataset/sparql` for standalone local Fuseki server
+  - `http://localhost:3330/use_dataset/sparql` for embedded Fuseki server
+- `dbpedia.dataset.endpoint` already set to `https://dbpedia.org/sparql`

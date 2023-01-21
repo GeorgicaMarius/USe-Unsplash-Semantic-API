@@ -1,5 +1,6 @@
 package ro.wade.useapi.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +12,8 @@ import java.util.List;
 
 @RestController
 public class CollectionController {
+    @Autowired
+    private UseDsCollectionQueryHelper useDsCollectionQueryHelper;
 
     @GetMapping("/collections")
     public List<UseCollectionQueryDto> getCollectionsFilter(
@@ -18,12 +21,12 @@ public class CollectionController {
             @RequestParam(value = "limit", defaultValue = "30") Integer limit,
             @RequestParam(value = "title", required = false) String filterTitle) {
 
-        return UseDsCollectionQueryHelper.getCollectionsFilter(offset, limit, filterTitle);
+        return useDsCollectionQueryHelper.getCollectionsFilter(offset, limit, filterTitle);
     }
 
     @GetMapping("/collections/{collectionId}")
     public UseCollectionQueryDto getCollectionById(@PathVariable("collectionId") String collectionId) {
-        return UseDsCollectionQueryHelper.getCollectionById(collectionId);
+        return useDsCollectionQueryHelper.getCollectionById(collectionId);
     }
 
     @GetMapping("/collections/search")
@@ -32,6 +35,6 @@ public class CollectionController {
             @RequestParam(value = "limit", defaultValue = "30") Integer limit,
             @RequestParam(value = "title", required = false) String searchTitle) {
 
-        return UseDsCollectionQueryHelper.getCollectionsSearch(offset, limit, searchTitle);
+        return useDsCollectionQueryHelper.getCollectionsSearch(offset, limit, searchTitle);
     }
 }

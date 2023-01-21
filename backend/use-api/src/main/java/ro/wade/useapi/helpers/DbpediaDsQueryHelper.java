@@ -2,13 +2,21 @@ package ro.wade.useapi.helpers;
 
 import org.apache.jena.query.*;
 import org.apache.jena.sparql.exec.http.QueryExecutionHTTP;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import ro.wade.useapi.models.DbpediaCityQueryDto;
 
-
+@Service
 public class DbpediaDsQueryHelper {
-    private static final String useDatasetEndpointUrl = "https://dbpedia.org/sparql";
+    private final String dbpediaDatasetEndpointUrl;
 
-    private static DbpediaCityQueryDto querySolutionToCityDto(QuerySolution sol) {
+    @Autowired
+    public DbpediaDsQueryHelper(@Value("${dbpedia.dataset.endpoint}") String dbpediaDatasetEndpointUrl) {
+        this.dbpediaDatasetEndpointUrl = dbpediaDatasetEndpointUrl;
+    }
+
+    private DbpediaCityQueryDto querySolutionToCityDto(QuerySolution sol) {
         DbpediaCityQueryDto city = new DbpediaCityQueryDto();
         city.cityName = sol.getLiteral("cityName").getString();
         city.cityAbstract = sol.contains("cityAbstract") ? sol.getLiteral("cityAbstract").getString() : "";
@@ -25,7 +33,7 @@ public class DbpediaDsQueryHelper {
         return city;
     }
 
-    public static DbpediaCityQueryDto getCityByName(String cityName) {
+    public DbpediaCityQueryDto getCityByName(String cityName) {
         ParameterizedSparqlString pss = new ParameterizedSparqlString();
 
         pss.setCommandText("" +
@@ -58,7 +66,7 @@ public class DbpediaDsQueryHelper {
         Query query = pss.asQuery();
 
         System.out.print("Please wait while querying DBpedia... ");
-        try (QueryExecution queryExec = QueryExecutionHTTP.service(useDatasetEndpointUrl).query(query).build()) {
+        try (QueryExecution queryExec = QueryExecutionHTTP.service(dbpediaDatasetEndpointUrl).query(query).build()) {
             ResultSet results = queryExec.execSelect();
             System.out.println("Done!");
             if (results.hasNext()) {

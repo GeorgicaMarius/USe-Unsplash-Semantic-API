@@ -2,22 +2,31 @@ package ro.wade.useapi.helpers;
 
 import org.apache.jena.query.*;
 import org.apache.jena.sparql.exec.http.QueryExecutionHTTP;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import ro.wade.useapi.models.UseCollectionQueryDto;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+@Service
 public class UseDsCollectionQueryHelper {
-    private static final String useDatasetEndpointUrl = "http://localhost:3030/use_dataset/sparql";
+    private final String useDatasetEndpointUrl;
 
-    private static final String prefixesBlock = "" +
+    @Autowired
+    public UseDsCollectionQueryHelper(@Value("${use.dataset.endpoint}") String useDatasetEndpointUrl) {
+        this.useDatasetEndpointUrl = useDatasetEndpointUrl;
+    }
+
+    private final String prefixesBlock = "" +
             "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
             "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
             "PREFIX schema: <http://schema.org/>\n" +
             "PREFIX use: <http://use.ro/>\n";
 
-    private static final String createVarsForAllFieldsBlock = "" +
+    private final String createVarsForAllFieldsBlock = "" +
             "  ?collectionRes rdf:type rdf:Bag ;\n" +
             "                 schema:identifier ?collectionId ;\n" +
             "                 rdfs:label ?collectionTitle ;\n" +
@@ -25,7 +34,7 @@ public class UseDsCollectionQueryHelper {
             "  ?entryItem schema:identifier ?photoId .\n";
 
 
-    private static UseCollectionQueryDto resultSetToSingleCollectionDto(ResultSet results) {
+    private UseCollectionQueryDto resultSetToSingleCollectionDto(ResultSet results) {
         UseCollectionQueryDto collection = new UseCollectionQueryDto();
         if (results.hasNext()) {
             QuerySolution sol = results.nextSolution();
@@ -40,7 +49,7 @@ public class UseDsCollectionQueryHelper {
         return collection;
     }
 
-    private static List<UseCollectionQueryDto> resultSetToMultipleCollectionDto(ResultSet results) {
+    private List<UseCollectionQueryDto> resultSetToMultipleCollectionDto(ResultSet results) {
         HashMap<String, UseCollectionQueryDto> map = new HashMap<>();
 
         while (results.hasNext()) {
@@ -62,7 +71,7 @@ public class UseDsCollectionQueryHelper {
         return new ArrayList<>(map.values());
     }
 
-    private static ResultSet executeBasicQuery(String filterBlock, String sortBlock, Integer offset, Integer limit) {
+    private ResultSet executeBasicQuery(String filterBlock, String sortBlock, Integer offset, Integer limit) {
         if (filterBlock == null) filterBlock = "";
         if (sortBlock == null) sortBlock = "";
 
@@ -92,19 +101,19 @@ public class UseDsCollectionQueryHelper {
         return resultSetCopy;
     }
 
-    private static <T> List<T> clampedSublist(List<T> list, int offset, int limit) {
+    private <T> List<T> clampedSublist(List<T> list, int offset, int limit) {
         return list.subList(
                 Math.min(list.size(), offset),
                 Math.min(list.size(), offset + limit));
     }
 
-    public static UseCollectionQueryDto getCollectionById(String collectionId) {
+    public UseCollectionQueryDto getCollectionById(String collectionId) {
         String filterBlock = "  FILTER (?collectionId = \"" + collectionId + "\")\n";
         ResultSet resultSet = executeBasicQuery(filterBlock, "", 0, 1);
         return resultSetToSingleCollectionDto(resultSet);
     }
 
-    public static List<UseCollectionQueryDto> getCollectionsFilter(Integer offset, Integer limit, String collectionTitle) {
+    public List<UseCollectionQueryDto> getCollectionsFilter(Integer offset, Integer limit, String collectionTitle) {
         String filterBlock = null;
         if (collectionTitle != null)
             filterBlock = String.format("  FILTER (regex (?collectionTitle, \"^%s$\", \"i\"))\n", collectionTitle);
@@ -112,7 +121,7 @@ public class UseDsCollectionQueryHelper {
         return clampedSublist(resultSetToMultipleCollectionDto(resultSet), offset, limit);
     }
 
-    public static List<UseCollectionQueryDto> getCollectionsSearch(Integer offset, Integer limit, String collectionTitle) {
+    public List<UseCollectionQueryDto> getCollectionsSearch(Integer offset, Integer limit, String collectionTitle) {
         String filterBlock = null;
         if (collectionTitle != null)
             filterBlock = String.format("  FILTER (regex (?collectionTitle, \"%s\", \"i\"))\n", collectionTitle);

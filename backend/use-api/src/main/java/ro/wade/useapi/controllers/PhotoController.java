@@ -1,5 +1,6 @@
 package ro.wade.useapi.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +12,8 @@ import java.util.List;
 
 @RestController
 public class PhotoController {
+    @Autowired
+    private UseDsPhotoQueryHelper useDsPhotoQueryHelper;
 
     @GetMapping("/photos")
     public List<UsePhotoQueryDto> getPhotosFilter(
@@ -22,13 +25,13 @@ public class PhotoController {
             @RequestParam(value = "country", required = false) String filterCountry,
             @RequestParam(value = "city", required = false) String filterCity) {
 
-        return UseDsPhotoQueryHelper.getPhotosFilter(offset, limit,
+        return useDsPhotoQueryHelper.getPhotosFilter(offset, limit,
                 filterPhotographerFirstName, filterPhotographerLastName, filterCameraMake, filterCountry, filterCity);
     }
 
     @GetMapping("/photos/{photoId}")
     public UsePhotoQueryDto getPhotoById(@PathVariable("photoId") String photoId) {
-        return UseDsPhotoQueryHelper.getPhotoById(photoId);
+        return useDsPhotoQueryHelper.getPhotoById(photoId);
     }
 
     @GetMapping("/photos/search")
@@ -42,7 +45,7 @@ public class PhotoController {
             @RequestParam(value = "city", required = false) String searchCity,
             @RequestParam(value = "keyword", required = false) String searchKeyword) {
 
-        return UseDsPhotoQueryHelper.getPhotosSearch(offset, limit, searchPhotographerFirstName,
+        return useDsPhotoQueryHelper.getPhotosSearch(offset, limit, searchPhotographerFirstName,
                 searchPhotographerLastName, searchCameraMake, searchCountry, searchCity, searchKeyword);
     }
 }
