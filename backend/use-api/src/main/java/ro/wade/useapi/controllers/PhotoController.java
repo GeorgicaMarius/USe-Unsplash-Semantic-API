@@ -18,7 +18,7 @@ public class PhotoController {
     @GetMapping("/photos")
     public List<UsePhotoQueryDto> getPhotosFilter(
             @RequestParam(value = "offset", defaultValue = "0") Integer offset,
-            @RequestParam(value = "limit", defaultValue = "30") Integer limit,
+            @RequestParam(value = "limit", defaultValue = "15") Integer limit,
             @RequestParam(value = "photographerFirstName", required = false) String filterPhotographerFirstName,
             @RequestParam(value = "photographerLastName", required = false) String filterPhotographerLastName,
             @RequestParam(value = "cameraMake", required = false) String filterCameraMake,
@@ -37,7 +37,7 @@ public class PhotoController {
     @GetMapping("/photos/search")
     public List<UsePhotoQueryDto> getPhotosSearch(
             @RequestParam(value = "offset", defaultValue = "0") Integer offset,
-            @RequestParam(value = "limit", defaultValue = "30") Integer limit,
+            @RequestParam(value = "limit", defaultValue = "15") Integer limit,
             @RequestParam(value = "photographerFirstName", required = false) String searchPhotographerFirstName,
             @RequestParam(value = "photographerLastName", required = false) String searchPhotographerLastName,
             @RequestParam(value = "cameraMake", required = false) String searchCameraMake,

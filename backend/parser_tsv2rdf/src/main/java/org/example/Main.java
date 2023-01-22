@@ -166,8 +166,12 @@ public class Main {
                     .withSeparator('\t')
                     .build();
 
+            int limitEntries = 250_000;
+            int entryCounter = 0;
             for (CollectionBean collectionBean : csvToBean) {
                 // System.out.println(collectionBean);
+                if (entryCounter >= limitEntries)
+                    break;
 
                 // if bag for collection does NOT exist, create bag, add identifier, label, etc.
                 Bag collection = model.getBag(USE.getResUri(collectionBean.collectionId));
@@ -180,6 +184,7 @@ public class Main {
                 // add photo to collection
                 Resource photoEntry = model.getResource(USE.getResUri(collectionBean.photoId));
                 collection.add(photoEntry);
+                entryCounter++;
             }
 
             // write the model in XML form to a file

@@ -9,11 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.io.ClassPathResource;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 @SpringBootApplication
@@ -34,9 +31,8 @@ public class UseApiApplication {
         // Fuseki server startup
         if (startFusekiServer.equals("True")) {
             Model model = ModelFactory.createDefaultModel();
-            File useModelFile = new ClassPathResource("use_model.rdf").getFile();
-            try (FileReader model_fr = new FileReader(useModelFile, StandardCharsets.UTF_8)) {
-                model.read(model_fr, "");
+            try (InputStream inputStream = new ClassPathResource("use_model.rdf").getInputStream()) {
+                model.read(inputStream, "");
             }
             Dataset ds = DatasetFactory.create(model);
 

@@ -18,7 +18,7 @@ public class CollectionController {
     @GetMapping("/collections")
     public List<UseCollectionQueryDto> getCollectionsFilter(
             @RequestParam(value = "offset", defaultValue = "0") Integer offset,
-            @RequestParam(value = "limit", defaultValue = "30") Integer limit,
+            @RequestParam(value = "limit", defaultValue = "15") Integer limit,
             @RequestParam(value = "title", required = false) String filterTitle) {
 
         return useDsCollectionQueryHelper.getCollectionsFilter(offset, limit, filterTitle);
@@ -32,7 +32,7 @@ public class CollectionController {
     @GetMapping("/collections/search")
     public List<UseCollectionQueryDto> getCollectionsSearch(
             @RequestParam(value = "offset", defaultValue = "0") Integer offset,
-            @RequestParam(value = "limit", defaultValue = "30") Integer limit,
+            @RequestParam(value = "limit", defaultValue = "15") Integer limit,
             @RequestParam(value = "title", required = false) String searchTitle) {
 
         return useDsCollectionQueryHelper.getCollectionsSearch(offset, limit, searchTitle);
