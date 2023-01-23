@@ -14,17 +14,16 @@ import java.util.List;
 @Service
 public class UseDsCollectionQueryHelper {
     private final String useDatasetEndpointUrl;
-
-    @Autowired
-    public UseDsCollectionQueryHelper(@Value("${use.dataset.endpoint}") String useDatasetEndpointUrl) {
-        this.useDatasetEndpointUrl = useDatasetEndpointUrl;
-    }
-
     private final String prefixesBlock = "" +
             "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
             "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
             "PREFIX schema: <http://schema.org/>\n" +
             "PREFIX use: <http://use.ro/>\n";
+
+    @Autowired
+    public UseDsCollectionQueryHelper(@Value("${use.dataset.endpoint}") String useDatasetEndpointUrl) {
+        this.useDatasetEndpointUrl = useDatasetEndpointUrl;
+    }
 
     private UseCollectionQueryDto resultSetToSingleCollectionDto(ResultSet results) {
         UseCollectionQueryDto collection = new UseCollectionQueryDto();

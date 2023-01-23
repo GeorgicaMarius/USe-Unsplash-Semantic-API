@@ -13,18 +13,11 @@ import java.util.List;
 @Service
 public class UseDsPhotoQueryHelper {
     private final String useDatasetEndpointUrl;
-
-    @Autowired
-    public UseDsPhotoQueryHelper(@Value("${use.dataset.endpoint}") String useDatasetEndpointUrl) {
-        this.useDatasetEndpointUrl = useDatasetEndpointUrl;
-    }
-
     private final String prefixesBlock = "" +
             "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
             "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
             "PREFIX schema: <http://schema.org/>\n" +
             "PREFIX use: <http://use.ro/>\n";
-
     private final String createVarsForAllFieldsBlock = "" +
             "  ?photoRes rdf:type schema:Photograph ;\n" +
             "            schema:identifier ?photoId ;\n" +
@@ -58,6 +51,10 @@ public class UseDsPhotoQueryHelper {
             "            schema:givenName ?photographerFirstName ;\n" +
             "            schema:callSign ?photographerUsername .\n";
 
+    @Autowired
+    public UseDsPhotoQueryHelper(@Value("${use.dataset.endpoint}") String useDatasetEndpointUrl) {
+        this.useDatasetEndpointUrl = useDatasetEndpointUrl;
+    }
 
     private UsePhotoQueryDto querySolutionToPhotoDto(QuerySolution sol) {
         UsePhotoQueryDto photo = new UsePhotoQueryDto();
@@ -143,11 +140,11 @@ public class UseDsPhotoQueryHelper {
         if (cameraMake != null)
             filterBlockBuilder.append(String.format("  FILTER (regex (?exifCameraMake, \"^%s$\", \"i\"))\n", cameraMake));
         if (country != null)
-            filterBlockBuilder.append( String.format("  FILTER (regex (?photoLocationCountry, \"^%s$\", \"i\"))\n", country));
+            filterBlockBuilder.append(String.format("  FILTER (regex (?photoLocationCountry, \"^%s$\", \"i\"))\n", country));
         if (city != null)
             filterBlockBuilder.append(String.format("  FILTER (regex (?photoLocationCity, \"^%s$\", \"i\"))\n", city));
         String sortBlock = "ORDER BY ASC(?photoSubmittedAt)\n";
-        return executeBasicQuery(filterBlockBuilder.toString() , sortBlock, offset, limit);
+        return executeBasicQuery(filterBlockBuilder.toString(), sortBlock, offset, limit);
     }
 
     public List<UsePhotoQueryDto> getPhotosSearch(
