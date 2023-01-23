@@ -35,7 +35,7 @@
                 <li><a href="#ref_nav_abstract">Abstract</a></li>
                 <li><a href="#ref_nav_introduction">Introduction</a>
                     <ol>
-                        <li><a href="#ref_nav_goals">Goals and requirements</a></li>
+                        <li><a href="#ref_nav_goals">Goals and Requirements</a></li>
                     </ol>
                 </li>
                 <li><a href="#ref_nav_implementation">Implementation</a>
@@ -61,6 +61,7 @@
                     <ol>
                         <li><a href="#ref_nav_knowledge_modeling_vocabularies">Used Vocabularies</a></li>
                         <li><a href="#ref_nav_knowledge_modeling_photo">Photos - Ontology and Graph</a></li>
+                        <li><a href="#ref_nav_knowledge_modeling_collection">Collections - Ontology and Graph</a></li>
                     </ol>
                 </li>
                 <li><a href="#ref_nav_linked_data">Linked Data Principles</a></li>
@@ -96,15 +97,15 @@
                     <span property="schema:keywords">Modeling</span>
                 </dd>
             </dl>
-            <small><b>*</b> Authors have equal contributions and are just sorted in alphabetic order.</small>
+            <small><b>*</b> Authors have equal contributions and are just sorted in alphabetical order.</small>
         </div>
 
 
         <section id="ref_nav_abstract" role="doc-abstract" typeof="sa:Abstract">
             <h2>Abstract</h2>
             <p>
-                Unsplash Semantic API (USe) is a Web application based on the Semantic Web principles. In
-                this sense, it makes use of a knowledge graph built from various datasets and conceptual models. This
+                Unsplash Semantic API (USe) is a Web application based on the Semantic Web principles. Following these
+                concepts, it makes use of a knowledge graph built from various datasets and conceptual models. This
                 document describes technical aspects concerning the implementation, technologies, usability, the
                 knowledge modeling, the data sources, and other important aspects related to the development of the
                 proposed solution.
@@ -121,7 +122,7 @@
             </p>
 
             <section id="ref_nav_goals">
-                <h3>Goals and requirements</h3>
+                <h3>Goals and Requirements</h3>
 
                 <p>The project aims to allow users to perform various tasks such as:</p>
                 <ul>
@@ -132,9 +133,9 @@
                         semantically, with additional metadata about concepts related to a photo retrieved from external
                         datasets like DBpedia<a href="#ref_biblio_dbpedia"><sup>2</sup></a> and/or Wikidata<a
                             href="#ref_biblio_wikidata"><sup>3</sup></a>.</li>
-                    <li><i>Filter</i> - on various criterias such as keywords, photo dimensions, submission date, photo
-                        location, etc. which provide users the ability to quickly find and explore photos on different
-                        themes that users find of interest.</li>
+                    <li><i>Filter and Search</i> - on various criterias such as photoId, keywords, photo location
+                        country or city, photographer firstname or lastname, camera maker, etc. which provide users the
+                        ability to quickly find and explore photos that users may find of interest.</li>
                     <li><i>Compare</i> - two or more photos, side by side, highlighting the differences between most of
                         their properties, in order to enable users to easily study and find differences.</li>
                 </ul>
@@ -145,39 +146,43 @@
                         desktop and mobile platforms.</li>
                     <li>To follow the Linked Data recommended practices for publishing structured data on the Web, in
                         order for the data to be processable by Semantic Web tools.</li>
-                    <li>Use a knowledge graph/base and a SPARQL endpoint. The project is using data stored in an RDF
-                        triple store using a set of frameworks (described in technologies section) and is providing an
-                        endpoint at which other SPARQL clients can make queries and insert, update, or remove data.</li>
+                    <li>To use a knowledge graph/base and provide a SPARQL endpoint. The project is using data stored in
+                        an RDF triple store using a set of frameworks (described in technologies section) and is
+                        providing an endpoint at which other SPARQL clients can make queries and manipulate data.</li>
                     <li>The knowledge modeling to be about nature-themed photos provided for free by the Unsplash Lite
                         Dataset<a href="#ref_biblio_unsplash_datasets"><sup>4</sup></a>.</li>
                     <li>To use various conceptual models such as schema.org<a
                             href="#ref_biblio_schema_org"><sup>5</sup></a> or Getty Thesaurus of Geographic Names<a
                             href="#ref_biblio_vocab_getty"><sup>6</sup></a>, in addition to the knowledge about
-                        photography, natural beauties, geography, etc. from external datasets.</li>
+                        photography, natural beauties, geography, etc. from external data sources.</li>
                 </ul>
             </section>
         </section>
 
 
         <section id="ref_nav_implementation">
-            <h2>Implementation - [Preliminary] Considerations</h2>
-            <p>The Web Application will be developed according to the actual practices in Web engineering (e.g.,
+            <h2>Implementation</h2>
+            <p>The Web Application was developed according to the actual practices in Web engineering (e.g.,
                 documentation, modularity, service oriented architecture, etc.) by using modern approaches.
             </p>
-            <p>For the source-code management, the GitHub cloud-based solution will be used.</p>
+            <p>For the source-code management, the GitHub cloud-based solution was be used.</p>
 
-            <p>Being a complex application, the project will make use of a variety of programming languages and
-                frameworks in order to deliver comprehesive functionality.</p>
+            <p>Being a complex application, the project makes use of a variety of programming languages and
+                frameworks in order to deliver comprehensive functionality.</p>
 
             <section id="ref_nav_implementation_front">
                 <h3>Front-End</h3>
-                <p>For the Front-End of the application, some of the technologies used are:</p>
+                <p>For the Front-End of the application, some of the used technologies are:</p>
                 <ul>
-                    <li><b><a href="https://angular.io/">Angular</a></b> - development platform, a component-based
-                        framework for building scalable web applications.</li>
-                    <li><b><a href="https://material.angular.io/">Angular Material</a></b> - internationalized and
-                        accessible components that integrate seamlessly with Angular.</li>
-                    <li><b><a href="https://getbootstrap.com/">Bootstrap</a></b> - a powerful, feature-packed frontend
+                    <li><b><a href="https://angular.io/">Angular</a></b> - open-source, JavaScript framework written in
+                        TypeScript. A development platform and a component-based framework for building scalable web
+                        applications. It enables users to create large applications in a maintainable manner. </li>
+                    <li><b><a href="https://material.angular.io/">Angular Material</a></b> - a User Interface (UI)
+                        component library that can be use in the Angular projects to speed up the development of elegant
+                        and consistent user interfaces. Offers many internationalized and accessible components that
+                        integrated seamlessly with Angular.</li>
+                    <li><b><a href="https://getbootstrap.com/">Bootstrap</a></b> - a popular CSS Framework for
+                        developing responsive and mobile-first websites. It is a powerful, feature-packed frontend
                         toolkit which includes production-ready CSS and JavaScript.</li>
                 </ul>
             </section>
@@ -188,15 +193,23 @@
                 <ul>
                     <li><b><a href="https://spring.io/projects/spring-boot">Spring Boot</a></b> - development platform,
                         based on Spring platform and third-party libraries, for creating stand-alone, production-grade
-                        applications.</li>
+                        applications. It allowed us to develop in a standardised manner the REST API that provides most
+                        of the Back-End functionality.</li>
                     <li><b><a href="https://jena.apache.org/documentation/rdf/index.html">Apache Jena RDF API</a></b> -
                         Provides core API to create and read Resource Description Framework (RDF)<a
-                            href="#ref_biblio_w3c_rdf"><sup>7</sup></a> graphs. </li>
+                            href="#ref_biblio_w3c_rdf"><sup>7</sup></a> graphs. It allowed us to create RDF models using
+                        the data parsed from the Unsplash Lite Datasets, to define triples, nodes, resources, literals,
+                        blank nodes, collections, properties, namespaces, etc. and to output the models in both XML and
+                        TTL format.</li>
                     <li><b><a href="https://jena.apache.org/documentation/tdb/index.html">Apache TDB</a></b> -
-                        a high performance component of Jena for RDF storage and query. </li>
+                        a high performance component of Jena for RDF storage and query. It is implicitly used by Apache
+                        Fuseki to create persistent and in memory stores for the graphs used in the SPARQL operations.
+                    </li>
                     <li><b><a href="https://jena.apache.org/documentation/fuseki2/index.html">Apache Jena Fuseki</a></b>
                         - a SPARQL server, tightly integrated with TDB to provide a robust, transactional persistent
-                        storage layer. </li>
+                        storage layer. Offers an easy to use interface and endpoints to load, query and manipulate the
+                        existing graphs. The cloud deployed version of the proposed application uses it in the embedded
+                        form. </li>
                 </ul>
             </section>
 
@@ -204,29 +217,29 @@
 
 
         <section id="ref_nav_architecture">
-            <h2>Application Architecture - [Preliminary] Considerations</h2>
-            <p>USe aims to be a service-based Web application developed using existing Semantic Web technologies. The
-                application separates the Front-End and Back-end responsibilities in different projects and modules with
-                low coupling and high cohesion.</p>
+            <h2>Application Architecture</h2>
+            <p>The application proposed aims to be a service-based Web application developed using existing Semantic Web
+                technologies. The application separates the Front-End and Back-end responsibilities in different
+                projects and modules, according to the best practices, resulting in low coupling and high cohesion.</p>
 
             <section id="ref_nav_architecture_front">
                 <h3>The Front-End Architecture</h3>
-                <p>The Front-End application will be developed in Angular framework, with the addition of Angular
+                <p>The Front-End application was developed using the Angular framework, with the addition of Angular
                     Material Design integrable components and additional styling using Bootstrap 5. The front-end
                     application aims to offer an attractive and easy to use interface for the users in order to access
-                    the functionality of the backend, in a hassle-free manner.</p>
-                <p>Some of the main goals would be to provide the functionality to visualize, augment, filter, compare
-                    photos to the user throught their web browser.</p>
+                    the functionality of the backend in an intuitive manner.</p>
+                <p>Some of the main goals would be to provide the functionality to visualize, augment, filter and
+                    compare photos and collection to the user throught their web browser.</p>
 
-                <p>The application will be a Single-Page Application<a href="#ref_biblio_mdn_spa"><sup>8</sup></a>
+                <p>The application is a Single-Page Application<a href="#ref_biblio_mdn_spa"><sup>8</sup></a>
                     organised in a set of pages with well defined functionality:</p>
                 <ul>
                     <li><b>Home page</b> will serve as an entry point for the users, and provides a summary of the
                         functionalities of the application.</li>
-                    <li><b>Search and Filter page</b> will provide the users with various controls to search
-                        photos, for example by description or keywords, or to filter them by criterias like theme,
-                        collection, published date, etc. The page will also display the results in a grid-like manner
-                        and allow users to click them, and go to their individual page.</li>
+                    <li><b>Search and Filter page</b> will provide the users with various controls to search photos, for
+                        example by description or keywords, or to filter them by criterias like photographer, country,
+                        city, camera make, etc. The page will also display the results in a grid-like manner and allow
+                        users to click them, and go to their individual page.</li>
                     <li><b>Individual Photo page</b> Allows the user to view the image with a larger size, to see it's
                         description, source Unsplash url, data about it's original pixels size, submission date,
                         location name and GPS coordinates, etc. This page is also augmented with data from external
@@ -234,7 +247,7 @@
                         about the place, etc. </li>
                     <li><b>Compare Photos page</b> allows users to compare two or more photos, side by side, and
                         highlights the differences between the properties of the images. This enables users to easily
-                        study and find differences between photos of interests.</li>
+                        study and find differences between photos of interest.</li>
                 </ul>
             </section>
 
@@ -266,14 +279,13 @@
                         <li><b>Photos Service</b> system is responsible to provides the functionality to visualize,
                             augment, filter and compare photos. It communicates with external sistems like Unsplash
                             System to augment them using developer APIs. Images data is retrieved from the local
-                            triples store, and can also be augmented with more data retrieve by using the Wikidata and
-                            DBpedia sistems.</li>
+                            triples store, and can also be augmented with more data retrieved by using the Wikidata and
+                            DBpedia systems.</li>
                         <li><b>Collection Service</b> system allows retrieving predefined collections of photos on
-                            different themes, filters and criterias for quick access and exploring. It also can augment
-                            data from external datastores.</li>
+                            different themes, filters and search criterias for quick access and exploring.</li>
                         <li><b>Data Manipulation Service</b> system provides the functionality for inserting additional
-                            data for different models into the local datastore, based on an endpoint and using
-                            RDF/CSV/TSV data files.</li>
+                            data into the different datasets from the local datastore, based on a SPARQL endpoint and
+                            using parseable RDF/CSV/TSV data files.</li>
                     </ul>
                 </section>
 
@@ -281,9 +293,9 @@
                     <h4>External software systems</h4>
                     <p>The external sistems that the USe system is making use of are:</p>
                     <ul>
-                        <li><b>Unsplash System</b> which is used for access to images and the developer APIs which
-                            provides options to visually augment images.</li>
-                        <li><b>Wikidata System</b> open knowledge base with structured data accessed for additionl
+                        <li><b>Unsplash System</b> which is used for access to the images, and for the developer APIs
+                            that provide options to visually augment images.</li>
+                        <li><b>Wikidata System</b> open knowledge base with structured data, accessed for additional
                             knowledge about photography, geographical places, etc.</li>
                         <li><b>DBpedia System</b> which provides structured content from the information of various
                             Wikimedia projects, also used to augment the knowledge about photography and natural
@@ -295,13 +307,13 @@
 
 
         <section id="ref_nav_data_sources">
-            <h2>Data Sources - [Preliminary] Considerations</h2>
+            <h2>Data Sources</h2>
             <p>The proposed project relies on both constructing an internal knowledge dataset, starting from the
-                Unsplash Lite dataset<a href="#ref_biblio_unsplash_datasets"><sup>4</sup></a>, and on using
-                external knowledge datasets like Wikidata or DBpedia.</p>
-            <p>Below are presented the sources of data for the application and different important aspects related. The
-                knowledge modeling specific to our application according to various vocabularies and schemas is
-                presented in the next chapter</a>.</p>
+                Unsplash Lite dataset<a href="#ref_biblio_unsplash_datasets"><sup>4</sup></a>, and on using external
+                knowledge datasets like Wikidata or DBpedia.</p>
+            <p>Below are presented the sources of data for the application and different important related aspects. The
+                knowledge modeling specific to our application using various vocabularies and schemas is presented in
+                the next main section.</p>
 
             <section id="ref_nav_data_sources_unsplash">
                 <h3>Unsplash Lite Dataset</h3>
@@ -360,6 +372,30 @@
                                 <td>Last name of the photographer</td>
                             </tr>
                             <tr>
+                                <td>exif_camera_make</td>
+                                <td>Camera make (brand) extracted from the EXIF data</td>
+                            </tr>
+                            <tr>
+                                <td>exif_camera_model</td>
+                                <td>Camera model extracted from the EXIF data</td>
+                            </tr>
+                            <tr>
+                                <td>exif_iso</td>
+                                <td>ISO setting of the camera, extracted from the EXIF data</td>
+                            </tr>
+                            <tr>
+                                <td>exif_aperture_value</td>
+                                <td>Aperture setting of the camera, extracted from the EXIF data</td>
+                            </tr>
+                            <tr>
+                                <td>exif_focal_length</td>
+                                <td>Focal length setting of the camera, extracted from the EXIF data</td>
+                            </tr>
+                            <tr>
+                                <td>exif_exposure_time</td>
+                                <td>Exposure time setting of the camera, extracted from the EXIF data</td>
+                            </tr>
+                            <tr>
                                 <td>photo_location_name</td>
                                 <td>Location of the photo</td>
                             </tr>
@@ -415,6 +451,44 @@
                                 <td>ai_service_1_confidence</td>
                                 <td>Confidence for the keyword from a 3rd party AI (0-100)</td>
                             </tr>
+                            <tr>
+                                <td>ai_service_2_confidence</td>
+                                <td>Confidence for the keyword from another 3rd party AI (0-100)</td>
+                            </tr>
+                            <tr>
+                                <td>suggested_by_user</td>
+                                <td>Whether the keyword was added by a user (human)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>For example, we attach keywords to the photo entities only if they were suggested by the user or
+                        have either AI confidence above 50%. </p>
+                </section>
+
+                <section class="section_no_indent">
+                    <h4>collections.tsv</h4>
+                    <p>The <code>collections.tsv</code> has data for linking each photo to users' created collections of
+                        photos. Some of the most important properties used are:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>photo_id</td>
+                                <td>ID of the Unsplash photo</td>
+                            </tr>
+                            <tr>
+                                <td>collection_id</td>
+                                <td>ID of the Unsplash collection containing the photo</td>
+                            </tr>
+                            <tr>
+                                <td>collection_title</td>
+                                <td>Title of the collection containing the photo</td>
+                            </tr>
                         </tbody>
                     </table>
                 </section>
@@ -424,8 +498,6 @@
                     <p>The other .tsv files are currently of no interest, but depending on the evolution of the project,
                         they could be used for advanced semantic inferences or machine learning techniques:</p>
                     <ul>
-                        <li><code>collections.tsv</code> has data for linking each photo to users created groupings of
-                            photos. </li>
                         <li><code>conversions.tsv</code> has data that links each download of a photo to the search
                             keywords, the timestamp, anonymouse user identifier, country, etc.</li>
                         <li><code>colors.tsv</code> has data about which colors are contained within a photo, their
@@ -446,7 +518,7 @@
                 </figure>
 
                 <p>In the figure, it can be seen how the Data Manipulation Service, detailed in the Architecture
-                    chapter, can be invoked in a REST manner, to process input files like <code>photos.tsv</code> and
+                    chapter, can be used to process input files like <code>photos.tsv</code> and
                     <code>keywords.tsv</code>, and serializes them into RDF triples (the figure uses "pseudo-rdf"
                     language just for illustrative purposes) using a set of defined schemas from well known
                     vocabularies, and then store them into an RDF triple store locally or in the cloud, that is also
@@ -457,14 +529,14 @@
             <section id="ref_nav_data_sources_external">
                 <h3>External Data Sources</h3>
                 <p>In addition to the dataset provided by Unsplash, that is processed and persisted in the local
-                    triplestore, the concepts retrieved can be further augmented with additional data from external
-                    datasets like Wikidata and DBpedia.</p>
+                    triplestore, the knowledge dataset created can be further augmented with additional data from
+                    external datasets like Wikidata and DBpedia.</p>
 
                 <p><a href="https://www.wikidata.org/wiki/Wikidata:Main_Page"><b>Wikidata</b></a> is an open knowledge
                     base with a large collection of structured data, that can be read by machines, and provides support
-                    for Wikimedia projects like Wikipedia and Wikimedia Commons. It is free, open, and provides an
-                    SPARQL enpoint which our application can use to retrieve items of interest related to photos
-                    location, city, country, significant keywords, and other various concepts.</p>
+                    for Wikimedia projects like Wikipedia and Wikimedia Commons. It is free, open, and provides a SPARQL
+                    enpoint which our application can use to retrieve items of interest related to photos location,
+                    city, country, significant keywords, and other various concepts.</p>
 
                 <p><a href="https://www.dbpedia.org/"><b>DBpedia</b></a> is another project of interest, that leverages
                     a source of knowledge by extracting structured information from Wikipedia and by making this
@@ -484,18 +556,18 @@
                 <figure typeof="sa:image">
                     <img src="resources/images/sparql_dbpedia_city_info_example_result.png"
                         alt="Example of the SPARQL query result">
-                    <figcaption>Example of the SPARQL query result</figcaption>
+                    <figcaption>Example of result for the above SPARQL query</figcaption>
                 </figure>
             </section>
         </section>
 
 
         <section id="ref_nav_knowledge_modeling">
-            <h2>Knowledge Modeling - [Preliminary] Considerations</h2>
-            <p>All the data managed by the developed Web application is described in RDF-based existing knowledge
-                models, using well-known vocabularies and simple ontologies. Modeling data this way allows us to perform
-                various integrations with other datasets, to perform queries using the SPARQL query language, and
-                to make advanced inferences using the local and external datasets.</p>
+            <h2>Knowledge Modeling</h2>
+            <p>All the data managed by the developed Web application is modeled into RDF-based knowledge models, using
+                well-known vocabularies and simple ontologies. Modeling data this way allows us to perform various
+                integrations with other datasets, to perform queries using the SPARQL query language, and to make
+                advanced inferences using the local and external datasets.</p>
 
             <p>The proposed Web Application uses RDF schemas to define the entities and how they relate semantically to
                 each other. The entities are stored in different graphs, in the repository managed by Apache TDB.
@@ -516,6 +588,7 @@
                         PREFIX <b>dbo</b>: &lt;http://dbpedia.org/ontology/&gt;
                         PREFIX <b>dbp</b>: &lt;http://dbpedia.org/property/&gt;
                         PREFIX <b>geo</b>: &lt;http://www.w3.org/2003/01/geo/wgs84_pos#&gt;
+                        PREFIX <b>use</b>: &lt;http://use.ro/&gt;
                     </pre>
                     <figcaption>Vocabularies and their prefixes used to model the ontologies</figcaption>
                 </figure>
@@ -529,9 +602,9 @@
                     <li><a href="https://schema.org/Photograph">schema:Photograph</a></li>
                     <li><a href="https://schema.org/MediaObject">schema:MediaObject</a></li>
                     <li><a href="https://schema.org/Place">schema:Place</a></li>
-                    <li><a href="https://schema.org/InteractionCounter">schema:InteractionCounter</a></li>
                     <li><a href="https://schema.org/Person">schema:Person</a></li>
                 </ul>
+                <p>And also using properties from the custom defined <b>use</b> vocabulary.</p>
 
                 <p>The following diagram represents the complete Photo concept modeling, done using various schemes,
                     properties, data types, etc. used by the application:</p>
@@ -543,9 +616,11 @@
                 <section>
                     <h4>The core photo properties</h4>
                     <p>The ontology used is built around the <a
-                            href="https://schema.org/Photograph">schema.org/Photograph</a> type thay defines multiple
+                            href="https://schema.org/Photograph">schema.org/Photograph</a> type that defines multiple
                         properties of interest. Besides these, a variety of other schemes (listed previously) have been
-                        used to model the properties from the dataset we have available.</p>
+                        used to model the properties from the dataset we have available, including the custom defined
+                        <b>use</b> vocabulary.
+                    </p>
                     <figure typeof="sa:image">
                         <img src="resources/images/photo_ontology_core.svg" alt="Photo - Core properties">
                         <figcaption>Photo - Core properties</figcaption>
@@ -555,13 +630,21 @@
                         <li><b>schema:identifier</b> Uniquely identifies a photo using a short string ID.</li>
                         <li><b>schema:sameAs</b> Has as object a permalink URL to the photo page on unsplash.com</li>
                         <li><b>schema:description</b> Contains a description of the photo.</li>
-                        <li><b>schema:keywords</b> Represent keywords connected to the photo.</li>
+                        <li><b>schema:keywords</b> Represents keywords connected to the photo.</li>
+                        <li><b>use:statsViews</b> Represents number of times that a photo has been downloaded via the
+                            Unsplash platform.</li>
+                        <li><b>use:statsDownloads</b> Represents number of times that a photo has been viewed on the
+                            Unsplash platform.</li>
+                        <li><b>use:exifCameraMake</b> Represents camera make (brand).</li>
+                        <li><b>use:exifCameraModel</b> Represents camera model.</li>
+                        <li><b>use:exifIso</b> Represents ISO setting of the camera.</li>
+                        <li><b>use:exifApertureValue</b> Represents aperture setting of the camera.</li>
+                        <li><b>use:exifFocalLength</b> Represents focal length setting of the camera.</li>
+                        <li><b>use:exifExposureTime</b> Represents exposure time setting of the camera.</li>
                         <li><b>schema:associatedMedia</b> property links a blank node that contains information about
                             the media properties of a photograph.</li>
                         <li><b>schema:contentLocation</b> links a blank node that contains info about the location of
                             the content depicted in the photograph.</li>
-                        <li><b>schema:interactionStatistic</b> links a blank node that contains informations about the
-                            interactions of the Unsplash users with the photo.</li>
                         <li><b>schema:author</b> links a blank node that contains informations about the
                             author of the photo.</li>
                     </ul>
@@ -606,26 +689,6 @@
                 </section>
 
                 <section>
-                    <h4>The Interaction properties</h4>
-                    <p>The Interaction blank node is based on the <a
-                            href="https://schema.org/InteractionCounter">schema.org/InteractionCounter</a> and contains
-                        different properties that give additional information about the interactions of the users from
-                        Unsplash with the photo.
-                    </p>
-                    <figure typeof="sa:image">
-                        <img src="resources/images/photo_ontology_interaction.svg" alt="Photo - Interaction properties">
-                        <figcaption>Photo - Interaction properties</figcaption>
-                    </figure>
-                    <p>The properties used are the following:</p>
-                    <ul>
-                        <li><b>schema:userInteractionCount</b> Total # of times that a photo has been viewed/downloaded
-                            on the Unsplash platform.</li>
-                        <li><b>schema:interactionType</b> Represents the type of the interaction, like download or view.
-                        </li>
-                    </ul>
-                </section>
-
-                <section>
                     <h4>The Author properties</h4>
                     <p>The Author blank node is based on the <a href="https://schema.org/Author">schema.org/Author</a>
                         and contains different properties that give additional information about the author of a photo.
@@ -641,6 +704,32 @@
                         <li><b>schema:familyName</b> Last name of the photographer.</li>
                     </ul>
                 </section>
+            </section>
+
+            <section id="ref_nav_knowledge_modeling_collection">
+                <h3>Collection - Ontology and Graph</h3>
+                <p>The Collection conceptual model is used for representing the photographs collection nodes for the
+                    application. It makes use of properties defined in the <b>schema</b>, <b>rdf</b>, <b>rdfs</b> and
+                    our <b>use</b> vocabularies.</p>
+
+                <p>The following diagram represents the complete Collection concept modeling, done using various
+                    schemes, properties, data types, etc.:</p>
+                <figure typeof="sa:image">
+                    <img src="resources/images/collection_ontology_complete.svg" alt="Collection - Conceptual Model">
+                    <figcaption>Collection - Conceptual Model</figcaption>
+                </figure>
+
+                <p>The collection model is built around the <a
+                        href="https://www.w3.org/TR/rdf-schema/#ch_bag">rdf-schema/#ch_bag</a> type that indicates a
+                    container that is intended to be unordered. In our case, it represents a collection of photos that
+                    build up a user defined collection of photos.</p>
+                <p>Some of the properties used are:</p>
+                <ul>
+                    <li><b>schema:identifier</b> Uniquely identifies a collection using a short string ID.</li>
+                    <li><b>rdfs:label</b> Represents the title of the collection containing the photo.</li>
+                    <li><b>rdf:li</b> Container membership property that indicates which photos are part of the
+                        collection.</li>
+                </ul>
             </section>
         </section>
 
@@ -681,7 +770,7 @@
                     <p><b>Representation</b></p>
                     <ul>
                         <li>Provide informations using standardised Semantic Web formats such as RDF.</li>
-                        <li>The application uses the RDF standardised format for representing (meta-)information about
+                        <li>The application uses RDF standardised formats for representing (meta-)information about
                             things of interest, which are both Human and Machine readable.</li>
                     </ul>
                 </li>
@@ -689,7 +778,7 @@
                     <p><b>Linking</b></p>
                     <ul>
                         <li>Inclusion in the RDF representations of links to other URIs.</li>
-                        <li>Because in the data representations are included links to other resources from unsplash,
+                        <li>Because in the data representations are included links to other resources from Unsplash,
                             this creates a network effect by following links, and facilitates discovery and further
                             access to even more data of interest.</li>
                     </ul>
@@ -698,12 +787,12 @@
 
             <p>By following all these principles, the application actually follows the 5-⭐data ranking</p>
             <ul>
-                <li>✔️ ⭐ the data is made available on the Web, regardless of format, under an open license</li>
-                <li>✔️ ⭐⭐ the data is made available as structured data</li>
-                <li>✔️ ⭐⭐⭐ uses non-proprietary formats for the data - RDF</li>
-                <li>✔️ ⭐⭐⭐⭐ the resources have associated URLs that can be referenced by others resources</li>
-                <li>✔️ ⭐⭐⭐⭐⭐ the resources make use of URLs to link to other data (e.g. source photographs from
-                    Unsplash)</li>
+                <li>✔️ ⭐ The data is made available on the Web, regardless of format, under an open licence.</li>
+                <li>✔️ ⭐⭐ The data is made available as structured data.</li>
+                <li>✔️ ⭐⭐⭐ Uses non-proprietary formats for the data - RDF.</li>
+                <li>✔️ ⭐⭐⭐⭐ The resources have associated URLs that can be referenced by others resources.</li>
+                <li>✔️ ⭐⭐⭐⭐⭐ The resources make use of URLs to link to other data (e.g. source photographs from
+                    Unsplash).</li>
             </ul>
         </section>
 
