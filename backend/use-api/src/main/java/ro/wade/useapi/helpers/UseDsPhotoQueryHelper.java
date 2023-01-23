@@ -135,19 +135,19 @@ public class UseDsPhotoQueryHelper {
             String country,
             String city
     ) {
-        String filterBlock = null;
+        StringBuilder filterBlockBuilder = new StringBuilder();
         if (photographerFirstName != null)
-            filterBlock = String.format("  FILTER (regex (?photographerFirstName, \"^%s$\", \"i\"))\n", photographerFirstName);
-        else if (photographerLastName != null)
-            filterBlock = String.format("  FILTER (regex (?photographerLastName, \"^%s$\", \"i\"))\n", photographerLastName);
-        else if (cameraMake != null)
-            filterBlock = String.format("  FILTER (regex (?exifCameraMake, \"^%s$\", \"i\"))\n", cameraMake);
-        else if (country != null)
-            filterBlock = String.format("  FILTER (regex (?photoLocationCountry, \"^%s$\", \"i\"))\n", country);
-        else if (city != null)
-            filterBlock = String.format("  FILTER (regex (?photoLocationCity, \"^%s$\", \"i\"))\n", city);
+            filterBlockBuilder.append(String.format("  FILTER (regex (?photographerFirstName, \"^%s$\", \"i\"))\n", photographerFirstName));
+        if (photographerLastName != null)
+            filterBlockBuilder.append(String.format("  FILTER (regex (?photographerLastName, \"^%s$\", \"i\"))\n", photographerLastName));
+        if (cameraMake != null)
+            filterBlockBuilder.append(String.format("  FILTER (regex (?exifCameraMake, \"^%s$\", \"i\"))\n", cameraMake));
+        if (country != null)
+            filterBlockBuilder.append( String.format("  FILTER (regex (?photoLocationCountry, \"^%s$\", \"i\"))\n", country));
+        if (city != null)
+            filterBlockBuilder.append(String.format("  FILTER (regex (?photoLocationCity, \"^%s$\", \"i\"))\n", city));
         String sortBlock = "ORDER BY ASC(?photoSubmittedAt)\n";
-        return executeBasicQuery(filterBlock, sortBlock, offset, limit);
+        return executeBasicQuery(filterBlockBuilder.toString() , sortBlock, offset, limit);
     }
 
     public List<UsePhotoQueryDto> getPhotosSearch(
@@ -160,20 +160,20 @@ public class UseDsPhotoQueryHelper {
             String city,
             String keyword
     ) {
-        String filterBlock = null;
+        StringBuilder filterBlockBuilder = new StringBuilder();
         if (photographerFirstName != null)
-            filterBlock = String.format("  FILTER (regex (?photographerFirstName, \"%s\", \"i\"))\n", photographerFirstName);
-        else if (photographerLastName != null)
-            filterBlock = String.format("  FILTER (regex (?photographerLastName, \"%s\", \"i\"))\n", photographerLastName);
-        else if (cameraMake != null)
-            filterBlock = String.format("  FILTER (regex (?exifCameraMake, \"%s\", \"i\"))\n", cameraMake);
-        else if (country != null)
-            filterBlock = String.format("  FILTER (regex (?photoLocationCountry, \"%s\", \"i\"))\n", country);
-        else if (city != null)
-            filterBlock = String.format("  FILTER (regex (?photoLocationCity, \"%s\", \"i\"))\n", city);
-        else if (keyword != null)
-            filterBlock = String.format("  FILTER (regex (?photoKeywords, \"%s\", \"i\"))\n", keyword);
+            filterBlockBuilder.append(String.format("  FILTER (regex (?photographerFirstName, \"%s\", \"i\"))\n", photographerFirstName));
+        if (photographerLastName != null)
+            filterBlockBuilder.append(String.format("  FILTER (regex (?photographerLastName, \"%s\", \"i\"))\n", photographerLastName));
+        if (cameraMake != null)
+            filterBlockBuilder.append(String.format("  FILTER (regex (?exifCameraMake, \"%s\", \"i\"))\n", cameraMake));
+        if (country != null)
+            filterBlockBuilder.append(String.format("  FILTER (regex (?photoLocationCountry, \"%s\", \"i\"))\n", country));
+        if (city != null)
+            filterBlockBuilder.append(String.format("  FILTER (regex (?photoLocationCity, \"%s\", \"i\"))\n", city));
+        if (keyword != null)
+            filterBlockBuilder.append(String.format("  FILTER (regex (?photoKeywords, \"%s\", \"i\"))\n", keyword));
         String sortBlock = "ORDER BY ASC(?photoSubmittedAt)\n";
-        return executeBasicQuery(filterBlock, sortBlock, offset, limit);
+        return executeBasicQuery(filterBlockBuilder.toString(), sortBlock, offset, limit);
     }
 }
