@@ -25,6 +25,21 @@ public class UseDsCollectionQueryHelper {
         this.useDatasetEndpointUrl = useDatasetEndpointUrl;
     }
 
+    private UseCollectionQueryDto resultSetToSingleCollectionDto(ResultSet results) {
+        UseCollectionQueryDto collection = new UseCollectionQueryDto();
+        if (results.hasNext()) {
+            QuerySolution sol = results.nextSolution();
+            collection.collectionId = sol.getLiteral("collectionId").getString();
+            collection.collectionTitle = sol.getLiteral("collectionTitle").getString();
+            (collection.photoIds = new ArrayList<>()).add(sol.getLiteral("photoId").getString());
+        }
+        while (results.hasNext()) {
+            QuerySolution sol = results.nextSolution();
+            collection.photoIds.add(sol.getLiteral("photoId").getString());
+        }
+        return collection;
+    }
+
     private UseCollectionQueryDto executeGetCollectionByIdQuery(String collectionId, boolean verbose) {
         ParameterizedSparqlString pss = new ParameterizedSparqlString();
         pss.setCommandText("" +
@@ -46,14 +61,8 @@ public class UseDsCollectionQueryHelper {
 
         try (QueryExecution queryExec = QueryExecutionHTTP.service(useDatasetEndpointUrl).query(query).build()) {
             ResultSet results = queryExec.execSelect();
-            if (results.hasNext()) {
-                QuerySolution sol = results.nextSolution();
-                UseCollectionQueryDto collection = new UseCollectionQueryDto();
-                collection.collectionId = sol.getLiteral("collectionId").getString();
-                collection.collectionTitle = sol.getLiteral("collectionTitle").getString();
-                (collection.photoIds = new ArrayList<>()).add(sol.getLiteral("photoId").getString());
-                return collection;
-            }
+            if (results.hasNext())
+                return resultSetToSingleCollectionDto(results);
         }
         return null;
     }
