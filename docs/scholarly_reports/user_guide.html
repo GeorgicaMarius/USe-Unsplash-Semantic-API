@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"">
+    <title>USe - User Guide</title>
+    <link rel=" stylesheet" href="resources/css/scholarly_styles.css">
+</head>
+
+<body prefix="schema: http://schema.org">
+
+    <article resource="#" typeof="schema:ScholarlyArticle">
+
+        <!-- Header section -->
+        <header>
+            <div class="banner">
+                <img id="logo_use" src="resources/images/logo_use.png" alt="USe logo">
+                <div class="status">User Guide</div>
+            </div>
+            <h1 property="schema:name">USe - User Guide</h1>
+            <p role="doc-subtitle" property="schema:alternateName">The Future of Semantic Search of Photos</p>
+        </header>
+
+        <!-- Accessibility properties -->
+        <meta property="schema:accessibilityFeature" content="alternativeText">
+        <meta property="schema:accessibilityHazard" content="noFlashingHazard">
+        <meta property="schema:accessMode" content="textual">
+
+
+        <!-- Contentinfo section -->
+        <div role="contentinfo">
+            <h2>Content</h2>
+            <ol role="directory">
+                <li><a href="#ref_nav_abstract">Abstract</a></li>
+                <li><a href="#ref_nav_introduction">Introduction</a> </li>
+                <li><a href="#ref_nav_pages">Web Pages of the Application</a>
+                    <ol>
+                        <li><a href="#ref_nav_pages_photo_search">Search and Filter Photos Page</a></li>
+                        <li><a href="#ref_nav_pages_photo_details">Individual Photo Page</a></li>
+                        <li><a href="#ref_nav_pages_collection_search">Search and Filter Collections Page</a></li>
+                        <li><a href="#ref_nav_pages_collection_details">Individual Collection Page</a></li>
+                    </ol>
+                </li>
+                <li><a href="#ref_nav_rest_api">REST API Guide</a>
+                    <ol>
+                        <li><a href="#ref_nav_rest_api_swagger">Swagger</a></li>
+                        <li><a href="#ref_nav_rest_api_photos">Photos Endpoints</a></li>
+                        <li><a href="#ref_nav_rest_api_collections">Collections Endpoints</a></li>
+                    </ol>
+                </li>
+                <li><a href="#ref_nav_authors">Authors</a></li>
+                <li><a href="#ref_nav_affiliations">Affiliations</a></li>
+                <li><a href="#ref_nav_references">References</a></li>
+            </ol>
+
+            <dl>
+                <dt>Authors</dt>
+                <dd>
+                    *
+                    <a href="#ref_author_1">Marius Georgica</a>
+                    &amp;
+                    <a href="#ref_author_1">Robert Frentz</a>
+                    &amp;
+                    <a href="#ref_author_1">Silviu Ilas</a>
+                    (<a href="https://www.info.uaic.ro/">info.uaic.ro</a>)
+                </dd>
+                <dt>License</dt>
+                <dd>
+                    <a property="schema:license" href="https://www.gnu.org/licenses/gpl-3.0.html">GNU GPL-3.0</a>
+                </dd>
+            </dl>
+            <small><b>*</b> Authors have equal contributions and are just sorted in alphabetical order.</small>
+        </div>
+
+
+        <section id="ref_nav_abstract" role="doc-abstract" typeof="sa:Abstract">
+            <h2>Abstract</h2>
+            <p>
+                Unsplash Semantic API (USe) is a Web application based on the Semantic Web principles. This document
+                aims to provide users with documentation on using the application, detailing its various features,
+                and giving an overview of the application's endpoints that can be of service to the advanced users.</p>
+        </section>
+
+
+        <section id="ref_nav_introduction" role="doc-introduction">
+            <h2>Introduction</h2>
+            <p><b>USe</b> stands for <u>U</u>nsplash <u>Se</u>mantic API, and is a Web application following the
+                Semantic Web principles.</p>
+
+            <p>The application aims to allow users to perform various tasks such as:</p>
+            <ul>
+                <li><i>Visualize</i> - images as the result of searching or using predefined collections. Individual
+                    images have associated properties and (meta-)informations, enriching the knowledge about a
+                    photograph.</li>
+                <li><i>Augment</i> - both visually, using parameters like brightness, contrast, blur, etc., and
+                    semantically, with additional metadata about photo-related concepts, retrieved from external
+                    datasets like DBpedia<a href="#ref_biblio_dbpedia"><sup>1</sup></a> and Wikidata<a
+                        href="#ref_biblio_wikidata"><sup>2</sup></a>.</li>
+                <li><i>Filter and Search</i> - on various criterias such as photo id, keywords, photo location country
+                    or city, photographer name, camera maker, etc. which provide users the ability to quickly find and
+                    explore photos that they may find of interest.</li>
+            </ul>
+
+            <p>USe is a multi-device Web application, accessible to the users on both desktop and mobile platforms. The
+                application also embeds structured data into the HTML using RDFa<a
+                    href="#ref_biblio_rdfa_w3c"><sup>3</sup></a>, in order for the data to be parseable by Semantic Web
+                tools. Moreover, all the data is accessible through both traditional REST APIs and SPARQL endpoints that
+                give users full access to the data about nature-themed photos provided for free by the Unsplash Lite
+                Dataset<a href="#ref_biblio_unsplash_datasets"><sup>4</sup></a> that is backing-up the application.
+            </p>
+        </section>
+
+
+        <section id="ref_nav_pages">
+            <h2>Web Pages of the Application</h2>
+            <p>The Front-End application was developed using the Angular framework, with the addition of Angular
+                Material Design components and additional styling with Bootstrap 5. The Front-End application aims to
+                offer an attractive and easy to use interface for the users in order to access the functionality of the
+                backend in an intuitive manner. Also, the application is organised in a set of pages with well defined
+                functionality.</p>
+
+            <section id="ref_nav_pages_photo_search">
+                <h3>Search and Filter Photos Page</h3>
+                <p>This page provides the users with various controls to search photos, for example by description or
+                    keywords, or to filter them by criterias like photographer, country, city, camera make, etc. The
+                    page also displays the search results in a grid-like manner and allows users to click any photo
+                    result, and go to their individual page.</p>
+                <figure typeof="sa:image">
+                    <img src="resources/images/user_guide/placeholder_1920_937.png" alt="Search and Filter Photos Page">
+                    <figcaption>Search and Filter Photos Page</figcaption>
+                </figure>
+            </section>
+
+            <section id="ref_nav_pages_photo_details">
+                <h3>Individual Photo Page</h3>
+                <p>This page allows the users to view a particular photo with a larger resolution size, to view it's
+                    source Unsplash URL, it's description, associated keywords, the number of downloads and views, exif
+                    data like camera model and ISO, submission date, photo location country and city, the GPS
+                    coordinates, etc. This page is also augmented with data from external datastores like DBpedia about
+                    concepts like the photo location country, city, about the place, etc.</p>
+                <figure typeof="sa:image">
+                    <img src="resources/images/user_guide/placeholder_1920_937.png" alt="Individual Photo Page">
+                    <figcaption>Individual Photo Page</figcaption>
+                </figure>
+            </section>
+
+            <section id="ref_nav_pages_collection_search">
+                <h3>Search and Filter Collections Page</h3>
+                <p>This page provides the users with various controls to search collections, for example, by title. The
+                    page also displays the results in a grid-like manner and allows users to click the collection
+                    results, which lead to their individual page.</p>
+                <figure typeof="sa:image">
+                    <img src="resources/images/user_guide/placeholder_1920_937.png"
+                        alt="Search and Filter Collections Page">
+                    <figcaption>Search and Filter Collections Page</figcaption>
+                </figure>
+            </section>
+
+            <section id="ref_nav_pages_collection_details">
+                <h3>Individual Collection Page</h3>
+                <p>This page allows the users to view a particular collection. It displays the collection title and the
+                    photos that make up the collection in a grid-like manner. Users can then click a photo result, and
+                    go to its individual page to find out more details.</p>
+                <figure typeof="sa:image">
+                    <img src="resources/images/user_guide/placeholder_1920_937.png" alt="Individual Collection Page">
+                    <figcaption>Individual Collection Page</figcaption>
+                </figure>
+            </section>
+        </section>
+
+
+        <section id="ref_nav_rest_api">
+            <h2>REST API Guide</h2>
+            <p>The application also offers a REST API, and it's interface description follows the OpenAPI Specification
+                v3.1.0<a href="#ref_biblio_openapi_specs"><sup>5</sup></a>. The APIs provides access through the HTTP(S)
+                protocol to the data that is also backing-up the application.</p>
+
+            <section id="ref_nav_rest_api_swagger">
+                <h3>Swagger</h3>
+                <p>The Swagger documentation for the proposed application is openly available <a
+                        href="https://app.swaggerhub.com/apis/FRENTZROBERT/OpenAPI/1.0.0"><b>here</b></a> (on
+                    SwaggerHub).</p>
+                <figure typeof="sa:image">
+                    <img src="resources/images/user_guide/swagger_complete.png"
+                        alt="Project API definitions using the OpenAPI Specification">
+                    <figcaption>Project API definitions using the OpenAPI Specification</figcaption>
+                </figure>
+            </section>
+
+            <section id="ref_nav_rest_api_photos">
+                <h3>Photos Endpoints</h3>
+                <p>The information related to photos can be retrieved via a set of endpoints, and can be customized via
+                    query parameters. For example, photos can be searched or filtered via one or multiple criterias, in
+                    a <b>case-insensitive</b> manner for the string query parameters. Pagination support is offered via
+                    <b><code>offset</code></b> (default is 0) and <b><code>limit</code></b> (default is 15) query
+                    parameters.
+                </p>
+                <p>The endpoints for photos are:</p>
+                <ul>
+                    <li><b>GET /photos</b> Retrieves photos without searching or filtering.</li>
+                    <li><b>GET /photos/{photoId}</b> Retrieves a particular photo by id.</li>
+                    <li><b>GET /photos?country={country}</b> Retrieves photos filtered by country name.</li>
+                    <li><b>GET /photos?city={city}</b> Retrieves photos filtered by city name.</li>
+                    <li><b>GET /photos?cameraMake={cameraMake}</b> Retrieves photos filtered by camera maker.</li>
+                    <li><b>GET /photos?photographerFirstName={name}</b> Gets photos filtered by photographer first name.
+                    </li>
+                    <li><b>GET /photos?photographerLastName={name}</b> Gets photos filtered by photographer last name.
+                    </li>
+                    <br />
+                    <li><b>GET /photos/search?country={country}</b> Retrieves photos searched by country name.</li>
+                    <li><b>GET /photos/search?city={city}</b> Retrieves photos searched by city name.</li>
+                    <li><b>GET /photos/search?cameraMake={cameraMake}</b> Retrieves photos searched by camera maker.
+                    </li>
+                    <li><b>GET /photos/search?photographerFirstName={name}</b> Retrieves photos searched by photographer
+                        first name.</li>
+                    <li><b>GET /photos/search?photographerLastName={name}</b> Retrieves photos searched by photographer
+                        last name.</li>
+                    <li><b>GET /photos/search?keyword={keyword}</b> Retrieves photos searched by keyword.</li>
+                    <br />
+                    <li><b>GET /additional-data/city/{city}</b> Retrieves additional data about a city by name (from
+                        external data source - DBpedia).</li>
+                </ul>
+                <figure typeof="sa:image">
+                    <img src="resources/images/user_guide/api_photos_get_by_id.png"
+                        alt="Example of API response for getting a photo by id">
+                    <figcaption>Example of API response for getting a photo by id</figcaption>
+                </figure>
+            </section>
+
+            <section id="ref_nav_rest_api_collections">
+                <h3>Collections Endpoints</h3>
+                <p>Collections can also be retrieved via a set of endpoints, and the queries can be customized via
+                    query parameters. For example, collections can be searched by title in a <b>case-insensitive</b>
+                    manner. Pagination support is offered via <b><code>offset</code></b> (default is 0) and
+                    <b><code>limit</code></b> (default is 15) query parameters.
+                </p>
+                <p>The endpoints for collections are:</p>
+                <ul>
+                    <li><b>GET /collections</b> Retrieves collections without filtering.</li>
+                    <li><b>GET /collections/{collectionId}</b> Retrieves a particular collection by id.</li>
+                    <li><b>GET /collections?title={title}</b> Retrieves collections filtered by title.</li>
+                    <li><b>GET /collections/search?title={title}</b> Retrieves collections searched by title.</li>
+                </ul>
+                <figure typeof="sa:image">
+                    <img src="resources/images/user_guide/api_collections_search_by_title.png"
+                        alt="Example of API response for searching collections by title">
+                    <figcaption>Example of API response for searching collections by title</figcaption>
+                </figure>
+            </section>
+        </section>
+
+
+        <!-- Authors section -->
+        <section id="ref_nav_authors" typeof="sa:AuthorsList">
+            <h2>Authors</h2>
+            <p>The authors have the same contribution to the developed solution. In alphabetical order, they are:</p>
+            <ul>
+                <li id="ref_author_1" typeof="sa:ContributorRole" property="schema:author">
+                    <span typeof="schema:Person" resource="https://github.com/GeorgicaMarius">
+                        <meta property="schema:givenName" content="Marius">
+                        <meta property="schema:familyName" content="Georgica">
+                        <a href="https://github.com/GeorgicaMarius"><span property="schema:name">Marius
+                                Georgica</span></a>
+                    </span>
+                    <a href="#aff_fii" property="sa:roleAffiliation" resource="https://www.info.uaic.ro/">UAIC FII</a>
+                </li>
+                <li id="ref_author_2" typeof="sa:ContributorRole" property="schema:author">
+                    <span typeof="schema:Person" resource="https://github.com/RobertFrentz">
+                        <meta property="schema:givenName" content="Robert">
+                        <meta property="schema:familyName" content="Frentz">
+                        <a href="https://github.com/RobertFrentz"><span property="schema:name">Robert
+                                Frentz</span></a>
+                    </span>
+                    <a href="#aff_fii" property="sa:roleAffiliation" resource="https://www.info.uaic.ro/">UAIC FII</a>
+                </li>
+                <li id="ref_author_3" typeof="sa:ContributorRole" property="schema:author">
+                    <span typeof="schema:Person" resource="https://github.com/silviuilas">
+                        <meta property="schema:givenName" content="Silviu">
+                        <meta property="schema:familyName" content="Ilas">
+                        <a href="https://github.com/silviuilas"><span property="schema:name">Silviu
+                                Ilas</span></a>
+                    </span>
+                    <a href="#aff_fii" property="sa:roleAffiliation" resource="https://www.info.uaic.ro/">UAIC FII</a>
+                </li>
+            </ul>
+        </section>
+
+
+        <!-- Affiliations section -->
+        <section id="ref_nav_affiliations" typeof="sa:Affiliations">
+            <h2>Affiliations</h2>
+            <ul>
+                <li id="aff_fii">
+                    <span typeof="schema:Organization" resource="https://www.info.uaic.ro/">
+                        <a href="https://www.info.uaic.ro/">
+                            <span property="schema:name">Faculty of Computer Science</span>
+                        </a>
+                        -
+                        <span property="schema:parentOrganization">
+                            <span typeof="schema:Organization">
+                                <a href="https://www.uaic.ro/en/">
+                                    <span property="schema:name">"Alexandru Ioan Cuza" University of Iasi</span>
+                                </a>
+                                -
+                                <span property="schema:location" typeof="schema:Place">
+                                    <span property="schema:address" typeof="schema:PostalAddress">
+                                        <span property="schema:addressLocality">Iasi</span>,
+                                        <span property="schema:addressRegion">Iasi</span>,
+                                        <span property="schema:addressCountry">Romania</span>
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </span>
+                </li>
+            </ul>
+        </section>
+
+
+        <!-- References section -->
+        <section id="ref_nav_references" role="doc-bibliography">
+            <h2>References</h2>
+            <ol>
+                <li id="ref_biblio_dbpedia" typeof="schema:WebPage" role="doc-biblioentry"
+                    resource="https://www.dbpedia.org/" property="schema:citation">
+                    <cite property="schema:name">
+                        <a href="https://www.dbpedia.org/">DBpedia</a>
+                    </cite>, by
+                    <span property="schema:author" typeof="schema:Organization">
+                        <span property="schema:name">DBpedia Association</span>
+                    </span>; published in <time property="schema:datePublished" datatype="xsd:gYear"
+                        datetime="2022">2022</time>
+                    <span property="schema:potentialAction" typeof="schema:ReadAction">
+                        <meta property="schema:actionStatus" content="CompletedActionStatus">
+                        (accessed on
+                        <time property="schema:endTime" datatype="xsd:date" datetime="2023-01-22">22 Jan 2023</time>)
+                    </span>.
+                </li>
+                <li id="ref_biblio_wikidata" typeof="schema:WebPage" role="doc-biblioentry"
+                    resource="https://www.wikidata.org/wiki/Wikidata:Main_Page" property="schema:citation">
+                    <cite property="schema:name">
+                        <a href="https://www.wikidata.org/wiki/Wikidata:Main_Page">Wikidata</a>
+                    </cite>, by
+                    <span property="schema:author" typeof="schema:Organization">
+                        <span property="schema:name">Wikimedia Foundation</span>
+                    </span>; published in <time property="schema:datePublished" datatype="xsd:gYear"
+                        datetime="2022">2022</time>
+                    <span property="schema:potentialAction" typeof="schema:ReadAction">
+                        <meta property="schema:actionStatus" content="CompletedActionStatus">
+                        (accessed on
+                        <time property="schema:endTime" datatype="xsd:date" datetime="2023-01-23">23 Jan 2023</time>)
+                    </span>.
+                </li>
+                <li id="ref_biblio_rdfa_w3c" typeof="schema:WebPage" role="doc-biblioentry"
+                    resource="https://www.w3.org/TR/rdfa-lite/" property="schema:citation">
+                    <cite property="schema:name">
+                        <a href="https://www.w3.org/TR/rdfa-lite/">RDFa Lite 1.1 - Second Edition</a>
+                    </cite>, by
+                    <span property="schema:author" typeof="schema:Organization">
+                        <span property="schema:name">W3C</span>
+                    </span>; published in <time property="schema:datePublished" datatype="xsd:gYear"
+                        datetime="2015">2015</time>
+                    <span property="schema:potentialAction" typeof="schema:ReadAction">
+                        <meta property="schema:actionStatus" content="CompletedActionStatus">
+                        (accessed on
+                        <time property="schema:endTime" datatype="xsd:date" datetime="2023-01-24">24 Jan 2023</time>)
+                    </span>.
+                </li>
+                <li id="ref_biblio_unsplash_datasets" typeof="schema:WebPage" role="doc-biblioentry"
+                    resource="https://github.com/unsplash/datasets" property="schema:citation">
+                    <cite property="schema:name">
+                        <a href="https://github.com/unsplash/datasets">The Unsplash Dataset</a>
+                    </cite>, by
+                    <span property="schema:author" typeof="schema:Organization">
+                        <span property="schema:name">Unsplash</span>
+                    </span>; published in <time property="schema:datePublished" datatype="xsd:gYear"
+                        datetime="2022">2022</time>
+                    <span property="schema:potentialAction" typeof="schema:ReadAction">
+                        <meta property="schema:actionStatus" content="CompletedActionStatus">
+                        (accessed on
+                        <time property="schema:endTime" datatype="xsd:date" datetime="2023-01-24">24 Jan 2023</time>)
+                    </span>.
+                </li>
+                <li id="ref_biblio_openapi_specs" typeof="schema:WebPage" role="doc-biblioentry"
+                    resource="https://spec.openapis.org/oas/v3.1.0" property="schema:citation">
+                    <cite property="schema:name">
+                        <a href="https://spec.openapis.org/oas/v3.1.0">OpenAPI Specification v3.1.0</a>
+                    </cite>, by
+                    <span property="schema:author" typeof="schema:Organization">
+                        <span property="schema:name">OpenAPI Initiative Working Group</span>
+                    </span>; published in <time property="schema:datePublished" datatype="xsd:gYear"
+                        datetime="2021">2021</time>
+                    <span property="schema:potentialAction" typeof="schema:ReadAction">
+                        <meta property="schema:actionStatus" content="CompletedActionStatus">
+                        (accessed on
+                        <time property="schema:endTime" datatype="xsd:date" datetime="2023-01-25">25 Jan 2023</time>)
+                    </span>.
+                </li>
+            </ol>
+        </section>
+
+    </article>
+
+</body>
+
+</html>

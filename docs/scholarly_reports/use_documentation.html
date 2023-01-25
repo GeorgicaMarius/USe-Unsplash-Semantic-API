@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"">
-    <title>USe Technical Report</title>
+    <title>USe - Technical Report</title>
     <link rel=" stylesheet" href="resources/css/scholarly_styles.css">
 </head>
 
@@ -19,7 +19,7 @@
                 <img id="logo_use" src="resources/images/logo_use.png" alt="USe logo">
                 <div class="status">Technical Report</div>
             </div>
-            <h1 property="schema:name">USe - Unsplash Semantic API</h1>
+            <h1 property="schema:name">USe - Technical Report</h1>
             <p role="doc-subtitle" property="schema:alternateName">The Future of Semantic Search of Photos</p>
         </header>
 
@@ -31,6 +31,7 @@
 
         <!-- Contentinfo section -->
         <div role="contentinfo">
+            <h2>Content</h2>
             <ol role="directory">
                 <li><a href="#ref_nav_abstract">Abstract</a></li>
                 <li><a href="#ref_nav_introduction">Introduction</a>
@@ -57,11 +58,17 @@
                         <li><a href="#ref_nav_data_sources_external">External Data Sources</a></li>
                     </ol>
                 </li>
-                <li><a href="#ref_nav_knowledge_modeling">USe Knowledge Modeling</a>
+                <li><a href="#ref_nav_knowledge_modeling">Knowledge Modeling</a>
                     <ol>
-                        <li><a href="#ref_nav_knowledge_modeling_vocabularies">Used Vocabularies</a></li>
+                        <li><a href="#ref_nav_knowledge_modeling_vocabularies">Vocabularies</a></li>
                         <li><a href="#ref_nav_knowledge_modeling_photo">Photos - Ontology and Graph</a></li>
                         <li><a href="#ref_nav_knowledge_modeling_collection">Collections - Ontology and Graph</a></li>
+                    </ol>
+                </li>
+                <li><a href="#ref_nav_data_access">Accessing Data using SPARQL</a>
+                    <ol>
+                        <li><a href="#ref_nav_data_access_photos">Retrieving and Searching Photos</a></li>
+                        <li><a href="#ref_nav_data_access_collections">Retrieving and Searching Collections</a></li>
                     </ol>
                 </li>
                 <li><a href="#ref_nav_linked_data">Linked Data Principles</a></li>
@@ -133,7 +140,7 @@
                         semantically, with additional metadata about concepts related to a photo retrieved from external
                         datasets like DBpedia<a href="#ref_biblio_dbpedia"><sup>2</sup></a> and/or Wikidata<a
                             href="#ref_biblio_wikidata"><sup>3</sup></a>.</li>
-                    <li><i>Filter and Search</i> - on various criterias such as photoId, keywords, photo location
+                    <li><i>Filter and Search</i> - on various criterias such as photo id, keywords, photo location
                         country or city, photographer firstname or lastname, camera maker, etc. which provide users the
                         ability to quickly find and explore photos that users may find of interest.</li>
                     <li><i>Compare</i> - two or more photos, side by side, highlighting the differences between most of
@@ -225,7 +232,7 @@
             <section id="ref_nav_architecture_front">
                 <h3>The Front-End Architecture</h3>
                 <p>The Front-End application was developed using the Angular framework, with the addition of Angular
-                    Material Design integrable components and additional styling using Bootstrap 5. The front-end
+                    Material Design integrable components and additional styling using Bootstrap 5. The Front-End
                     application aims to offer an attractive and easy to use interface for the users in order to access
                     the functionality of the backend in an intuitive manner.</p>
                 <p>Some of the main goals would be to provide the functionality to visualize, augment, filter and
@@ -234,17 +241,17 @@
                 <p>The application is a Single-Page Application<a href="#ref_biblio_mdn_spa"><sup>8</sup></a>
                     organised in a set of pages with well defined functionality:</p>
                 <ul>
-                    <li><b>Home page</b> will serve as an entry point for the users, and provides a summary of the
+                    <li><b>Home page</b> serves as an entry point for the users, and provides a summary of the
                         functionalities of the application.</li>
-                    <li><b>Search and Filter page</b> will provide the users with various controls to search photos, for
+                    <li><b>Search and Filter page</b> provides the users with various controls to search photos, for
                         example by description or keywords, or to filter them by criterias like photographer, country,
-                        city, camera make, etc. The page will also display the results in a grid-like manner and allow
+                        city, camera make, etc. The page also displays the results in a grid-like manner and allow
                         users to click them, and go to their individual page.</li>
                     <li><b>Individual Photo page</b> Allows the user to view the image with a larger size, to see it's
-                        description, source Unsplash url, data about it's original pixels size, submission date,
+                        description, source Unsplash URL, data about it's original pixels size, submission date,
                         location name and GPS coordinates, etc. This page is also augmented with data from external
-                        datastores like DBpedia and/or Wikidata about concepts like the photo location country, city,
-                        about the place, etc. </li>
+                        datastores like DBpedia or Wikidata about concepts like the photo location country, city, about
+                        the place, etc.</li>
                     <li><b>Compare Photos page</b> allows users to compare two or more photos, side by side, and
                         highlights the differences between the properties of the images. This enables users to easily
                         study and find differences between photos of interest.</li>
@@ -262,7 +269,8 @@
                     software system and shows the high-level technical building blocks is presented below:</p>
 
                 <figure typeof="sa:image">
-                    <img src="resources/images/c4_level2.svg" alt="C4 Model - Level 2 Container Diagram">
+                    <img src="resources/images/technical_report/c4_level2.svg"
+                        alt="C4 Model - Level 2 Container Diagram">
                     <figcaption>C4 Model - Level 2 Container Diagram</figcaption>
                 </figure>
 
@@ -513,7 +521,8 @@
                     next chapter. The figure below depicts the flow of the serialization process.</p>
 
                 <figure typeof="sa:image">
-                    <img src="resources/images/dataset_processing_flow.svg" alt="Dataset Processing Flow Diagram">
+                    <img src="resources/images/technical_report/dataset_processing_flow.svg"
+                        alt="Dataset Processing Flow Diagram">
                     <figcaption>Dataset Processing Flow Diagram</figcaption>
                 </figure>
 
@@ -547,14 +556,14 @@
                     that can be used to get additional information about a city, and augment informations about the
                     location of a photo is the following:</p>
                 <figure typeof="sa:image">
-                    <img src="resources/images/sparql_dbpedia_city_info_example_query.png"
+                    <img src="resources/images/technical_report/sparql_dbpedia_city_info_example_query.png"
                         alt="Example of a query against DBpedia SPARQL endpoint">
                     <figcaption>Example of a query against DBpedia SPARQL endpoint</figcaption>
                 </figure>
 
                 <p>And the result of the query is depicted below:</p>
                 <figure typeof="sa:image">
-                    <img src="resources/images/sparql_dbpedia_city_info_example_result.png"
+                    <img src="resources/images/technical_report/sparql_dbpedia_city_info_example_result.png"
                         alt="Example of the SPARQL query result">
                     <figcaption>Example of result for the above SPARQL query</figcaption>
                 </figure>
@@ -575,7 +584,7 @@
                 are structured as follows.</p>
 
             <section id="ref_nav_knowledge_modeling_vocabularies">
-                <h3>Used Vocabularies</h3>
+                <h3>Vocabularies</h3>
                 <p>The following vocabularies were used for modeling the data in RDF triples, for building the
                     ontologies used by the application, and for linking the resources with external data:</p>
                 <figure typeof="sa:SoftwareSourceCode">
@@ -609,7 +618,8 @@
                 <p>The following diagram represents the complete Photo concept modeling, done using various schemes,
                     properties, data types, etc. used by the application:</p>
                 <figure typeof="sa:image">
-                    <img src="resources/images/photo_ontology_complete.svg" alt="Photo - Conceptual Model">
+                    <img src="resources/images/technical_report/photo_ontology_complete.svg"
+                        alt="Photo - Conceptual Model">
                     <figcaption>Photo - Conceptual Model</figcaption>
                 </figure>
 
@@ -622,7 +632,8 @@
                         <b>use</b> vocabulary.
                     </p>
                     <figure typeof="sa:image">
-                        <img src="resources/images/photo_ontology_core.svg" alt="Photo - Core properties">
+                        <img src="resources/images/technical_report/photo_ontology_core.svg"
+                            alt="Photo - Core properties">
                         <figcaption>Photo - Core properties</figcaption>
                     </figure>
                     <p>Some of the properties used are:</p>
@@ -657,7 +668,8 @@
                         properties that give additional information about the photo from a media content point of view.
                     </p>
                     <figure typeof="sa:image">
-                        <img src="resources/images/photo_ontology_media.svg" alt="Photo - Media properties">
+                        <img src="resources/images/technical_report/photo_ontology_media.svg"
+                            alt="Photo - Media properties">
                         <figcaption>Photo - Media properties</figcaption>
                     </figure>
                     <p>Some of the properties used are:</p>
@@ -675,7 +687,8 @@
                         contains different properties that give additional information about the location of the content
                         from a photo. </p>
                     <figure typeof="sa:image">
-                        <img src="resources/images/photo_ontology_place.svg" alt="Photo - Place properties">
+                        <img src="resources/images/technical_report/photo_ontology_place.svg"
+                            alt="Photo - Place properties">
                         <figcaption>Photo - Place properties</figcaption>
                     </figure>
                     <p>In the following are some details about the properties used:</p>
@@ -694,7 +707,8 @@
                         and contains different properties that give additional information about the author of a photo.
                     </p>
                     <figure typeof="sa:image">
-                        <img src="resources/images/photo_ontology_author.svg" alt="Photo - Author properties">
+                        <img src="resources/images/technical_report/photo_ontology_author.svg"
+                            alt="Photo - Author properties">
                         <figcaption>Photo - Author properties</figcaption>
                     </figure>
                     <p>Details about the properties used are:</p>
@@ -715,7 +729,8 @@
                 <p>The following diagram represents the complete Collection concept modeling, done using various
                     schemes, properties, data types, etc.:</p>
                 <figure typeof="sa:image">
-                    <img src="resources/images/collection_ontology_complete.svg" alt="Collection - Conceptual Model">
+                    <img src="resources/images/technical_report/collection_ontology_complete.svg"
+                        alt="Collection - Conceptual Model">
                     <figcaption>Collection - Conceptual Model</figcaption>
                 </figure>
 
@@ -730,6 +745,62 @@
                     <li><b>rdf:li</b> Container membership property that indicates which photos are part of the
                         collection.</li>
                 </ul>
+            </section>
+        </section>
+
+
+        <section id="ref_nav_data_access">
+            <h2>Accessing Data using SPARQL</h2>
+            <p>All the data managed by the application is modeled into RDF-based knowledge models.This allows the
+                application to perform queries using the SPARQL language and to make advanced inferences.</p>
+
+            <section id="ref_nav_data_access_photos">
+                <h3>Retrieving and Searching Photos</h3>
+
+                <p>The following represents a SPARQL query that can be used to retrieve photos and their properties.
+                    There is also support for pagination, using <code>OFFSET</code> and <code>LIMIT</code> keywords.
+                </p>
+                <figure typeof="sa:image">
+                    <img src="resources/images/technical_report/sparql_use_photos_get_query.png"
+                        alt="Example of a SPARQL query for retrieving photos">
+                    <figcaption>Example of a SPARQL query for retrieving photos</figcaption>
+                </figure>
+
+                <p>Photos can be searched by various criterias, by augmenting the previous query with
+                    <code>FILTER</code> statements, for example by id, photo location country and city, camera
+                    properties like maker, photographer name, keywords, etc.
+                </p>
+                <figure typeof="sa:image">
+                    <img src="resources/images/technical_report/sparql_use_photos_get_search.png"
+                        alt="Example of filters that can be applied to the SPARQL query for retrieving photos">
+                    <figcaption>Example of filters that can be applied to the SPARQL query for retrieving photos
+                    </figcaption>
+                </figure>
+            </section>
+
+            <section id="ref_nav_data_access_collections">
+                <h3>Retrieving and Searching Collections</h3>
+
+                <p>Collections can be retrieved using the following SPARQL query:</p>
+                <figure typeof="sa:image">
+                    <img src="resources/images/technical_report/sparql_use_collections_get_query.png"
+                        alt="Example of a SPARQL query for retrieving collections">
+                    <figcaption>Example of a SPARQL query for retrieving collections </figcaption>
+                </figure>
+
+                <p>Collections can also be filtered by id using a SPARQL query like the following:</p>
+                <figure typeof="sa:image">
+                    <img src="resources/images/technical_report/sparql_use_collections_get_by_id_query.png"
+                        alt="Example of SPARQL query for getting a collection by id">
+                    <figcaption>Example of SPARQL query for getting a collection by id</figcaption>
+                </figure>
+
+                <p>They can also be searched by title using a similar SPARQL query:</p>
+                <figure typeof="sa:image">
+                    <img src="resources/images/technical_report/sparql_use_collections_get_search_query.png"
+                        alt="Example of SPARQL query for searching collections by title">
+                    <figcaption>Example of SPARQL query for searching collections by title</figcaption>
+                </figure>
             </section>
         </section>
 
@@ -785,15 +856,15 @@
                 </li>
             </ol>
 
-            <p>By following all these principles, the application actually follows the 5-⭐data ranking</p>
-            <ul>
+            <p>By following all these principles, the application actually follows the 5-⭐ data ranking:</p>
+            <ol>
                 <li>✔️ ⭐ The data is made available on the Web, regardless of format, under an open licence.</li>
                 <li>✔️ ⭐⭐ The data is made available as structured data.</li>
                 <li>✔️ ⭐⭐⭐ Uses non-proprietary formats for the data - RDF.</li>
                 <li>✔️ ⭐⭐⭐⭐ The resources have associated URLs that can be referenced by others resources.</li>
                 <li>✔️ ⭐⭐⭐⭐⭐ The resources make use of URLs to link to other data (e.g. source photographs from
                     Unsplash).</li>
-            </ul>
+            </ol>
         </section>
 
 
