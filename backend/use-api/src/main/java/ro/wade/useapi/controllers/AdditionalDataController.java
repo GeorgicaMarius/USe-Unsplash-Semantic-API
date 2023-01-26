@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import ro.wade.useapi.helpers.DbpediaDsQueryHelper;
 import ro.wade.useapi.models.DbpediaCityQueryDto;
+import ro.wade.useapi.models.DbpediaCountryQueryDto;
 
 @RestController
 public class AdditionalDataController {
@@ -15,5 +16,10 @@ public class AdditionalDataController {
     @GetMapping("/additional-data/city/{cityName}")
     public DbpediaCityQueryDto getCityByName(@PathVariable("cityName") String cityName) {
         return dbpediaDsQueryHelper.getCityByName(cityName);
+    }
+
+    @GetMapping("/additional-data/country/{countryName}")
+    public DbpediaCountryQueryDto getCountryByName(@PathVariable("countryName") String cityName) {
+        return dbpediaDsQueryHelper.getCountryByName(cityName);
     }
 }
