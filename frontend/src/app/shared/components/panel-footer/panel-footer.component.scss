@@ -1,10 +1,35 @@
 @import 'src/app/styles/variables';
 
-.panel-footer-container{
-  height: 5%;
-  margin: 0px;
-  background-color: $royal-blue;
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
+:host{
+  .panel-footer-container {
+      height: 8%;
+      margin: 0px;
+      background-color: $royal-blue;
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
 
+      ::ng-deep {
+        .mat-mdc-paginator {
+            height: 100%;
+            background-color: #3B8CE0;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+
+            .mat-mdc-paginator-outer-container{
+              height: 100%;
+            }
+        }
+      }
+
+    }
+
+    @media screen and (max-width: 493px) {
+      ::ng-deep{
+        .mat-mdc-paginator-page-size {
+          display: none;
+        }
+      }
+
+    }
 }
+

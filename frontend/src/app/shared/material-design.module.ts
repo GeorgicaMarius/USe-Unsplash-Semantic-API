@@ -13,17 +13,12 @@ const materialDesignImport = [
   MatSidenavModule,
   MatIconModule,
   MatPaginatorModule,
-  MatButtonModule
+  MatButtonModule,
 ];
 
 @NgModule({
   declarations: [],
-  imports: [
-    ...materialDesignImport,
-    CommonModule
-  ],
-  exports: [
-    ...materialDesignImport
-  ]
+  imports: [...materialDesignImport, CommonModule],
+  exports: [...materialDesignImport],
 })
-export class MaterialDesignModule { }
+export class MaterialDesignModule {}

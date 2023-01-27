@@ -1,4 +1,9 @@
 <div class="panel-footer-container">
-  <p>panel-footer works!</p>
+  <mat-paginator
+    [length]="numberOfItems"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[10, 25, 100]"
+    (page)="onPageChanged($event)"
+  >
+  </mat-paginator>
 </div>
-

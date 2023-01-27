@@ -6,6 +6,7 @@ import { PhotosOverviewComponent } from './components/photos-overview/photos-ove
 import { PhotoDetailsComponent } from './components/photos-overview/photo-details/photo-details.component';
 import { PhotoCardComponent } from './components/photos-overview/photo-card/photo-card.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     PhotosRoutingModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ]
 })
 export class PhotosModule { }
