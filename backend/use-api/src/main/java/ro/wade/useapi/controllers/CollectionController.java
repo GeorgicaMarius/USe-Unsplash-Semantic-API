@@ -26,7 +26,7 @@ public class CollectionController {
 
     @GetMapping("/collections/{collectionId}")
     public UseCollectionQueryDto getCollectionById(@PathVariable("collectionId") String collectionId) {
-        return useDsCollectionQueryHelper.getCollectionById(collectionId);
+        return useDsCollectionQueryHelper.getCollectionById(collectionId, true);
     }
 
     @GetMapping("/collections/search")
