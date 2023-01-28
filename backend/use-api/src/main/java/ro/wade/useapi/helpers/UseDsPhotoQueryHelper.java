@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ro.wade.useapi.models.UsePhotoQueryDto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -171,13 +172,18 @@ public class UseDsPhotoQueryHelper {
             filterBlockBuilder.append(String.format("  FILTER (regex (?photoLocationCity, \"%s\", \"i\"))\n", city));
         if (keyword != null)
             filterBlockBuilder.append(String.format("  FILTER (regex (?photoKeywords, \"%s\", \"i\"))\n", keyword));
-        if (masterKeyword != null)
-            filterBlockBuilder.append(String.format("FILTER (regex(?photoLocationCity, \"%s\", \"i\") || \n" +
-                    "        regex(?photoLocationCountry, \"%s\", \"i\") || \n" +
-                    "        regex(?photoLocationName, \"%s\", \"i\") ||\n" +
-                    "        regex(?photographerLastName, \"%s\", \"i\") ||\n" +
-                    "        regex(?photographerFirstName, \"%s\", \"i\") ||\n" +
-                    "        regex(?photographerUsername, \"%s\", \"i\"))", masterKeyword, masterKeyword, masterKeyword, masterKeyword, masterKeyword, masterKeyword));
+        if (masterKeyword != null){
+            List<String> variables = Arrays.asList("photoLocationCity", "photoLocationCountry", "photographerLastName",
+                    "photographerFirstName", "exifCameraMake", "photoKeywords");
+            filterBlockBuilder.append("FILTER (");
+            for (int i = 0; i < variables.size(); i++) {
+                filterBlockBuilder.append(String.format("regex(?%s, \"%s\", \"i\")", variables.get(i), masterKeyword));
+                if (i < variables.size() - 1) {
+                    filterBlockBuilder.append(" || ");
+                }
+            }
+            filterBlockBuilder.append(")");
+        }
         String sortBlock = "ORDER BY ASC(?photoSubmittedAt)\n";
         return executeBasicQuery(filterBlockBuilder.toString(), sortBlock, offset, limit);
     }
