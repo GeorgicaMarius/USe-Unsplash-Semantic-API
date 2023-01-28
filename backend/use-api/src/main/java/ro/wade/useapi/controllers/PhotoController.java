@@ -43,9 +43,11 @@ public class PhotoController {
             @RequestParam(value = "cameraMake", required = false) String searchCameraMake,
             @RequestParam(value = "country", required = false) String searchCountry,
             @RequestParam(value = "city", required = false) String searchCity,
-            @RequestParam(value = "keyword", required = false) String searchKeyword) {
+            @RequestParam(value = "keyword", required = false) String searchKeyword,
+            @RequestParam(value = "masterKeyword", required = false) String masterKeyword
+            ) {
 
         return useDsPhotoQueryHelper.getPhotosSearch(offset, limit, searchPhotographerFirstName,
-                searchPhotographerLastName, searchCameraMake, searchCountry, searchCity, searchKeyword);
+                searchPhotographerLastName, searchCameraMake, searchCountry, searchCity, searchKeyword, masterKeyword);
     }
 }

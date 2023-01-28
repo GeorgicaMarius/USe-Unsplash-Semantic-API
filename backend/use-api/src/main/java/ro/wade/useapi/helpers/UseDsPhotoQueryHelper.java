@@ -155,7 +155,8 @@ public class UseDsPhotoQueryHelper {
             String cameraMake,
             String country,
             String city,
-            String keyword
+            String keyword,
+            String masterKeyword
     ) {
         StringBuilder filterBlockBuilder = new StringBuilder();
         if (photographerFirstName != null)
@@ -170,6 +171,13 @@ public class UseDsPhotoQueryHelper {
             filterBlockBuilder.append(String.format("  FILTER (regex (?photoLocationCity, \"%s\", \"i\"))\n", city));
         if (keyword != null)
             filterBlockBuilder.append(String.format("  FILTER (regex (?photoKeywords, \"%s\", \"i\"))\n", keyword));
+        if (masterKeyword != null)
+            filterBlockBuilder.append(String.format("FILTER (regex(?photoLocationCity, \"%s\", \"i\") || \n" +
+                    "        regex(?photoLocationCountry, \"%s\", \"i\") || \n" +
+                    "        regex(?photoLocationName, \"%s\", \"i\") ||\n" +
+                    "        regex(?photographerLastName, \"%s\", \"i\") ||\n" +
+                    "        regex(?photographerFirstName, \"%s\", \"i\") ||\n" +
+                    "        regex(?photographerUsername, \"%s\", \"i\"))", masterKeyword, masterKeyword, masterKeyword, masterKeyword, masterKeyword, masterKeyword));
         String sortBlock = "ORDER BY ASC(?photoSubmittedAt)\n";
         return executeBasicQuery(filterBlockBuilder.toString(), sortBlock, offset, limit);
     }
