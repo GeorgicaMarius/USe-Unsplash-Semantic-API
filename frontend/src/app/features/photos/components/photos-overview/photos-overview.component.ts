@@ -23,6 +23,7 @@ export class PhotosOverviewComponent implements OnInit {
   displayedPhotos: Photo[][] = [];
   currentViewingPhoto: Photo = {} as Photo;
 
+  searchTerm = '';
   isLoading = false;
 
   constructor(
@@ -31,8 +32,17 @@ export class PhotosOverviewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.photosOverviewService.reset();
+    this.displayedPhotos = []
+    this.photos= [];
+
     this.initializeColumns();
     this.getPhotos();
+  }
+
+  onSearchTermChange(searchTerm: string) {
+    this.searchTerm = searchTerm
+    this.ngOnInit();
   }
 
   onOpenedDetails(photo: Photo): void {
@@ -64,7 +74,7 @@ export class PhotosOverviewComponent implements OnInit {
 
   private getPhotos(): void {
     this.photosOverviewService
-      .getPhotos()
+      .getPhotos(this.searchTerm)
       .pipe(first())
       .subscribe((photos) => {
         this.photos.push(...photos);

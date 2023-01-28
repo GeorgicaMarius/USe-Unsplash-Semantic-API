@@ -1,4 +1,7 @@
-<mat-form-field class="search-bar-container">
-  <mat-label>Search bar</mat-label>
-  <input matInput type="text">
-</mat-form-field>
+<form (ngSubmit)="onSearchSubmit()">
+  <mat-form-field class="search-bar-container">
+    <mat-label>Search bar</mat-label>
+    <input matInput [(ngModel)]="searchTerm" name="searchTerm" type="text">
+  </mat-form-field>
+  <button mat-raised-button type="submit">Submit</button>
+</form>

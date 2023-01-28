@@ -1,6 +1,6 @@
 <div class="photos-container">
   <div class="top-container">
-    <app-search-bar></app-search-bar>
+    <app-search-bar (searchTermChange)="onSearchTermChange($event)"></app-search-bar>
   </div>
   <div class="bottom-container">
     <div class="photos-overview-container">
