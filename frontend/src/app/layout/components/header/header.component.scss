@@ -14,18 +14,13 @@
     font-weight: bold;
   }
 
-  .navigation-button{
+  button{
+    margin-top: 8px;
     margin-left: 16px;
-    margin-top: 16px;
-    color: $wisp-pink;
-    font-size: 24px;
-    font-weight: bold;
   }
 
   #menu-icon{
     color: $wisp-pink;
     transform: scale(2);
-    margin-top: 20px;
-    margin-left: 16px;
   }
 }

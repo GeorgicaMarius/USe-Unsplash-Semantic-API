@@ -10,8 +10,11 @@
 
   .bottom-container{
     height: 88%;
-    margin-top: 16px;
+    width: 68.4%;
+    min-width: 1269.5px;
     display: flex;
+    margin-top: 16px;
+    margin: auto;
 
     .photos-overview-container{
       width: 100%;
@@ -20,13 +23,29 @@
     }
 
     .photos-content{
-      height: 86%;
       display: flex;
       flex-wrap: wrap;
       flex: 6;
-      gap: 20px 50px;
+      gap: 10px 10px;
+      height: 88%;
+      padding: 16px;
       overflow: auto;
     }
   }
 }
 
+@media screen and (max-width: 507px) {
+  .photos-container {
+      .bottom-container {
+        width: 100%;
+      }
+  }
+}
+
+@media screen and (max-width: 1336px) {
+  .photos-container {
+    .bottom-container {
+      min-width: 451px;
+    }
+  }
+}

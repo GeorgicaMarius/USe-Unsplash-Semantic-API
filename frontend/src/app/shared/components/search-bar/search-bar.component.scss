@@ -4,14 +4,20 @@
   .search-bar-container{
     width: 30vw;
     margin-top: 16px;
-    min-width: 200px;
+    min-width: 576px;
 
     ::ng-deep{
       .mat-mdc-text-field-wrapper{
-        background-color: $heavy-metal;
+        background-color: $regal-blue;
       }
     }
 
+  }
+
+  @media screen and (max-width: 576px) {
+    .search-bar-container {
+      min-width: 200px;
+    }
   }
 }
 

@@ -1,6 +1,14 @@
 <div class="panel-header-container">
-  <span>
+  <span *ngIf="!displayBackButton; else goBack">
     {{ title }}
   </span>
 </div>
 
+<ng-template #goBack>
+  <div class="go-back-container">
+    <button mat-button (click)="onClickedBackButton()">
+      <mat-icon id="go-back-icon" fontIcon="arrow_back"></mat-icon>
+      {{ goBackText }}
+    </button>
+  </div>
+</ng-template>

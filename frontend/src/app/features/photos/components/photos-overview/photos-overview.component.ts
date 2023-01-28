@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { first } from 'rxjs';
+import { ScrollWatchDirective } from 'src/app/shared/directives/scroll-watch.directive';
 import { PhotosOverviewService } from '../../services/photos-overview.service';
-import { Photo } from '../../types/photo-response.type';
+import { Photo } from '../../types/photo.type';
 
 @Component({
   selector: 'app-photos-overview',
@@ -12,33 +12,54 @@ import { Photo } from '../../types/photo-response.type';
 })
 export class PhotosOverviewComponent implements OnInit {
   title = 'Photos';
+  displayOverview = true;
+  numberOfColumnsToDisplay = 3;
+  indexOfLastLoadedPhoto = 0;
+  maxNumberOfDisplayedPhotosPerLoad = 30;
+
+  lastScrolledPosition = 0;
 
   photos: Photo[] = [];
-  displayedPhotos: Photo[] = [];
+  displayedPhotos: Photo[][] = [];
+  currentViewingPhoto: Photo = {} as Photo;
 
-  currentPage = 0;
-  pageSize = 10;
+  isLoading = false;
 
   constructor(
     private readonly photosOverviewService: PhotosOverviewService,
-    private ngxService: NgxUiLoaderService
+    private loaderService: NgxUiLoaderService
   ) {}
 
   ngOnInit(): void {
+    this.initializeColumns();
     this.getPhotos();
   }
 
-  onPageChanged(pageEvent: PageEvent): void {
-    this.currentPage = pageEvent.pageIndex;
-    this.pageSize = pageEvent.pageSize;
-
-    this.updateDisplayedPhotos();
+  onOpenedDetails(photo: Photo): void {
+    this.displayOverview = false;
+    this.currentViewingPhoto = photo;
   }
 
-  private updateDisplayedPhotos(): void {
-    this.ngxService.start();
-    this.displayedPhotos = this.getPhotosToDisplayForCurrentPage();
-    this.ngxService.stop();
+  onDetailsClickedBackButton(): void {
+    this.displayOverview = true;
+  }
+
+  getArray(mapValues: any): Photo[] {
+    return [...mapValues];
+  }
+
+  updateDisplayedPhotos(): void {
+    this.getPhotosToDisplayForCurrentPage();
+  }
+
+  private initializeColumns() {
+    for (
+      let columnIndex = 0;
+      columnIndex < this.numberOfColumnsToDisplay;
+      columnIndex++
+    ) {
+      this.displayedPhotos.push([]);
+    }
   }
 
   private getPhotos(): void {
@@ -46,24 +67,62 @@ export class PhotosOverviewComponent implements OnInit {
       .getPhotos()
       .pipe(first())
       .subscribe((photos) => {
-        this.photos = photos;
+        this.photos.push(...photos);
         this.updateDisplayedPhotos();
       });
   }
 
-  private getPhotosToDisplayForCurrentPage(): Photo[] {
-    const currentPhotosIndex = this.currentPage * this.pageSize;
+  private getPhotosToDisplayForCurrentPage(): void {
+    this.updatePhotoColumns();
 
-    const remaingPhotosNumberLessThanPageSize =
-      this.photos.length < currentPhotosIndex + this.pageSize;
+    const remaingPhotosNumberLessThanLoadSize =
+      this.photos.length <
+      this.indexOfLastLoadedPhoto + this.maxNumberOfDisplayedPhotosPerLoad;
 
-    if (remaingPhotosNumberLessThanPageSize) {
-      return this.photos.slice(this.currentPage * this.pageSize);
+    if (remaingPhotosNumberLessThanLoadSize) {
+      this.indexOfLastLoadedPhoto = this.photos.length;
+      return;
     }
 
-    return this.photos.slice(
-      this.currentPage * this.pageSize,
-      currentPhotosIndex + this.pageSize
+    this.indexOfLastLoadedPhoto += this.maxNumberOfDisplayedPhotosPerLoad;
+
+    if (this.shouldRetrieveMorePhotos()) {
+      this.getPhotos();
+    }
+  }
+
+  private updatePhotoColumns(): void {
+    for (
+      let columnIndex = 0;
+      columnIndex < this.numberOfColumnsToDisplay;
+      columnIndex++
+    ) {
+      this.updateColumn(columnIndex);
+    }
+  }
+
+  private updateColumn(columnIndex: number) {
+    let columnPhotos: Photo[] = [];
+    const startIndex = this.indexOfLastLoadedPhoto + columnIndex;
+    const endIndex =
+      this.indexOfLastLoadedPhoto + this.maxNumberOfDisplayedPhotosPerLoad;
+
+    for (
+      let index = startIndex;
+      index < endIndex;
+      index += this.numberOfColumnsToDisplay
+    ) {
+      columnPhotos.push(this.photos[index]);
+    }
+
+    this.displayedPhotos[columnIndex].push(...columnPhotos);
+  }
+
+  private shouldRetrieveMorePhotos(): boolean {
+    return (
+      this.photos.length - this.indexOfLastLoadedPhoto <
+      this.maxNumberOfDisplayedPhotosPerLoad
     );
   }
+
 }

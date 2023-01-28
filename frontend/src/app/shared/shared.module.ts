@@ -4,6 +4,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { MaterialDesignModule } from './material-design.module';
 import { PanelHeaderComponent } from './components/panel-header/panel-header.component';
 import { PanelFooterComponent } from './components/panel-footer/panel-footer.component';
+import { ScrollWatchDirective } from './directives/scroll-watch.directive';
 
 
 
@@ -11,17 +12,16 @@ import { PanelFooterComponent } from './components/panel-footer/panel-footer.com
   declarations: [
     SearchBarComponent,
     PanelHeaderComponent,
-    PanelFooterComponent
+    PanelFooterComponent,
+    ScrollWatchDirective,
   ],
-  imports: [
-    CommonModule,
-    MaterialDesignModule
-  ],
+  imports: [CommonModule, MaterialDesignModule],
   exports: [
     MaterialDesignModule,
     SearchBarComponent,
     PanelHeaderComponent,
-    PanelFooterComponent
-  ]
+    PanelFooterComponent,
+    ScrollWatchDirective,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

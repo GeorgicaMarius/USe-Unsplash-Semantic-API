@@ -4,18 +4,35 @@
   </div>
   <div class="bottom-container">
     <div class="photos-overview-container">
-      <app-panel-header [title]="title"></app-panel-header>
-      <div class="photos-content">
-        <ng-container *ngFor="let photo of displayedPhotos">
-          <app-photo-card [photo]="photo"> </app-photo-card>
-        </ng-container>
-      </div>
-      <app-panel-footer
-        [numberOfItems]="photos.length"
-        [pageSize]="pageSize"
-        (pageChanged)="onPageChanged($event)"
+      <app-panel-header
+        [title]="title"
+        [displayBackButton]="!displayOverview"
+        (clickedBackButton)="onDetailsClickedBackButton()"
+      ></app-panel-header>
+      <div
+        *ngIf="displayOverview; else photoDetail"
+        scrollWatch
+        (scrollReachedLowerBound)="updateDisplayedPhotos()"
+        class="photos-content"
       >
-      </app-panel-footer>
+        <div *ngFor="let columnWithPhotos of displayedPhotos">
+          <ng-container *ngFor="let photo of columnWithPhotos">
+            <app-photo-card
+              [photo]="photo"
+              (openedDetails)="onOpenedDetails($event)"
+            >
+            </app-photo-card>
+          </ng-container>
+        </div>
+      </div>
+      <app-panel-footer></app-panel-footer>
     </div>
   </div>
 </div>
+
+<ng-template #photoDetail>
+  <app-photo-details
+    [photo]="currentViewingPhoto"
+    (clickedBackButton)="onDetailsClickedBackButton()"
+  ></app-photo-details>
+</ng-template>

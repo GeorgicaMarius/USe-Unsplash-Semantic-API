@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-panel-footer',
@@ -7,12 +6,5 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrls: ['./panel-footer.component.scss'],
 })
 export class PanelFooterComponent {
-  @Input() numberOfItems: number = 0;
-  @Input() pageSize: number = 0;
 
-  @Output() pageChanged: EventEmitter<PageEvent> = new EventEmitter();
-
-  onPageChanged(pageEvent: PageEvent): void {
-    this.pageChanged.emit(pageEvent);
-  }
 }

@@ -7,19 +7,15 @@ import { PhotoDetailsComponent } from './components/photos-overview/photo-detail
 import { PhotoCardComponent } from './components/photos-overview/photo-card/photo-card.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
-
+import { PhotoInfoComponent } from './components/photos-overview/photo-details/photo-info/photo-info.component';
 
 @NgModule({
   declarations: [
     PhotosOverviewComponent,
     PhotoDetailsComponent,
-    PhotoCardComponent
+    PhotoCardComponent,
+    PhotoInfoComponent,
   ],
-  imports: [
-    CommonModule,
-    PhotosRoutingModule,
-    SharedModule,
-    HttpClientModule
-  ]
+  imports: [CommonModule, PhotosRoutingModule, SharedModule, HttpClientModule],
 })
-export class PhotosModule { }
+export class PhotosModule {}

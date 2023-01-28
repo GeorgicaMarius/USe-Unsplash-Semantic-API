@@ -1,0 +1,40 @@
+@import 'src/app/styles/variables';
+
+.photo-details-container{
+  height: 88%;
+  display: flex;
+
+  .left-container {
+    width: 70%;
+    border-right: 1px solid black;
+    padding: 16px;
+
+    .image-container {
+      img {
+        border-radius: 16px;
+      }
+    }
+
+    .image-info{
+      .section-container {
+        display: flex;
+        flex-wrap: wrap;
+        color: black;
+        
+        p {
+          color: $heavy-metal;
+          margin: auto 0;
+        }
+      }
+      
+    }
+  }
+
+  .right-container{
+    width: 30%;
+    p {
+      color: $heavy-metal;
+    }
+  }
+
+}

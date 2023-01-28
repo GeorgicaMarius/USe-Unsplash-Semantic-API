@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Photo } from '../../../types/photo-response.type';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Photo } from '../../../types/photo.type';
 
 @Component({
   selector: 'app-photo-card',
@@ -7,6 +7,11 @@ import { Photo } from '../../../types/photo-response.type';
   styleUrls: ['./photo-card.component.scss'],
 })
 export class PhotoCardComponent {
-  @Input()
-  photo!: Photo;
+  @Input() photo!: Photo;
+
+  @Output() openedDetails: EventEmitter<Photo> = new EventEmitter();
+
+  onOpenPhotoDetails(): void {
+    this.openedDetails.emit(this.photo);
+  }
 }

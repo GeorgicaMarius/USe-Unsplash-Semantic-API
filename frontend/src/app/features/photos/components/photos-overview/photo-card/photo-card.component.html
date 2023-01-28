@@ -1,13 +1,14 @@
-<mat-card class="example-card">
-  <mat-card-header>
-  </mat-card-header>
-  <img mat-card-image [src]="photo.photoImageUrl + '?w=300&h=300'" alt="Photo of a Shiba Inu" />
-  <mat-card-content>
-    <p>
-      {{photo.photoDescription + ''}}
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>DETAILS</button>
-  </mat-card-actions>
-</mat-card>
+<ng-container *ngIf="photo">
+  <div (click)="onOpenPhotoDetails()"
+        class="image">
+    <img
+      [src]="photo.photoImageUrl + '?w=400&h=400'"
+      class="image__img"
+      mat-card-image
+    />
+    <div class="image__overlay image__overlay--primary">
+      <p class="image__description">{{photo.photoDescription}}</p>
+    </div>
+  </div>
+</ng-container>
+
