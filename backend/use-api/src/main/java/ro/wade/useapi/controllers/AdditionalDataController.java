@@ -19,7 +19,7 @@ public class AdditionalDataController {
     }
 
     @GetMapping("/additional-data/country/{countryName}")
-    public DbpediaCountryQueryDto getCountryByName(@PathVariable("countryName") String cityName) {
-        return dbpediaDsQueryHelper.getCountryByName(cityName);
+    public DbpediaCountryQueryDto getCountryByName(@PathVariable("countryName") String countryName) {
+        return dbpediaDsQueryHelper.getCountryByName(countryName);
     }
 }

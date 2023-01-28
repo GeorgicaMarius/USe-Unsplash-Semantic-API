@@ -104,19 +104,19 @@ public class DbpediaDsQueryHelper {
                 "PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>\n" +
                 "\n" +
                 "SELECT * WHERE {\n" +
-                "?country rdf:type dbo:Country ;\n" +
-                "rdfs:label ?countryName .\n" +
-                "OPTIONAL { ?country dbo:abstract ?countryAbstract . }\n" +
-                "OPTIONAL { ?country dbo:capital ?countryCapital . }\n" +
-                "OPTIONAL { ?country dbo:currency ?countryCurrency . }\n" +
-                "OPTIONAL { ?country dbo:populationTotal ?countryPopulationTotal . }\n" +
-                "OPTIONAL { ?country dbo:timeZone ?countryTimeZone . }\n" +
-                "OPTIONAL { ?country dbp:website ?countryWebsite . }\n" +
-                "OPTIONAL { ?country geo:lat ?countryLat . }\n" +
-                "OPTIONAL { ?country geo:long ?countryLong . }\n" +
-                "OPTIONAL { ?country dbo:governmentType ?countryGovernmentType . }\n" +
-                "OPTIONAL { ?country dbo:officialLanguage ?countryOfficialLanguage . }\n" +
-                "FILTER ((!bound(?countryAbstract) || LANG(?countryAbstract) = 'en') && ?countryName = ?injectedCountryName@en)\n" +
+                "  ?country rdf:type dbo:Country ;\n" +
+                "           rdfs:label ?countryName .\n" +
+                "  OPTIONAL { ?country dbo:abstract ?countryAbstract . }\n" +
+                "  OPTIONAL { ?country dbo:capital ?countryCapital . }\n" +
+                "  OPTIONAL { ?country dbo:currency ?countryCurrency . }\n" +
+                "  OPTIONAL { ?country dbo:populationTotal ?countryPopulationTotal . }\n" +
+                "  OPTIONAL { ?country dbo:timeZone ?countryTimeZone . }\n" +
+                "  OPTIONAL { ?country dbp:website ?countryWebsite . }\n" +
+                "  OPTIONAL { ?country geo:lat ?countryLat . }\n" +
+                "  OPTIONAL { ?country geo:long ?countryLong . }\n" +
+                "  OPTIONAL { ?country dbo:governmentType ?countryGovernmentType . }\n" +
+                "  OPTIONAL { ?country dbo:officialLanguage ?countryOfficialLanguage . }\n" +
+                "  FILTER ((!bound(?countryAbstract) || LANG(?countryAbstract) = 'en') && ?countryName = ?injectedCountryName@en)\n" +
                 "}\n" +
                 "LIMIT 10\n");
         pss.setLiteral("injectedCountryName", countryName);

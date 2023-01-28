@@ -15,17 +15,17 @@ public class DbpediaCountryQueryDto {
 
     @Override
     public String toString() {
-        return "DbpediaCountryQueryDto{" +
-                "countryName='" + countryName + '\'' +
-                ", countryCurrency='" + countryCurrency + '\'' +
-                ", countryPopulationTotal=" + countryPopulationTotal +
-                ", countryTimeZone='" + countryTimeZone + '\'' +
-                ", countryWebsite='" + countryWebsite + '\'' +
-                ", countryLat=" + countryLat +
-                ", countryLong=" + countryLong +
-                ", countryOfficialLanguage='" + countryOfficialLanguage + '\'' +
-                ", countryCapital='" + countryCapital + '\'' +
-                ", countryGovernmentType='" + countryGovernmentType + '\'' +
+        return "DbpediaCountryQueryDto{" + "\n" +
+                "\tcountryName='" + countryName + '\'' + "\n" +
+                "\tcountryCurrency='" + countryCurrency + '\'' + "\n" +
+                "\tcountryPopulationTotal=" + countryPopulationTotal + "\n" +
+                "\tcountryTimeZone='" + countryTimeZone + '\'' + "\n" +
+                "\tcountryWebsite='" + countryWebsite + '\'' + "\n" +
+                "\tcountryLat=" + countryLat + "\n" +
+                "\tcountryLong=" + countryLong + "\n" +
+                "\tcountryOfficialLanguage='" + countryOfficialLanguage + '\'' + "\n" +
+                "\tcountryCapital='" + countryCapital + '\'' + "\n" +
+                "\tcountryGovernmentType='" + countryGovernmentType + '\'' + "\n" +
                 '}';
     }
 }
