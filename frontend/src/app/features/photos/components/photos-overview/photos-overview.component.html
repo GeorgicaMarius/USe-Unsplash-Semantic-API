@@ -1,16 +1,13 @@
 <div class="photos-container">
   <div class="top-container">
-    <app-search-bar (searchTermChange)="onSearchTermChange($event)"></app-search-bar>
+    <app-search-bar
+      (searchTermChange)="onSearchTermChange($event)"
+    ></app-search-bar>
   </div>
   <div class="bottom-container">
     <div class="photos-overview-container">
-      <app-panel-header
-        [title]="title"
-        [displayBackButton]="!displayOverview"
-        (clickedBackButton)="onDetailsClickedBackButton()"
-      ></app-panel-header>
+      <app-panel-header [title]="title"></app-panel-header>
       <div
-        *ngIf="displayOverview; else photoDetail"
         scrollWatch
         (scrollReachedLowerBound)="updateDisplayedPhotos()"
         class="photos-content"
@@ -29,10 +26,3 @@
     </div>
   </div>
 </div>
-
-<ng-template #photoDetail>
-  <app-photo-details
-    [photo]="currentViewingPhoto"
-    (clickedBackButton)="onDetailsClickedBackButton()"
-  ></app-photo-details>
-</ng-template>

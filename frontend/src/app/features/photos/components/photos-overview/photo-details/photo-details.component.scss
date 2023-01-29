@@ -1,40 +1,50 @@
-@import 'src/app/styles/variables';
+@import "src/app/styles/variables";
 
-.photo-details-container{
-  height: 88%;
-  display: flex;
+.photos-container {
+  height: 85vh;
+  margin-top: 64px;
 
-  .left-container {
-    width: 70%;
-    border-right: 1px solid black;
-    padding: 16px;
+  .bottom-container {
+    height: 88%;
+    width: 68.4%;
+    min-width: 1269.5px;
+    display: flex;
+    margin-top: 16px;
+    margin: auto;
+  }
+  .photos-overview-container {
+    width: 100%;
+    background-color: white;
+    border-radius: 16px;
 
-    .image-container {
-      img {
-        border-radius: 16px;
-      }
-    }
+    .photo-details-container {
+      height: 88%;
+      display: flex;
+      overflow: auto;
 
-    .image-info{
-      .section-container {
-        display: flex;
-        flex-wrap: wrap;
-        color: black;
-        
-        p {
-          color: $heavy-metal;
-          margin: auto 0;
+      .left-container {
+        width: 70%;
+        border-right: 1px solid black;
+        padding: 16px;
+
+        .image-container {
+          margin-bottom: 16px;
+          img {
+            max-width: 100%;
+            border-radius: 16px;
+          }
+        }
+
+        .image-info {
         }
       }
-      
+
+      .right-container {
+        width: 30%;
+        p {
+          color: $heavy-metal;
+        }
+      }
     }
   }
-
-  .right-container{
-    width: 30%;
-    p {
-      color: $heavy-metal;
-    }
-  }
-
 }

@@ -1,17 +1,25 @@
-<div class="photo-details-container">
-  <div class="left-container">
-    <div class="image-container">
-      <img
-        [src]="photo.photoImageUrl + '?w=650&h=650'"
-        class="image__img"
-        mat-card-image
-      />
+<div class="photos-container">
+  <div class="bottom-container">
+    <div class="photos-overview-container">
+      <app-panel-header title="title"></app-panel-header>
+      <div class="photo-details-container">
+        <div class="left-container">
+          <div class="image-container">
+            <img
+              [src]="photo.photoImageUrl + '?w=650&h=650'"
+              class="image__img"
+              mat-card-image
+            />
+          </div>
+          <div class="image-info">
+            <app-photo-info [photo]="photo"></app-photo-info>
+          </div>
+        </div>
+        <div class="right-container">
+          <p>Additional info here</p>
+        </div>
+      </div>
+      <app-panel-footer></app-panel-footer>
     </div>
-    <div class="image-info">
-      <app-photo-info [photo]="photo"></app-photo-info>
-    </div>
-  </div>
-  <div class="right-container">
-    <p>Additional info here</p>
   </div>
 </div>

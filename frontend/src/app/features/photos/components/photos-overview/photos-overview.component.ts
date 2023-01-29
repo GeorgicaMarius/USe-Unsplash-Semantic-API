@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { first } from 'rxjs';
 import { ScrollWatchDirective } from 'src/app/shared/directives/scroll-watch.directive';
-import { PhotosOverviewService } from '../../services/photos-overview.service';
+import { PhotosService } from '../../services/photos.service';
 import { Photo } from '../../types/photo.type';
 
 @Component({
@@ -12,7 +13,6 @@ import { Photo } from '../../types/photo.type';
 })
 export class PhotosOverviewComponent implements OnInit {
   title = 'Photos';
-  displayOverview = true;
   numberOfColumnsToDisplay = 3;
   indexOfLastLoadedPhoto = 0;
   maxNumberOfDisplayedPhotosPerLoad = 30;
@@ -27,7 +27,8 @@ export class PhotosOverviewComponent implements OnInit {
   isLoading = false;
 
   constructor(
-    private readonly photosOverviewService: PhotosOverviewService,
+    private readonly photosOverviewService: PhotosService,
+    private readonly router: Router,
     private loaderService: NgxUiLoaderService
   ) {}
 
@@ -43,12 +44,7 @@ export class PhotosOverviewComponent implements OnInit {
   }
 
   onOpenedDetails(photo: Photo): void {
-    this.displayOverview = false;
-    this.currentViewingPhoto = photo;
-  }
-
-  onDetailsClickedBackButton(): void {
-    this.displayOverview = true;
+    this.router.navigateByUrl(`${this.router.url}/${photo.photoId}`);
   }
 
   getArray(mapValues: any): Photo[] {
@@ -59,7 +55,8 @@ export class PhotosOverviewComponent implements OnInit {
     this.getPhotosToDisplayForCurrentPage();
   }
 
-  private clearPhotos(): void{
+  private clearPhotos(): void {
+    this.photosOverviewService.reset();
     this.displayedPhotos = [];
     this.photos = [];
 

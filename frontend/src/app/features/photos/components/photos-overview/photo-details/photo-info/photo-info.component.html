@@ -1,59 +1,84 @@
 <div class="section-container">
-  <span class="section-title">Stats</span>
-  <div class="section-info">
-    <label>Downloads</label>
-    <span>{{photo.statsDownloads}}</span>
+  <span class="section-title">Description</span>
+  <div class="section-content">
+    <div class="section-item">
+      <span>{{photo.photoDescription | emptyString}}</span>
+    </div>
   </div>
-  <div class="section-info">
-    <label>Views</label>
-    <span>{{photo.statsViews}}</span>
+</div>
+<div class="section-container">
+  <span class="section-title">Stats</span>
+  <div class="section-content">
+    <div class="section-item">
+      <label>Downloads: : </label>
+      <span>{{photo.statsDownloads | emptyString}}</span>
+    </div>
+    <div class="section-item">
+      <label>Views: : </label>
+      <span>{{photo.statsViews | emptyString}}</span>
+    </div>
   </div>
 </div>
 <div class="section-container">
   <span class="section-title">Photographer</span>
-  <div class="section-info">
-    <label>Name</label>
-    <span
-      >{{photo.photographerFirstName + ' ' + photo.photographerLastName}}</span
-    >
-  </div>
-  <div class="section-info">
-    <label>Username</label>
-    <span>{{photo.photographerUsername}}</span>
+  <div class="section-content">
+    <div class="section-item">
+      <label>Name: : </label>
+      <span>{{(photo.photographerFirstName + photo.photographerLastName) | emptyString}}</span>
+    </div>
+    <div class="section-item">
+      <label>Username: </label>
+      <span>{{photo.photographerUsername | emptyString}}</span>
+    </div>
   </div>
 </div>
 <div class="section-container">
   <span class="section-title">Location</span>
-  <div class="section-info">
-    <label></label>
-    <span></span>
+  <div class="section-content">
+    <div class="section-item">
+      <label>Name: </label>
+      <span>{{photo.photoLocationName | emptyString}}</span>
+    </div>
+    <div class="section-item">
+      <label>City: </label>
+      <span>{{photo.photoLocationCity | emptyString}}</span>
+    </div>
+    <div class="section-item">
+      <label>Country: </label>
+      <span>{{photo.photoLocationCountry | emptyString}}</span>
+    </div>
+    <div class="section-item">
+      <label>Longitude: </label>
+      <span>{{photo.photoLocationLongitude | emptyString}}</span>
+    </div>
+    <div class="section-item">
+      <label>Latitude: </label>
+      <span>{{photo.photoLocationLatitude | emptyString}}</span>
+    </div>
   </div>
-  <div class="section-info">
-    <label></label>
-    <span></span>
-  </div>
-  <div class="section-info">
-    <label></label>
-    <span></span>
-  </div>
-  <div class="section-info">
-    <label></label>
-    <span></span>
-  </div>
-  <div class="section-info">
-    <label></label>
-    <span></span>
-  </div>
-  <!-- photoLocationCity: string;
-  photoLocationCountry: string;
-  photoLocationLongitude: string;
-  photoLocationLatitude: string;
-  photoLocationName: string; -->
 </div>
 <div class="section-container">
   <span class="section-title">Specifications</span>
-  <div class="section-info">
-    <label></label>
-    <span></span>
+  <div class="section-content">
+    <div class="section-item">
+      <label>Camera Maker: </label>
+      <span>{{photo.exifCameraMake | emptyString}}</span>
+    </div>
+    <div class="section-item">
+      <label>Camera Model: </label>
+      <span>{{photo.exifCameraModel | emptyString}}</span>
+    </div>
+    <div class="section-item">
+      <label>Iso: </label>
+      <span>{{photo.exifIso | emptyString}}</span>
+    </div>
+    <div class="section-item">
+      <label>Focal Length: </label>
+      <span>{{photo.exifFocalLength | emptyString}}</span>
+    </div>
+    <div class="section-item">
+      <label>Exposure Time: </label>
+      <span>{{photo.exifExposureTime | emptyString}}</span>
+    </div>
   </div>
 </div>

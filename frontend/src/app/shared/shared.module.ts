@@ -5,8 +5,7 @@ import { MaterialDesignModule } from './material-design.module';
 import { PanelHeaderComponent } from './components/panel-header/panel-header.component';
 import { PanelFooterComponent } from './components/panel-footer/panel-footer.component';
 import { ScrollWatchDirective } from './directives/scroll-watch.directive';
-
-
+import { EmptyStringPipe } from './pipes/empty-string.pipe';
 
 @NgModule({
   declarations: [
@@ -14,6 +13,7 @@ import { ScrollWatchDirective } from './directives/scroll-watch.directive';
     PanelHeaderComponent,
     PanelFooterComponent,
     ScrollWatchDirective,
+    EmptyStringPipe,
   ],
   imports: [CommonModule, MaterialDesignModule],
   exports: [
@@ -22,6 +22,7 @@ import { ScrollWatchDirective } from './directives/scroll-watch.directive';
     PanelHeaderComponent,
     PanelFooterComponent,
     ScrollWatchDirective,
+    EmptyStringPipe,
   ],
 })
 export class SharedModule {}
