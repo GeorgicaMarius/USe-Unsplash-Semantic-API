@@ -124,6 +124,11 @@ public class UseDsPhotoQueryHelper {
         return (photos.size() != 0) ? photos.get(0) : null;
     }
 
+    public List<UsePhotoQueryDto> getPhotosByIds(List<String> photoIds) {
+        String filterBlock = getPhotoIdsFilter(photoIds);
+        return executeBasicQuery(filterBlock, "", 0, photoIds.size());
+    }
+
     public List<UsePhotoQueryDto> getPhotosFilter(
             Integer offset,
             Integer limit,

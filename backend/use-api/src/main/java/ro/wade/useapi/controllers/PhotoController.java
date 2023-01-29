@@ -1,10 +1,7 @@
 package ro.wade.useapi.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ro.wade.useapi.helpers.UseDsPhotoQueryHelper;
 import ro.wade.useapi.models.UsePhotoQueryDto;
 
@@ -34,6 +31,11 @@ public class PhotoController {
     @GetMapping("/photos/{photoId}")
     public UsePhotoQueryDto getPhotoById(@PathVariable("photoId") String photoId) {
         return useDsPhotoQueryHelper.getPhotoById(photoId);
+    }
+
+    @PostMapping("/photos")
+    public List<UsePhotoQueryDto> getPhotosByIds(@RequestBody List<String> photoIds) {
+        return useDsPhotoQueryHelper.getPhotosByIds(photoIds);
     }
 
     @GetMapping("/photos/search")
