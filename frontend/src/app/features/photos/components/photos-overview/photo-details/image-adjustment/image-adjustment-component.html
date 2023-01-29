@@ -1,0 +1,42 @@
+<mat-toolbar>
+<h1>Adjust Image Parameters</h1>
+</mat-toolbar>
+<div class="slider-box">
+  <p>Brightness: {{brightness}}</p>
+  <mat-slider min="-100" max="100" step="1" color="white">
+    <input [(ngModel)]="brightness" matSliderThumb>
+  </mat-slider>
+</div>
+<div class="slider-box">
+  <p>Contrast: {{contrast}}</p>
+  <mat-slider min="-100" max="100" step="1" color="white">
+    <input [(ngModel)]="contrast" matSliderThumb>
+  </mat-slider>
+</div>
+<div class="slider-box">
+  <p>Saturation: {{saturation}}</p>
+  <mat-slider min="-100" max="100" step="1" color="white">
+    <input [(ngModel)]="saturation" matSliderThumb>
+  </mat-slider>
+</div>
+<div class="slider-box">
+  <p>Shadow: {{shadow}}</p>
+  <mat-slider min="-100" max="100" step="1" color="white">
+    <input [(ngModel)]="shadow" matSliderThumb>
+  </mat-slider>
+</div>
+<div class="slider-box">
+  <p>Highlight: {{highlight}}</p>
+  <mat-slider min="-100" max="100" step="1" color="white">
+    <input [(ngModel)]="highlight" matSliderThumb>
+  </mat-slider>
+</div>
+<div class="slider-box">
+  <p>Sharpness: {{sharpness}}</p>
+  <mat-slider min="-100" max="100" step="1" color="white">
+    <input [(ngModel)]="sharpness" matSliderThumb>
+  </mat-slider>
+</div>
+<mat-toolbar>
+  <button mat-raised-button color="primary" (click)="augmentPicture()">Augment</button>
+</mat-toolbar>

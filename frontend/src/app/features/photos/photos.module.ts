@@ -9,6 +9,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PhotoInfoComponent } from './components/photos-overview/photo-details/photo-info/photo-info.component';
 import { PhotoAdditionalInfoComponent } from './components/photos-overview/photo-details/photo-additional-info/photo-additional-info.component';
+import {ImageAdjustmentComponent} from "./components/photos-overview/photo-details/image-adjustment/image-adjustment-component";
+import {MatSliderModule} from "@angular/material/slider";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
@@ -17,7 +21,8 @@ import { PhotoAdditionalInfoComponent } from './components/photos-overview/photo
     PhotoCardComponent,
     PhotoInfoComponent,
     PhotoAdditionalInfoComponent,
+    ImageAdjustmentComponent
   ],
-  imports: [CommonModule, PhotosRoutingModule, SharedModule, HttpClientModule],
+  imports: [CommonModule, PhotosRoutingModule, SharedModule, HttpClientModule, MatSliderModule, ReactiveFormsModule, MatToolbarModule],
 })
 export class PhotosModule {}

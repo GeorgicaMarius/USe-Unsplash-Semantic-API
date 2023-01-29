@@ -12,6 +12,7 @@
     margin-top: 16px;
     margin: auto;
   }
+
   .photos-overview-container {
     width: 100%;
     background-color: white;
@@ -26,8 +27,13 @@
       .left-container {
         width: 70%;
 
+        button {
+          background-color: $royal-blue
+        }
+
         .image-container {
           margin-bottom: 16px;
+
           img {
             max-width: 100%;
             border-radius: 16px;

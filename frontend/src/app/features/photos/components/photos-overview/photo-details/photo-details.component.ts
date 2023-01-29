@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import {first, Subject} from 'rxjs';
-import { PhotoAdditionalInfoService } from '../../../services/photo-additional-info.service';
-import { PhotosService } from '../../../services/photos.service';
-import { Photo } from '../../../types/photo.type';
+import {Component} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {first} from 'rxjs';
+import {PhotoAdditionalInfoService} from '../../../services/photo-additional-info.service';
+import {PhotosService} from '../../../services/photos.service';
+import {Photo} from '../../../types/photo.type';
+import {ImageAdjustmentComponent} from "./image-adjustment/image-adjustment-component";
+import {MatDialog} from '@angular/material/dialog';
+import {AugmentParameters} from "../../../types/augment-parameters";
+import {ViewportRuler} from "@angular/cdk/overlay";
 
 @Component({
   selector: 'app-photo-details',
@@ -15,14 +19,41 @@ export class PhotoDetailsComponent {
   photo!: Photo;
   additionalData: Map<string, any> = new Map<string, any>();
   isLoading = true;
+  augmentParameters: AugmentParameters = {
+    brightness: 0,
+    contrast: 0,
+    saturation: 0,
+    shadow: 0,
+    highlight: 0,
+    sharpness: 0,
+  }
+  augmentParametersString: string = ''
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private photoService: PhotosService,
-    private additionalInfoService: PhotoAdditionalInfoService
+    private additionalInfoService: PhotoAdditionalInfoService,
+    private dialog: MatDialog,
+    private viewportRuler: ViewportRuler
   ) {
     this.getIdFromUrl();
+  }
+
+  openImageAdjustment(): void {
+    const width = this.viewportRuler.getViewportSize().width < 768 ? '100%' : '50%';
+
+    const dialogRef = this.dialog.open(ImageAdjustmentComponent, {
+      width: width,
+      data: {augmentParameters: this.augmentParameters}
+    });
+
+    dialogRef.afterClosed().subscribe(elem => {
+      if (elem) {
+        this.augmentParameters = elem;
+        this.augmentParametersString = `&bri=${this.augmentParameters.brightness}&con=${this.augmentParameters.contrast}&sat=${this.augmentParameters.saturation}&shad=${this.augmentParameters.shadow}&high=${this.augmentParameters.highlight}&sharp=${this.augmentParameters.sharpness}`
+      }
+    });
   }
 
   getIdFromUrl(): void {

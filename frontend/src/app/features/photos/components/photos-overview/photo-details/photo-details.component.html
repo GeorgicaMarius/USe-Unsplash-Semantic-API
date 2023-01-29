@@ -9,11 +9,12 @@
         <div *ngIf="!isLoading" class="left-container">
           <div class="image-container">
             <img
-              [src]="photo.photoImageUrl + '?w=650&h=650'"
+              [src]="photo.photoImageUrl + '?w=650&h=650' + augmentParametersString"
               class="image__img"
               mat-card-image
             />
           </div>
+          <button mat-raised-button  (click)="openImageAdjustment()">Adjust Image</button>
           <div class="image-info">
             <app-photo-info [photo]="photo"></app-photo-info>
           </div>

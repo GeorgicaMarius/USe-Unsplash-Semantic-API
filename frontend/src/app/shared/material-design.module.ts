@@ -8,6 +8,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from "@angular/forms";
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 
 const materialDesignImport = [
   MatCardModule,
@@ -18,12 +19,19 @@ const materialDesignImport = [
   MatButtonModule,
   FormsModule,
   MatCheckboxModule,
+  MatDialogModule
 ];
 
 @NgModule({
   declarations: [],
   imports: [...materialDesignImport, CommonModule],
   exports: [...materialDesignImport],
+  providers: [
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    }
+  ]
 })
 export class MaterialDesignModule {
 }
