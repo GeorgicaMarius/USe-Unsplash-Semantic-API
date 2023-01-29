@@ -15,6 +15,7 @@ public class AppConfiguration {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.addAllowedOrigin("http://localhost:4200");
+        config.addAllowedOrigin("https://use-app-7238.ey.r.appspot.com");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
