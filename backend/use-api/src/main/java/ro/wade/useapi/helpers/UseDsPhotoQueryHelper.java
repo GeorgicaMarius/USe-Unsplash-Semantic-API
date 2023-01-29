@@ -172,9 +172,9 @@ public class UseDsPhotoQueryHelper {
             filterBlockBuilder.append(String.format("  FILTER (regex (?photoLocationCity, \"%s\", \"i\"))\n", city));
         if (keyword != null)
             filterBlockBuilder.append(String.format("  FILTER (regex (?photoKeywords, \"%s\", \"i\"))\n", keyword));
-        if (masterKeyword != null){
+        if (masterKeyword != null) {
             List<String> variables = Arrays.asList("photoLocationCity", "photoLocationCountry", "photographerLastName",
-                    "photographerFirstName", "exifCameraMake", "photoKeywords");
+                    "photographerFirstName", "exifCameraMake", "photoDescription", "photoKeywords");
             filterBlockBuilder.append("FILTER (");
             for (int i = 0; i < variables.size(); i++) {
                 filterBlockBuilder.append(String.format("regex(?%s, \"%s\", \"i\")", variables.get(i), masterKeyword));
