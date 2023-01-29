@@ -1,9 +1,12 @@
 <div class="photos-container">
   <div class="bottom-container">
     <div class="photos-overview-container">
-      <app-panel-header title="title"></app-panel-header>
+      <app-panel-header
+        [displayBackButton]="true"
+        (clickedBackButton)="onClickedBackButton()"
+      ></app-panel-header>
       <div class="photo-details-container">
-        <div class="left-container">
+        <div *ngIf="!isLoading" class="left-container">
           <div class="image-container">
             <img
               [src]="photo.photoImageUrl + '?w=650&h=650'"
@@ -15,24 +18,12 @@
             <app-photo-info [photo]="photo"></app-photo-info>
           </div>
         </div>
-        <div class="right-container">
+        <div *ngIf="!isLoading" class="right-container">
           <h1>Info from Web 3.0 👻</h1>
-          <div *ngIf="additionalData | async as data">
-            <h1>City</h1>
-            <div *ngFor="let cityProp of data.get('city') | keyvalue">
-              <div class="additional-info-box">
-                <p>{{cityProp.key | customCityCountryFormat | titlecase}}: </p>
-                <p [innerHtml]="cityProp.value | linkify"></p>
-              </div>
-            </div>
-            <h1>Country</h1>
-            <div *ngFor="let countryProp of data.get('country') | keyvalue">
-              <div class="additional-info-box">
-                <p>{{countryProp.key | customCityCountryFormat | titlecase}}: </p>
-                <p [innerHtml]="countryProp.value | linkify"></p>
-              </div>
-            </div>
-          </div>
+          <app-photo-additional-info
+            [city]="additionalData.get('city')"
+            [country]="additionalData.get('country')"
+          ></app-photo-additional-info>
         </div>
       </div>
       <app-panel-footer></app-panel-footer>

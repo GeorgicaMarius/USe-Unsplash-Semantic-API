@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { first } from 'rxjs';
 import { ScrollWatchDirective } from 'src/app/shared/directives/scroll-watch.directive';
+import { SearchOptions } from 'src/app/shared/types/search-options.type';
 import { PhotosService } from '../../services/photos.service';
 import { Photo } from '../../types/photo.type';
 
@@ -33,14 +34,14 @@ export class PhotosOverviewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.photosOverviewService.resetPagination();
     this.initializeColumns();
     this.getPhotos();
   }
 
-  onSearchTermChange(searchTerm: string) {
-    this.searchTerm = searchTerm;
+  onSearchTermChange(searchOptions: SearchOptions) {
     this.clearPhotos();
-    this.getPhotos();
+    this.getPhotos(searchOptions);
   }
 
   onOpenedDetails(photo: Photo): void {
@@ -56,7 +57,7 @@ export class PhotosOverviewComponent implements OnInit {
   }
 
   private clearPhotos(): void {
-    this.photosOverviewService.reset();
+    this.photosOverviewService.resetPagination();
     this.displayedPhotos = [];
     this.photos = [];
 
@@ -75,9 +76,9 @@ export class PhotosOverviewComponent implements OnInit {
     }
   }
 
-  private getPhotos(): void {
+  private getPhotos(searchOptions?: SearchOptions): void {
     this.photosOverviewService
-      .getPhotos(this.searchTerm)
+      .getPhotos(searchOptions)
       .pipe(first())
       .subscribe((photos) => {
         this.photos.push(...photos);

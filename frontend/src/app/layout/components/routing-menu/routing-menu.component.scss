@@ -1,0 +1,22 @@
+@import "src/app/styles/variables";
+
+:host {
+  .routing-menu-container{
+
+    button {
+      display: block;
+      color: white;
+      margin-bottom: 16px;
+      font-size: 24px;
+      mat-icon {
+        transform: scale(2);
+        color: $heavy-metal;
+      }
+      ::ng-deep {
+        .mdc-button__label {
+          color: $heavy-metal;
+        }
+      }
+    }
+  }
+}

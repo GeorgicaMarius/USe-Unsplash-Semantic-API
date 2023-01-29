@@ -1,1 +1,32 @@
-<p>filter-menu works!</p>
+<div *ngIf="displayFilterMenu">
+  <h1>Filter by:</h1>
+  <div *ngIf="displayPhotoFilter; else collectionFilter">
+    <mat-checkbox (change)="onChangeCheckbox($event, 'country', 'country')"
+      >Country</mat-checkbox
+    >
+    <mat-checkbox (change)="onChangeCheckbox($event, 'city', 'city')"
+      >City</mat-checkbox
+    >
+    <mat-checkbox
+      (change)="onChangeCheckbox($event, 'cameraMake', 'camera maker')"
+      >Camera Maker
+    </mat-checkbox>
+    <mat-checkbox
+      (change)="onChangeCheckbox($event, 'photographerFirstName', 'first name')"
+      >Photographer First Name</mat-checkbox
+    >
+    <mat-checkbox
+      (change)="onChangeCheckbox($event, 'photographerLastName', 'last name')"
+      >Photographer Last Name</mat-checkbox
+    >
+    <mat-checkbox (change)="onChangeCheckbox($event, 'keyword', 'keyword')"
+      >Keyword</mat-checkbox
+    >
+  </div>
+</div>
+
+<ng-template #collectionFilter>
+  <mat-checkbox (change)="onChangeCheckbox($event, 'title', 'title')"
+    >Title</mat-checkbox
+  >
+</ng-template>

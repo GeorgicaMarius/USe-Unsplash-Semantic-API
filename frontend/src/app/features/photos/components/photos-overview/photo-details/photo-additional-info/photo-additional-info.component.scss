@@ -1,0 +1,30 @@
+@import "src/app/styles/variables";
+
+.section-container {
+  display: block;
+  color: black;
+  margin-bottom: 16px;
+
+  .section-title {
+    font-size: 24px;
+    font-weight: 500;
+    color: $heavy-metal;
+  }
+
+  .section-content {
+    .section-item {
+      label {
+        color: grey;
+      }
+
+      span {
+        color: $heavy-metal;
+      }
+    }
+  }
+
+  p {
+    color: $heavy-metal;
+    margin: auto 0;
+  }
+}

@@ -13,7 +13,8 @@ import { Photo } from '../../../types/photo.type';
 export class PhotoDetailsComponent {
   id: string = '';
   photo!: Photo;
-  additionalData = new Subject<Map<string, any>>();
+  additionalData: Map<string, any> = new Map<string, any>();
+  isLoading = true;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -31,7 +32,7 @@ export class PhotoDetailsComponent {
     });
   }
 
-  private getInformation(): void {
+  getInformation(): void {
     this.photoService
       .getPhoto(this.id)
       .pipe(first())
@@ -42,19 +43,43 @@ export class PhotoDetailsComponent {
   }
 
   getAdditionalInformation(): void {
+    this.getAdditionalCityInfo();
+    this.getAdditionalCountryInfo();
+    this.isLoading = false;
+  }
+
+  getAdditionalCityInfo(): void {
+    if (!this.photo.photoLocationCity) {
+      return;
+    }
+
     this.additionalInfoService
       .getCityInformation(this.photo.photoLocationCity)
       .pipe(first())
-      .subscribe((cityInfo) => {
-        this.additionalData.next(new Map<string, any>([['city', cityInfo]]));
-      });
+      .subscribe((cityInfo) => this.additionalData.set('city', cityInfo));
+  }
+
+  getAdditionalCountryInfo(): void {
+    if (!this.photo.photoLocationCountry) {
+      return;
+    }
 
     this.additionalInfoService
       .getCountryInformation(this.photo.photoLocationCountry)
       .pipe(first())
       .subscribe((countryInfo) => {
-          this.additionalData.next(new Map<string, any>([['country', countryInfo]]));
+          this.additionalData.set('country', countryInfo);
         }
       );
+  }
+
+  onClickedBackButton(): void {
+    this.router.navigateByUrl(this.getPhotosOverviewPath());
+  }
+
+  private getPhotosOverviewPath(): string {
+    let index = this.router.url.lastIndexOf('/');
+    index = index == -1 ? this.router.url.length : index;
+    return this.router.url.substring(0, index);
   }
 }

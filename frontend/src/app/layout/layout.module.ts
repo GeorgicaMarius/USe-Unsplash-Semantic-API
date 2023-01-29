@@ -5,22 +5,16 @@ import { HeaderComponent } from './components/header/header.component';
 import { SharedModule } from '../shared/shared.module';
 import { FilterMenuComponent } from './components/filter-menu/filter-menu.component';
 import { RoutingMenuComponent } from './components/routing-menu/routing-menu.component';
-
-
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [
     LayoutComponent,
     HeaderComponent,
     FilterMenuComponent,
-    RoutingMenuComponent
+    RoutingMenuComponent,
   ],
-  imports: [
-    CommonModule,
-    SharedModule
-  ],
-  exports: [
-    LayoutComponent
-  ]
+  imports: [CommonModule, SharedModule, CoreModule],
+  exports: [LayoutComponent],
 })
-export class LayoutModule { }
+export class LayoutModule {}

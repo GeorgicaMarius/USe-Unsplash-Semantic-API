@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
+import { FilterOption } from 'src/app/core/types/filter-option.type';
+import { SearchOptions } from 'src/app/shared/types/search-options.type';
 import { environment } from 'src/environments/environment';
 import { Photo } from '../types/photo.type';
 
@@ -13,20 +15,23 @@ export class PhotosService {
 
   constructor(private httpClient: HttpClient) {}
 
-  reset() {
+  resetPagination() {
     this.offset = 0;
     this.limit = 100;
   }
 
-  getPhotos(searchTerm: string = ''): Observable<Photo[]> {
+  getPhotos(searchOptions?: SearchOptions): Observable<Photo[]> {
     let queryString = `offset=${this.offset}&limit=${this.limit}`;
 
-    if (searchTerm) {
-      queryString = queryString.concat(`&masterKeyword=${searchTerm}`);
+    if (searchOptions) {
+      queryString = this.updateQueryStringWithSearchOptions(
+        searchOptions,
+        queryString
+      );
     }
 
     const url = `${environment.apiUrl}/photos/search?${queryString}`;
-    console.log(url)
+
     return this.httpClient
       .get<Photo[]>(url)
       .pipe(tap(() => (this.offset += this.limit)));
@@ -34,5 +39,24 @@ export class PhotosService {
 
   getPhoto(id: string): Observable<Photo> {
     return this.httpClient.get<Photo>(`${environment.apiUrl}/photos/${id}`);
+  }
+
+  private updateQueryStringWithSearchOptions(
+    searchOptions: SearchOptions,
+    queryString: string
+  ): string {
+    if (searchOptions.filterOptions.length) {
+      const searchValues = searchOptions.term.split(',');
+      const queryStringFilterOptions = searchOptions.filterOptions.map(
+        (element, index) => `${element.option}=${searchValues[index].trim()}`
+      );
+
+      queryString += `&${queryStringFilterOptions.join('&')}`;
+      return queryString;
+    }
+
+    return (queryString = queryString.concat(
+      `&masterKeyword=${searchOptions!.term}`
+    ));
   }
 }

@@ -1,0 +1,24 @@
+@import "src/app/styles/variables";
+
+:host {
+  h1 {
+    color: $heavy-metal;
+    margin-top: 16px;
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  mat-checkbox {
+    display: block;
+    ::ng-deep {
+      .mdc-checkbox__background {
+        border-color: grey !important;
+      }
+
+      label {
+        color: $heavy-metal;
+        font-size: 18px;
+      }
+    }
+  }
+}

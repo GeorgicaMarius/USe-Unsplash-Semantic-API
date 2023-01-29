@@ -1,20 +1,21 @@
-@import 'src/app/styles/variables';
+@import "src/app/styles/variables";
 
-.layout-container{
+.layout-container {
   height: 100%;
   background-color: $wisp-pink;
 
-  .layout-content{
+  .layout-content {
     display: flex;
   }
-  .sidenav-container{
+  .sidenav-container {
     background: $wisp-pink;
 
-    .sidenav{
+    .sidenav {
+      padding: 16px;
       background-color: white;
     }
 
-    .sidenav-content{
+    .sidenav-content {
       height: 93.2vh;
       margin-left: 32px;
       margin-right: 32px;
@@ -22,4 +23,3 @@
     }
   }
 }
-

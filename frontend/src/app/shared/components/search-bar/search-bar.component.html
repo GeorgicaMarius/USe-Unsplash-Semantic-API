@@ -1,6 +1,6 @@
 <form>
   <mat-form-field class="search-bar-container">
-    <mat-label>Search bar</mat-label>
+    <mat-label>{{ searchBarPlaceholder }}</mat-label>
     <input matInput [(ngModel)]="searchTerm" name="searchTerm" type="text" />
     <mat-icon matSuffix (click)="onSearchSubmit()" id="searchButton">
       search

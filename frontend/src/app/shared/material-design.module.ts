@@ -7,6 +7,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from "@angular/forms";
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const materialDesignImport = [
   MatCardModule,
@@ -15,7 +16,8 @@ const materialDesignImport = [
   MatIconModule,
   MatPaginatorModule,
   MatButtonModule,
-  FormsModule
+  FormsModule,
+  MatCheckboxModule,
 ];
 
 @NgModule({
