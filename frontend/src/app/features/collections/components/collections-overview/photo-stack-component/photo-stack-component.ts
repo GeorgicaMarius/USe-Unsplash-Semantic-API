@@ -7,9 +7,11 @@ import {first} from "rxjs";
 @Component({
   selector: 'app-photo-stack',
   template: `
-    <div *ngFor="let photo of photos; let i = index" [ngStyle]="{'z-index': photos.length - i}">
-      <img class="first-image" *ngIf="i === 0" [src]="photo.photoImageUrl" [ngStyle]="{'width': 'auto', 'height': 'auto'}">
-      <img *ngIf="i !== 0" [src]="photo.photoImageUrl" [ngStyle]="{'width': firstImageDimensions.width + 'px', 'height': firstImageDimensions.height + 'px', 'transform': 'rotate('+i*5+'deg)'}">
+    <div [ngStyle]="{'width' :  (firstImageDimensions.width + 100)+ 'px', 'height' : (firstImageDimensions.height+ 100) + 'px', 'overflow': 'hidden'}">
+      <div *ngFor="let photo of photos; let i = index" [ngStyle]="{'z-index': photos.length - i}">
+        <img (click)="changeImage()" [src]="photo.photoImageUrl"
+             [ngStyle]="{'width': firstImageDimensions.width + 'px', 'height': firstImageDimensions.height + 'px', 'transform': 'rotate('+i*5+'deg)'}">
+      </div>
     </div>
   `,
   styles: [`
@@ -41,7 +43,7 @@ export class PhotoStackComponent {
         photos.forEach(photo => {
           photo.photoImageUrl = photo.photoImageUrl + '?w=300'
         });
-        this.photos = photos.slice(0,10);
+        this.photos = photos.slice(0, 10);
         const img = new Image();
         // @ts-ignore
         img.src = this.photos[0].photoImageUrl;
@@ -49,5 +51,15 @@ export class PhotoStackComponent {
           this.firstImageDimensions = {width: img.width, height: img.height};
         };
       });
+  }
+  shiftArrayToRight(arr: Photo[], places: number) {
+    for (var i = 0; i < places; i++) {
+      // @ts-ignore
+      arr.unshift(arr.pop());
+    }
+  }
+
+  changeImage() {
+    this.shiftArrayToRight(this.photos, 1)
   }
 }

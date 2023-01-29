@@ -12,13 +12,12 @@
         (scrollReachedLowerBound)="updateDisplayedCollections()"
         class="collections-content"
       >
-        <div *ngFor="let columnWithCollections of displayedCollections">
+        <div class='collections-list' *ngFor="let columnWithCollections of [displayedCollections[0]]">
           <ng-container *ngFor="let collection of columnWithCollections">
-            <app-collection-card
+            <app-photo-stack
               [collection]="collection"
-              (openedDetails)="onOpenedDetails($event)"
             >
-            </app-collection-card>
+            </app-photo-stack>
           </ng-container>
         </div>
       </div>

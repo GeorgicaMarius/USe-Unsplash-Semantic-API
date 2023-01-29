@@ -20,6 +20,12 @@
       width: 100%;
       background-color: white;
       border-radius: 16px;
+
+      .collections-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
     }
 
     .collections-content {
