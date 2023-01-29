@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs';
+import {first, Subject} from 'rxjs';
 import { PhotoAdditionalInfoService } from '../../../services/photo-additional-info.service';
 import { PhotosService } from '../../../services/photos.service';
 import { Photo } from '../../../types/photo.type';
@@ -13,7 +13,7 @@ import { Photo } from '../../../types/photo.type';
 export class PhotoDetailsComponent {
   id: string = '';
   photo!: Photo;
-  additionalData: Map<string, any> = new Map<string, any>();
+  additionalData = new Subject<Map<string, any>>();
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -45,13 +45,16 @@ export class PhotoDetailsComponent {
     this.additionalInfoService
       .getCityInformation(this.photo.photoLocationCity)
       .pipe(first())
-      .subscribe((cityInfo) => this.additionalData.set('city', cityInfo));
+      .subscribe((cityInfo) => {
+        this.additionalData.next(new Map<string, any>([['city', cityInfo]]));
+      });
 
     this.additionalInfoService
       .getCountryInformation(this.photo.photoLocationCountry)
       .pipe(first())
-      .subscribe((countryInfo) =>
-        this.additionalData.set('country', countryInfo)
+      .subscribe((countryInfo) => {
+          this.additionalData.next(new Map<string, any>([['country', countryInfo]]));
+        }
       );
   }
 }

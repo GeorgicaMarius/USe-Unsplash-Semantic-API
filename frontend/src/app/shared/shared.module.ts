@@ -6,6 +6,8 @@ import { PanelHeaderComponent } from './components/panel-header/panel-header.com
 import { PanelFooterComponent } from './components/panel-footer/panel-footer.component';
 import { ScrollWatchDirective } from './directives/scroll-watch.directive';
 import { EmptyStringPipe } from './pipes/empty-string.pipe';
+import {CustomCityCountryPipe} from "./pipes/CustomCityCountryPipe";
+import {LinkifyPipe} from "./pipes/LinkifyPipe";
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { EmptyStringPipe } from './pipes/empty-string.pipe';
     PanelFooterComponent,
     ScrollWatchDirective,
     EmptyStringPipe,
+    CustomCityCountryPipe,
+    LinkifyPipe
   ],
   imports: [CommonModule, MaterialDesignModule],
   exports: [
@@ -23,6 +27,8 @@ import { EmptyStringPipe } from './pipes/empty-string.pipe';
     PanelFooterComponent,
     ScrollWatchDirective,
     EmptyStringPipe,
+    CustomCityCountryPipe,
+    LinkifyPipe
   ],
 })
 export class SharedModule {}

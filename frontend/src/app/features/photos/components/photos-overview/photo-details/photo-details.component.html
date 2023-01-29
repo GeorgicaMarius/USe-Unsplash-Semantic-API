@@ -17,6 +17,20 @@
         </div>
         <div class="right-container">
           <h1>Info from Web 3.0 👻</h1>
+          <div *ngIf="additionalData | async as data">
+            <h1>City</h1>
+            <div *ngFor="let cityProp of data.get('city') | keyvalue">
+              <p>{{cityProp.key | customCityCountryFormat | titlecase}}: </p>
+              <p [innerHtml]="cityProp.value | linkify"></p>
+            </div>
+            <h1>Country</h1>
+            <div *ngFor="let countryProp of data.get('country') | keyvalue">
+              <div class="additional-info-box">
+                <p>{{countryProp.key | customCityCountryFormat | titlecase}}: </p>
+                <p [innerHtml]="countryProp.value | linkify"></p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <app-panel-footer></app-panel-footer>

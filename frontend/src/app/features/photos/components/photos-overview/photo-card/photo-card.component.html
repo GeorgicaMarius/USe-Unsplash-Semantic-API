@@ -1,13 +1,13 @@
 <ng-container *ngIf="photo">
   <div (click)="onOpenPhotoDetails()"
-        class="image">
+       class="image">
     <img
       [src]="photo.photoImageUrl + '?w=400'"
       class="image__img"
       mat-card-image
     />
     <div class="image__overlay image__overlay--primary">
-      <p class="image__description">{{photo.photoDescription.slice(0,1).toUpperCase() + photo.photoDescription.slice(1)}}</p>
+      <p class="image__description">{{photo.photoDescription | titlecase }}</p>
     </div>
   </div>
 </ng-container>

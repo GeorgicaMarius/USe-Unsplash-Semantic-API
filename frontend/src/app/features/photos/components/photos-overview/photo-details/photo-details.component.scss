@@ -49,8 +49,17 @@
 
       .right-container {
         min-width: 300px;
-
+        .additional-info-box{
+          display: flex;
+        }
         h1 {
+          color: $heavy-metal;
+        }
+        p {
+          color: $heavy-metal;
+        }
+        a {
+          display: inline;
           color: $heavy-metal;
         }
       }

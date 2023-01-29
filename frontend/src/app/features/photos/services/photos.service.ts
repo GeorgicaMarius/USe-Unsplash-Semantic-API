@@ -21,12 +21,12 @@ export class PhotosService {
   getPhotos(searchTerm: string = ''): Observable<Photo[]> {
     let queryString = `offset=${this.offset}&limit=${this.limit}`;
 
-    if (!searchTerm) {
+    if (searchTerm) {
       queryString = queryString.concat(`&masterKeyword=${searchTerm}`);
     }
 
-    const url = `${environment.apiUrl}/photos?${queryString}`;
-
+    const url = `${environment.apiUrl}/photos/search?${queryString}`;
+    console.log(url)
     return this.httpClient
       .get<Photo[]>(url)
       .pipe(tap(() => (this.offset += this.limit)));
