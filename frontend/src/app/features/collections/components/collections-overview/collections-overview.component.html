@@ -1,1 +1,28 @@
-<p>collections-overview works!</p>
+<div class="collections-container">
+  <div class="top-container">
+    <app-search-bar
+      (searchTermChange)="onSearchTermChange($event)"
+    ></app-search-bar>
+  </div>
+  <div class="bottom-container">
+    <div class="collections-overview-container">
+      <app-panel-header [title]="title"></app-panel-header>
+      <div
+        scrollWatch
+        (scrollReachedLowerBound)="updateDisplayedCollections()"
+        class="collections-content"
+      >
+        <div *ngFor="let columnWithCollections of displayedCollections">
+          <ng-container *ngFor="let collection of columnWithCollections">
+            <app-collection-card
+              [collection]="collection"
+              (openedDetails)="onOpenedDetails($event)"
+            >
+            </app-collection-card>
+          </ng-container>
+        </div>
+      </div>
+      <app-panel-footer></app-panel-footer>
+    </div>
+  </div>
+</div>

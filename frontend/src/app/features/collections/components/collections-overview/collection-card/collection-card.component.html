@@ -1,0 +1,13 @@
+<ng-container *ngIf="collection && collection.photoThumbnailUrl">
+  <div class="collection-card-container">
+    <!-- TODO make it look like a mat card-->
+    <div (click)="onOpenCollectionDetails()" class="image">
+      <img
+        [src]="collection.photoThumbnailUrl + '?w=400'"
+        class="image__img"
+        mat-card-image
+      />
+      <div class="image__overlay image__overlay--primary"></div>
+    </div>
+  </div>
+</ng-container>

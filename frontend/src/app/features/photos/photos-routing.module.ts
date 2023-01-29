@@ -6,6 +6,7 @@ import { PhotosOverviewComponent } from './components/photos-overview/photos-ove
 const routes: Routes = [
   { path: '', component: PhotosOverviewComponent },
   { path: ':id', component: PhotoDetailsComponent },
+  { path: '**', component: PhotosOverviewComponent },
 ];
 
 @NgModule({

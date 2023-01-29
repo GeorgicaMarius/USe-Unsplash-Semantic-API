@@ -1,15 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { FilterOption } from 'src/app/core/types/filter-option.type';
 import { SearchOptions } from 'src/app/shared/types/search-options.type';
 import { environment } from 'src/environments/environment';
-import { Photo } from '../types/photo.type';
+import { Collection } from '../types/collection.type';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PhotosService {
+export class CollectionsService {
   offset = 0;
   limit = 100;
 
@@ -20,7 +19,7 @@ export class PhotosService {
     this.limit = 100;
   }
 
-  getPhotos(searchOptions: SearchOptions): Observable<Photo[]> {
+  getCollections(searchOptions: SearchOptions): Observable<Collection[]> {
     let queryString = `offset=${this.offset}&limit=${this.limit}`;
 
     if (searchOptions.filterOptions?.length > 0) {
@@ -30,19 +29,17 @@ export class PhotosService {
       );
     }
 
-    const url = `${environment.apiUrl}/photos/search?${queryString}`;
+    const url = `${environment.apiUrl}/collections/search?${queryString}`;
 
     return this.httpClient
-      .get<Photo[]>(url)
+      .get<Collection[]>(url)
       .pipe(tap(() => (this.offset += this.limit)));
   }
 
-  getPhotosById(ids: string[]): Observable<Photo[]> {
-    return this.httpClient.post<Photo[]>(`${environment.apiUrl}/photos`, ids);
-  }
-
-  getPhoto(id: string): Observable<Photo> {
-    return this.httpClient.get<Photo>(`${environment.apiUrl}/photos/${id}`);
+  getCollection(id: string): Observable<Collection> {
+    return this.httpClient.get<Collection>(
+      `${environment.apiUrl}/collections/${id}`
+    );
   }
 
   private updateQueryStringWithSearchOptions(

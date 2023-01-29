@@ -17,39 +17,35 @@ export class PhotosOverviewComponent implements OnInit {
   numberOfColumnsToDisplay = 3;
   indexOfLastLoadedPhoto = 0;
   maxNumberOfDisplayedPhotosPerLoad = 30;
+  searchOptions: SearchOptions = {} as SearchOptions;
 
   lastScrolledPosition = 0;
 
   photos: Photo[] = [];
   displayedPhotos: Photo[][] = [];
-  currentViewingPhoto: Photo = {} as Photo;
 
-  searchTerm = '';
   isLoading = false;
 
   constructor(
-    private readonly photosOverviewService: PhotosService,
+    private readonly photosService: PhotosService,
     private readonly router: Router,
     private loaderService: NgxUiLoaderService
   ) {}
 
   ngOnInit(): void {
-    this.photosOverviewService.resetPagination();
+    this.photosService.resetPagination();
     this.initializeColumns();
     this.getPhotos();
   }
 
   onSearchTermChange(searchOptions: SearchOptions) {
+    this.searchOptions = searchOptions;
     this.clearPhotos();
-    this.getPhotos(searchOptions);
+    this.getPhotos();
   }
 
   onOpenedDetails(photo: Photo): void {
     this.router.navigateByUrl(`${this.router.url}/${photo.photoId}`);
-  }
-
-  getArray(mapValues: any): Photo[] {
-    return [...mapValues];
   }
 
   updateDisplayedPhotos(): void {
@@ -57,7 +53,7 @@ export class PhotosOverviewComponent implements OnInit {
   }
 
   private clearPhotos(): void {
-    this.photosOverviewService.resetPagination();
+    this.photosService.resetPagination();
     this.displayedPhotos = [];
     this.photos = [];
 
@@ -76,9 +72,9 @@ export class PhotosOverviewComponent implements OnInit {
     }
   }
 
-  private getPhotos(searchOptions?: SearchOptions): void {
-    this.photosOverviewService
-      .getPhotos(searchOptions)
+  private getPhotos(): void {
+    this.photosService
+      .getPhotos(this.searchOptions)
       .pipe(first())
       .subscribe((photos) => {
         this.photos.push(...photos);
