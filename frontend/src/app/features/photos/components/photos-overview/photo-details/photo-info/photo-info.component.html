@@ -1,84 +1,125 @@
-<div class="section-container">
-  <span class="section-title">Description 🌞</span>
-  <div class="section-content">
-    <div class="section-item">
-      <span>{{photo.photoDescription | emptyString}}</span>
+<div vocab="http://schema.org/">
+  <div [attr.resource]="'#' + photo.photoId" typeof="Photograph">
+    <div class="section-container">
+      <span class="section-title">Keywords 🔑</span>
+      <div class="section-content">
+        <div class="section-item">
+          <span property="keywords">{{photo.photoKeywords | emptyString}}</span>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-<div class="section-container">
-  <span class="section-title">Stats 🕶</span>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Downloads: </label>
-      <span>{{photo.statsDownloads | emptyString}}</span>
+    <div class="section-container">
+      <span class="section-title">Description 🌞</span>
+      <div class="section-content">
+        <div class="section-item">
+          <span property="description">{{photo.photoDescription | emptyString}}</span>
+        </div>
+      </div>
     </div>
-    <div class="section-item">
-      <label>Views: </label>
-      <span>{{photo.statsViews | emptyString}}</span>
+    <div class="section-container">
+      <span class="section-title">Stats ℹ</span>
+      <div class="section-content">
+        <div class="section-item">
+          <label>Downloads: </label>
+          <span property="http://use.ro/statsDownloads">{{photo.statsDownloads | emptyString}}</span>
+        </div>
+        <div class="section-item">
+          <label>Views: </label>
+          <span property="http://use.ro/statsViews">{{photo.statsViews | emptyString}}</span>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-<div class="section-container">
-  <span class="section-title">Photographer 📷</span>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Name: </label>
-      <span>{{(photo.photographerFirstName + ' ' + photo.photographerLastName) | emptyString}}</span>
+    <div class="section-container">
+      <span class="section-title">Media 🖼</span>
+      <div class="section-content" property="associatedMedia" typeof="MediaObject">
+        <div class="section-item">
+          <label>Photo image url: </label>
+          <a property="contentUrl" href={{photo.photoImageUrl}}> Link</a>
+        </div>
+        <div class="section-item">
+          <label>Upload date: </label>
+          <span property="uploadDate">{{photo.photoSubmittedAt | date | emptyString}}</span>
+        </div>
+        <div class="section-item">
+          <label>Width: </label>
+          <span property="width">{{photo.photoWidth | emptyString}} px</span>
+        </div>
+        <div class="section-item">
+          <label>Height: </label>
+          <span property="width">{{photo.photoHeight | emptyString}} px</span>
+        </div>
+      </div>
     </div>
-    <div class="section-item">
-      <label>Username: </label>
-      <span>{{photo.photographerUsername | emptyString}}</span>
+    <div class="section-container">
+      <span class="section-title">Photographer 🧑</span>
+      <div class="section-content" property="author" typeof="Person">
+        <div class="section-item">
+          <label>First Name: : </label>
+          <span property="givenName">{{ photo.photographerFirstName | emptyString}}</span>
+        </div>
+        <div class="section-item">
+          <label>Last Name: : </label>
+          <span property="familyName">{{ photo.photographerLastName | emptyString}}</span>
+        </div>
+        <div class="section-item">
+          <label>Username: </label>
+          <span property="callSign">{{photo.photographerUsername | emptyString}}</span>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-<div class="section-container">
-  <span class="section-title">Location 🌎</span>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Name: </label>
-      <span>{{photo.photoLocationName | emptyString}}</span>
+    <div class="section-container">
+      <span class="section-title">Location 🌎</span>
+      <div class="section-content" property="contentLocation" typeof="Place">
+        <div class="section-item">
+          <label>Name: </label>
+          <span property="name">{{photo.photoLocationName | emptyString}}</span>
+        </div>
+        <div class="section-item">
+          <label>Country: </label>
+          <span property="addressCountry">{{photo.photoLocationCountry | emptyString}}</span>
+        </div>
+        <div class="section-item">
+          <label>City: </label>
+          <span property="addressLocality">{{photo.photoLocationCity | emptyString}}</span>
+        </div>
+        <div class="section-item">
+          <label>Longitude: </label>
+          <span property="longitude">{{photo.photoLocationLongitude | emptyString}}</span>
+        </div>
+        <div class="section-item">
+          <label>Latitude: </label>
+          <span property="latitude">{{photo.photoLocationLatitude | emptyString}}</span>
+        </div>
+      </div>
     </div>
-    <div class="section-item">
-      <label>City: </label>
-      <span>{{photo.photoLocationCity | emptyString}}</span>
-    </div>
-    <div class="section-item">
-      <label>Country: </label>
-      <span>{{photo.photoLocationCountry | emptyString}}</span>
-    </div>
-    <div class="section-item">
-      <label>Longitude: </label>
-      <span>{{photo.photoLocationLongitude | emptyString}}</span>
-    </div>
-    <div class="section-item">
-      <label>Latitude: </label>
-      <span>{{photo.photoLocationLatitude | emptyString}}</span>
-    </div>
-  </div>
-</div>
-<div class="section-container">
-  <span class="section-title">Specifications 🤓</span>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Camera Maker: </label>
-      <span>{{photo.exifCameraMake | emptyString}}</span>
-    </div>
-    <div class="section-item">
-      <label>Camera Model: </label>
-      <span>{{photo.exifCameraModel | emptyString}}</span>
-    </div>
-    <div class="section-item">
-      <label>Iso: </label>
-      <span>{{photo.exifIso | emptyString}}</span>
-    </div>
-    <div class="section-item">
-      <label>Focal Length: </label>
-      <span>{{photo.exifFocalLength | emptyString}}</span>
-    </div>
-    <div class="section-item">
-      <label>Exposure Time: </label>
-      <span>{{photo.exifExposureTime | emptyString}}</span>
+    <div class="section-container">
+      <span class="section-title">Camera Specs 📷</span>
+      <div class="section-content">
+        <div class="section-item">
+          <label>Camera Maker: </label>
+          <span property="http://use.ro/exifCameraMake">{{photo.exifCameraMake | emptyString}}</span>
+        </div>
+        <div class="section-item">
+          <label>Camera Model: </label>
+          <span property="http://use.ro/exifCameraModel">{{photo.exifCameraModel | emptyString}}</span>
+        </div>
+        <div class="section-item">
+          <label>ISO: </label>
+          <span property="http://use.ro/exifIso">{{photo.exifIso | emptyString}}</span>
+        </div>
+        <div class="section-item">
+          <label>Aperture value: </label>
+          <span property="http://use.ro/exifApertureValue">{{photo.exifApertureValue | emptyString}}</span>
+        </div>
+        <div class="section-item">
+          <label>Focal Length: </label>
+          <span property="http://use.ro/exifFocalLength">{{photo.exifFocalLength | emptyString}}</span>
+        </div>
+        <div class="section-item">
+          <label>Exposure Time: </label>
+          <span property="http://use.ro/exifExposureTime">{{photo.exifExposureTime | emptyString}}</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
