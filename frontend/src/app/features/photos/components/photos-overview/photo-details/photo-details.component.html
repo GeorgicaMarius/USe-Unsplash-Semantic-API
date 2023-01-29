@@ -20,8 +20,10 @@
           <div *ngIf="additionalData | async as data">
             <h1>City</h1>
             <div *ngFor="let cityProp of data.get('city') | keyvalue">
-              <p>{{cityProp.key | customCityCountryFormat | titlecase}}: </p>
-              <p [innerHtml]="cityProp.value | linkify"></p>
+              <div class="additional-info-box">
+                <p>{{cityProp.key | customCityCountryFormat | titlecase}}: </p>
+                <p [innerHtml]="cityProp.value | linkify"></p>
+              </div>
             </div>
             <h1>Country</h1>
             <div *ngFor="let countryProp of data.get('country') | keyvalue">
