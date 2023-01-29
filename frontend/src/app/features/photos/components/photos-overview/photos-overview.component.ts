@@ -32,17 +32,14 @@ export class PhotosOverviewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.photosOverviewService.reset();
-    this.displayedPhotos = []
-    this.photos= [];
-
     this.initializeColumns();
     this.getPhotos();
   }
 
   onSearchTermChange(searchTerm: string) {
-    this.searchTerm = searchTerm
-    this.ngOnInit();
+    this.searchTerm = searchTerm;
+    this.clearPhotos();
+    this.getPhotos();
   }
 
   onOpenedDetails(photo: Photo): void {
@@ -60,6 +57,15 @@ export class PhotosOverviewComponent implements OnInit {
 
   updateDisplayedPhotos(): void {
     this.getPhotosToDisplayForCurrentPage();
+  }
+
+  private clearPhotos(): void{
+    this.displayedPhotos = [];
+    this.photos = [];
+
+    this.initializeColumns();
+    this.indexOfLastLoadedPhoto = 0;
+    this.maxNumberOfDisplayedPhotosPerLoad = 30;
   }
 
   private initializeColumns() {
@@ -134,5 +140,4 @@ export class PhotosOverviewComponent implements OnInit {
       this.maxNumberOfDisplayedPhotosPerLoad
     );
   }
-
 }

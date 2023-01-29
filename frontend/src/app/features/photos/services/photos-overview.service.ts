@@ -1,6 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable, tap} from 'rxjs';
+import { environment } from 'src/environments/environment';
 import {Photo} from '../types/photo.type';
 
 @Injectable({
@@ -20,15 +21,15 @@ export class PhotosOverviewService {
 
   getPhotos(searchTerm: string = ''): Observable<Photo[]> {
     let queryString = `offset=${this.offset}&limit=${this.limit}`;
-    if (searchTerm != '') {
+
+    if (!searchTerm) {
       queryString = queryString.concat(`&masterKeyword=${searchTerm}`);
     }
-    console.log(`http://localhost:8080/photos/search?${queryString}`)
 
-    return this.httpClient.get<Photo[]>(
-      `http://localhost:8080/photos/search?${queryString}`
-    ).pipe(
-      tap(() => this.offset += this.limit)
-    );
+    const url = `${environment.apiUrl}/photos?${queryString}`;
+
+    return this.httpClient
+      .get<Photo[]>(url)
+      .pipe(tap(() => (this.offset += this.limit)));
   }
 }
