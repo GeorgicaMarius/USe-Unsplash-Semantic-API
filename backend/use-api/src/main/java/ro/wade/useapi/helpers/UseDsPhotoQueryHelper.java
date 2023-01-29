@@ -131,7 +131,8 @@ public class UseDsPhotoQueryHelper {
             String photographerLastName,
             String cameraMake,
             String country,
-            String city
+            String city,
+            List<String> photoIds
     ) {
         StringBuilder filterBlockBuilder = new StringBuilder();
         if (photographerFirstName != null)
@@ -144,6 +145,9 @@ public class UseDsPhotoQueryHelper {
             filterBlockBuilder.append(String.format("  FILTER (regex (?photoLocationCountry, \"^%s$\", \"i\"))\n", country));
         if (city != null)
             filterBlockBuilder.append(String.format("  FILTER (regex (?photoLocationCity, \"^%s$\", \"i\"))\n", city));
+        if (photoIds.size() > 0) {
+            filterBlockBuilder.append(getPhotoIdsFilter(photoIds));
+        }
         String sortBlock = "ORDER BY ASC(?photoSubmittedAt)\n";
         return executeBasicQuery(filterBlockBuilder.toString(), sortBlock, offset, limit);
     }
@@ -186,5 +190,18 @@ public class UseDsPhotoQueryHelper {
         }
         String sortBlock = "ORDER BY ASC(?photoSubmittedAt)\n";
         return executeBasicQuery(filterBlockBuilder.toString(), sortBlock, offset, limit);
+    }
+
+    private static String getPhotoIdsFilter(List<String> photoIds) {
+        StringBuilder filterBlockBuilder = new StringBuilder();
+        filterBlockBuilder.append("FILTER (");
+        for (int i = 0; i < photoIds.size(); i++) {
+            filterBlockBuilder.append(String.format("?photoId = \"%s\"", photoIds.get(i)));
+            if (i < photoIds.size() - 1) {
+                filterBlockBuilder.append(" || ");
+            }
+        }
+        filterBlockBuilder.append(")");
+        return filterBlockBuilder.toString();
     }
 }

@@ -23,10 +23,12 @@ public class PhotoController {
             @RequestParam(value = "photographerLastName", required = false) String filterPhotographerLastName,
             @RequestParam(value = "cameraMake", required = false) String filterCameraMake,
             @RequestParam(value = "country", required = false) String filterCountry,
-            @RequestParam(value = "city", required = false) String filterCity) {
+            @RequestParam(value = "city", required = false) String filterCity,
+            @RequestParam("photoIds") List<String> photoIds
+            ) {
 
         return useDsPhotoQueryHelper.getPhotosFilter(offset, limit,
-                filterPhotographerFirstName, filterPhotographerLastName, filterCameraMake, filterCountry, filterCity);
+                filterPhotographerFirstName, filterPhotographerLastName, filterCameraMake, filterCountry, filterCity, photoIds);
     }
 
     @GetMapping("/photos/{photoId}")
