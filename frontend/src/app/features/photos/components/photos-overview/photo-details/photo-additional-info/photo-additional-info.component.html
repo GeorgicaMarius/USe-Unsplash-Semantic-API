@@ -1,139 +1,158 @@
-<div *ngIf="city" class="section-container">
-  <span class="section-title">City 🏙</span>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Name: </label>
-      <span>{{city.cityName | emptyString }}</span>
-    </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Abstract: </label>
-      <span>{{city.cityAbstract | emptyString }}</span>
-    </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Country: </label>
-      <span>{{city.cityCountry | emptyString }}</span>
-    </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Area Code: </label>
-      <span>{{city.cityAreaCode | emptyString }}</span>
-    </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Total Population: </label>
-      <span>{{city.cityPopulationTotal | emptyString }}</span>
-    </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Population As Of: </label>
-      <span>{{city.cityPopulationAsOf | emptyString }}</span>
-    </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Postal Code: </label>
-      <span>{{city.cityPostalCode | emptyString }}</span>
-    </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Time Zone: </label>
-      <span>{{city.cityTimeZone | emptyString }}</span>
-    </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Type: </label>
-      <span>{{city.cityType | emptyString }}</span>
-    </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Website: </label>
-      <span>{{city.cityWebsite | emptyString }}</span>
-    </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Latitude: </label>
-      <span>{{city.cityLat | emptyString }}</span>
-    </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Longitude: </label>
-      <span>{{city.cityLong | emptyString }}</span>
-    </div>
-  </div>
-</div>
+<div vocab="http://dbpedia.org/ontology/">
 
-<div *ngIf="country" class="section-container">
-  <span class="section-title">Country 🚩</span>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Name: </label>
-      <span>{{country.countryName | emptyString }}</span>
+  <div *ngIf="city" class="section-container" typeof="City">
+    <span class="section-title">City 🏙</span>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Name: </label>
+        <span property="http://www.w3.org/2000/01/rdf-schema#label">{{city.cityName | emptyString }}</span>
+      </div>
+    </div>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Abstract: </label>
+        <span property="abstract">{{city.cityAbstract | emptyString }}</span>
+      </div>
+    </div>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Country: </label>
+        <span [innerHtml]="city.cityCountry | emptyString | linkify"></span>
+        <span class="display-none" property="country">{{city.cityCountry}}</span>
+      </div>
+    </div>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Area Code: </label>
+        <span property="areaCode">{{city.cityAreaCode | emptyString }}</span>
+      </div>
+    </div>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Total Population: </label>
+        <span property="populationTotal">{{city.cityPopulationTotal | emptyString }}</span>
+      </div>
+    </div>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Population as of: </label>
+        <span property="populationAsOf">{{city.cityPopulationAsOf | emptyString }}</span>
+      </div>
+    </div>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Postal Code: </label>
+        <span property="postalCode">{{city.cityPostalCode | emptyString }}</span>
+      </div>
+    </div>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Time Zone: </label>
+        <span [innerHtml]="city.cityTimeZone | emptyString | linkify"></span>
+        <span class="display-none" property="timeZone">{{city.cityTimeZone}}</span>
+      </div>
+    </div>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Type: </label>
+        <span [innerHtml]="city.cityType | emptyString | linkify"></span>
+        <span class="display-none" property="type">{{city.cityType}}</span>
+      </div>
+    </div>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Website: </label>
+        <span [innerHtml]="city.cityWebsite | emptyString | linkify2"></span>
+        <span class="display-none" property="http://dbpedia.org/property/website">{{city.cityWebsite}}</span>
+      </div>
+    </div>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Latitude: </label>
+        <span property="http://www.w3.org/2003/01/geo/wgs84_pos#lat">{{city.cityLat | emptyString }}</span>
+      </div>
+    </div>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Longitude: </label>
+        <span property="http://www.w3.org/2003/01/geo/wgs84_pos#long">{{city.cityLong | emptyString }}</span>
+      </div>
     </div>
   </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Currency: </label>
-      <span>{{country.countryCurrency | emptyString }}</span>
+
+  <div *ngIf="country" class="section-container" typeof="Country">
+    <span class="section-title">Country 🚩</span>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Name: </label>
+        <span property="http://www.w3.org/2000/01/rdf-schema#label">{{country.countryName | emptyString }}</span>
+      </div>
     </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Total Population: </label>
-      <span>{{country.countryPopulationTotal | emptyString }}</span>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Abstract: </label>
+        <span property="abstract">{{country.countryAbstract | emptyString }}</span>
+      </div>
     </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Time Zone: </label>
-      <span>{{country.countryTimeZone | emptyString }}</span>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Capital: </label>
+        <span [innerHtml]="country.countryCapital | emptyString | linkify"></span>
+        <span class="display-none" property="capital">{{country.countryCapital}}</span>
+      </div>
     </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Website: </label>
-      <span>{{country.countryWebsite | emptyString }}</span>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Currency: </label>
+        <span [innerHtml]="country.countryCurrency | emptyString | linkify"></span>
+        <span class="display-none" property="currency">{{country.countryCurrency}}</span>
+      </div>
     </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Latitude: </label>
-      <span>{{country.countryLat | emptyString }}</span>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Total Population: </label>
+        <span property="populationTotal">{{country.countryPopulationTotal | emptyString }}</span>
+      </div>
     </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Longitude: </label>
-      <span>{{country.countryLong | emptyString }}</span>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Time Zone: </label>
+        <span [innerHtml]="country.countryTimeZone | emptyString | linkify"></span>
+        <span class="display-none" property="timeZone">{{country.countryTimeZone}}</span>
+      </div>
     </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Official Language: </label>
-      <span>{{country.countryOfficialLanguage | emptyString }}</span>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Website: </label>
+        <span [innerHtml]="country.countryWebsite | emptyString | linkify2"></span>
+        <span class="display-none" property="http://dbpedia.org/property/website">{{country.countryWebsite}}</span>
+      </div>
     </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Capital: </label>
-      <span>{{country.countryCapital | emptyString }}</span>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Latitude: </label>
+        <span property="http://www.w3.org/2003/01/geo/wgs84_pos#lat">{{country.countryLat | emptyString }}</span>
+      </div>
     </div>
-  </div>
-  <div class="section-content">
-    <div class="section-item">
-      <label>Government Type: </label>
-      <span>{{country.countryGovernmentType | emptyString }}</span>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Longitude: </label>
+        <span property="http://www.w3.org/2003/01/geo/wgs84_pos#long">{{country.countryLong | emptyString }}</span>
+      </div>
+    </div>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Government Type: </label>
+        <span [innerHtml]="country.countryGovernmentType | emptyString | linkify"></span>
+        <span class="display-none" property="governmentType">{{country.countryGovernmentType}}</span>
+      </div>
+    </div>
+    <div class="section-content">
+      <div class="section-item">
+        <label>Official Language: </label>
+        <span [innerHtml]="country.countryOfficialLanguage | emptyString | linkify"></span>
+        <span class="display-none" property="officialLanguage">{{country.countryOfficialLanguage}}</span>
+      </div>
     </div>
   </div>
 </div>

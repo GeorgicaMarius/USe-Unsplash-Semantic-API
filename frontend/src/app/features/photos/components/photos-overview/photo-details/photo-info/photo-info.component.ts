@@ -7,5 +7,10 @@ import { Photo } from 'src/app/features/photos/types/photo.type';
   styleUrls: ['./photo-info.component.scss'],
 })
 export class PhotoInfoComponent {
+  resourceUrl: string;
   @Input() photo!: Photo;
+
+  constructor() {
+    this.resourceUrl = window.location.origin + window.location.pathname;
+  }
 }

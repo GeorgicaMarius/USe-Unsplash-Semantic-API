@@ -6,9 +6,9 @@ import { PanelHeaderComponent } from './components/panel-header/panel-header.com
 import { PanelFooterComponent } from './components/panel-footer/panel-footer.component';
 import { ScrollWatchDirective } from './directives/scroll-watch.directive';
 import { EmptyStringPipe } from './pipes/empty-string.pipe';
-import { CustomCityCountryPipe } from './pipes/CustomCityCountryPipe';
-import { LinkifyPipe } from './pipes/LinkifyPipe';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CustomCityCountryPipe } from './pipes/custom-city-country.pipe';
+import { LinkifyPipe } from './pipes/linkify.pipe';
+import { Linkify2Pipe } from './pipes/linkify2.pipe';
 
 @NgModule({
   declarations: [
@@ -19,12 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EmptyStringPipe,
     CustomCityCountryPipe,
     LinkifyPipe,
-  ],
-  imports: [
-    CommonModule,
-    MaterialDesignModule,
-    FormsModule,
-    ReactiveFormsModule,
+    Linkify2Pipe,
   ],
   exports: [
     MaterialDesignModule,
@@ -35,6 +30,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EmptyStringPipe,
     CustomCityCountryPipe,
     LinkifyPipe,
+    Linkify2Pipe,
   ],
 })
 export class SharedModule {}
