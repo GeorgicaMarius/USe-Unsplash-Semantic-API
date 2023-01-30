@@ -9,6 +9,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from "@angular/forms";
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 const materialDesignImport = [
   MatCardModule,
@@ -19,7 +20,8 @@ const materialDesignImport = [
   MatButtonModule,
   FormsModule,
   MatCheckboxModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSlideToggleModule
 ];
 
 @NgModule({

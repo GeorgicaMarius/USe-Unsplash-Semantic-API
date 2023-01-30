@@ -1,6 +1,6 @@
 <div *ngIf="displayFilterMenu">
   <h1>Filter by:</h1>
-  <div *ngIf="displayPhotoFilter; else collectionFilter">
+  <div>
     <mat-checkbox (change)="onChangeCheckbox($event, 'country', 'country')"
       >Country</mat-checkbox
     >
@@ -25,8 +25,8 @@
   </div>
 </div>
 
-<ng-template #collectionFilter>
+<!-- <ng-template #collectionFilter>
   <mat-checkbox (change)="onChangeCheckbox($event, 'title', 'title')"
     >Title</mat-checkbox
   >
-</ng-template>
+</ng-template> -->

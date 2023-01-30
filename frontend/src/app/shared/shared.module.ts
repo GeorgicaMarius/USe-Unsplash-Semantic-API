@@ -6,8 +6,9 @@ import { PanelHeaderComponent } from './components/panel-header/panel-header.com
 import { PanelFooterComponent } from './components/panel-footer/panel-footer.component';
 import { ScrollWatchDirective } from './directives/scroll-watch.directive';
 import { EmptyStringPipe } from './pipes/empty-string.pipe';
-import {CustomCityCountryPipe} from "./pipes/CustomCityCountryPipe";
-import {LinkifyPipe} from "./pipes/LinkifyPipe";
+import { CustomCityCountryPipe } from './pipes/CustomCityCountryPipe';
+import { LinkifyPipe } from './pipes/LinkifyPipe';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,9 +18,14 @@ import {LinkifyPipe} from "./pipes/LinkifyPipe";
     ScrollWatchDirective,
     EmptyStringPipe,
     CustomCityCountryPipe,
-    LinkifyPipe
+    LinkifyPipe,
   ],
-  imports: [CommonModule, MaterialDesignModule],
+  imports: [
+    CommonModule,
+    MaterialDesignModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   exports: [
     MaterialDesignModule,
     SearchBarComponent,
@@ -28,7 +34,7 @@ import {LinkifyPipe} from "./pipes/LinkifyPipe";
     ScrollWatchDirective,
     EmptyStringPipe,
     CustomCityCountryPipe,
-    LinkifyPipe
+    LinkifyPipe,
   ],
 })
 export class SharedModule {}

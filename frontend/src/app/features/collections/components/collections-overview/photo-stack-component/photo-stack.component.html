@@ -1,0 +1,36 @@
+<div
+  [ngStyle]="{
+    width: maxImageDimension.width + 100 + 'px',
+    height: maxImageDimension.height + 100 + 'px',
+    overflow: 'hidden'
+  }"
+  class="photo-stack"
+>
+  <div
+    *ngFor="let photo of photos; let i = index"
+    [ngStyle]="{ 'z-index': photos.length - i }"
+  >
+    <img
+      [src]="photo.photoImageUrl"
+      [ngStyle]="{
+        transform: 'rotate(' + i * 5 + 'deg)',
+        margin: '0',
+        'box-shadow': i === 0 ? '0 0 10px 2px #3B8CE0' : '',
+        top: i === 0 ? '10px' : '',
+        left: i === 0 ? '10px' : ''
+      }"
+      class="image__img"
+      mat-card-image
+    />
+    <div
+      (click)="onClickImage()"
+      [ngClass]="{ 'single-photo': photos.length === 1 }"
+      [ngStyle]="{
+        height: maxImageDimension.height + 100 + 'px'
+      }"
+      class="image__overlay image__overlay--primary"
+    >
+      <p>{{collection.collectionTitle}}</p>
+    </div>
+  </div>
+</div>

@@ -6,16 +6,24 @@
   </div>
   <div class="bottom-container">
     <div class="collections-overview-container">
-      <app-panel-header [title]="title"></app-panel-header>
+      <app-panel-header
+        [title]="title"
+        [isCollectionMenu]="true"
+        (toggled)="onToggleChange($event)"
+      ></app-panel-header>
       <div
         scrollWatch
         (scrollReachedLowerBound)="updateDisplayedCollections()"
         class="collections-content"
       >
-        <div class='collections-list' *ngFor="let columnWithCollections of [displayedCollections[0]]">
+        <div
+          class="collection-list"
+          *ngFor="let columnWithCollections of displayedCollections"
+        >
           <ng-container *ngFor="let collection of columnWithCollections">
             <app-photo-stack
               [collection]="collection"
+              [shuffleOnClick]="shuffleOnClick"
             >
             </app-photo-stack>
           </ng-container>

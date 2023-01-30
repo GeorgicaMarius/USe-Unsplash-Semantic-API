@@ -28,6 +28,8 @@ export class PhotosService {
         searchOptions,
         queryString
       );
+    } else if(searchOptions.term) {
+      queryString = queryString.concat(`&masterKeyword=${searchOptions.term}`);
     }
 
     const url = `${environment.apiUrl}/photos/search?${queryString}`;
@@ -49,18 +51,12 @@ export class PhotosService {
     searchOptions: SearchOptions,
     queryString: string
   ): string {
-    if (searchOptions.filterOptions.length) {
-      const searchValues = searchOptions.term.split(',');
-      const queryStringFilterOptions = searchOptions.filterOptions.map(
-        (element, index) => `${element.option}=${searchValues[index].trim()}`
-      );
+    const searchValues = searchOptions.term.split(',');
+    const queryStringFilterOptions = searchOptions.filterOptions.map(
+      (element, index) => `${element.option}=${searchValues[index].trim()}`
+    );
 
-      queryString += `&${queryStringFilterOptions.join('&')}`;
-      return queryString;
-    }
-
-    return (queryString = queryString.concat(
-      `&masterKeyword=${searchOptions!.term}`
-    ));
+    queryString += `&${queryStringFilterOptions.join('&')}`;
+    return queryString;
   }
 }

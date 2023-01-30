@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { SearchService } from 'src/app/core/services/search.service';
 import { FilterOption } from 'src/app/core/types/filter-option.type';
 import { SearchOptions } from '../../types/search-options.type';
@@ -10,6 +11,7 @@ import { SearchOptions } from '../../types/search-options.type';
 })
 export class SearchBarComponent implements OnInit {
   @Output() searchTermChange = new EventEmitter<SearchOptions>();
+  isSearchBarValid = true;
 
   filterOptions: FilterOption[] = [];
   searchBarPlaceholder: string = 'Search...';
@@ -21,7 +23,11 @@ export class SearchBarComponent implements OnInit {
     this.subscribeToFilterOptions();
   }
 
-  onSearchSubmit() {
+  onSearchSubmit(): void {
+    if (!this.searchTerm) {
+      return;
+    }
+
     this.searchTermChange.emit({
       term: this.searchTerm,
       filterOptions: this.filterOptions.filter((option) => option.checked),

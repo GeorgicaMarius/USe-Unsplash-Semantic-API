@@ -1,14 +1,32 @@
-@import 'src/app/styles/variables';
+@import "src/app/styles/variables";
 
-.photos-container{
+.photos-container {
   height: 88vh;
 
-  .top-container{
-    height: 10%;
-    text-align: center;
+  .top-container {
+    margin-bottom: 8px;
+    display: flex;
+
+    div {
+      display: inline-block;
+      margin: auto;
+      ::ng-deep {
+        .mat-mdc-form-field-subscript-wrapper {
+          display: none;
+        }
+      }
+
+      span {
+        display: block;
+        margin-top: 8px;
+        color: #c70000;
+        font-weight: bold;
+        font-size: 16px;
+      }
+    }
   }
 
-  .bottom-container{
+  .bottom-container {
     height: 88%;
     width: 68.4%;
     min-width: 1269.5px;
@@ -16,13 +34,13 @@
     margin-top: 16px;
     margin: auto;
 
-    .photos-overview-container{
+    .photos-overview-container {
       width: 100%;
       background-color: white;
       border-radius: 16px;
     }
 
-    .photos-content{
+    .photos-content {
       display: flex;
       flex-wrap: wrap;
       flex: 6;
@@ -36,9 +54,9 @@
 
 @media screen and (max-width: 507px) {
   .photos-container {
-      .bottom-container {
-        width: 100%;
-      }
+    .bottom-container {
+      width: 100%;
+    }
   }
 }
 

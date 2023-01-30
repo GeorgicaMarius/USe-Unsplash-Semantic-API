@@ -1,12 +1,20 @@
 <div class="photos-container">
   <div class="top-container">
-    <app-search-bar
-      (searchTermChange)="onSearchTermChange($event)"
-    ></app-search-bar>
+    <div>
+      <app-search-bar
+        (searchTermChange)="onSearchTermChange($event)"
+      ></app-search-bar>
+      <span *ngIf="displaySearchBarError"
+        >Number of terms and filters don't match.</span
+      >
+    </div>
   </div>
   <div class="bottom-container">
     <div class="photos-overview-container">
-      <app-panel-header [title]="title"></app-panel-header>
+      <app-panel-header
+        [title]="title"
+        [isCollectionMenu]="false"
+      ></app-panel-header>
       <div
         scrollWatch
         (scrollReachedLowerBound)="updateDisplayedPhotos()"

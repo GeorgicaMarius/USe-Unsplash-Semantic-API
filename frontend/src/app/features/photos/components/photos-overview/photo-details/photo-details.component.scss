@@ -23,12 +23,13 @@
       padding: 16px;
       display: flex;
       overflow: auto;
+      flex-wrap: wrap;
 
       .left-container {
         width: 70%;
 
         button {
-          background-color: $royal-blue
+          background-color: $royal-blue;
         }
 
         .image-container {
@@ -71,6 +72,16 @@
   .photos-container {
     .bottom-container {
       min-width: 451px;
+
+      .photo-details-container {
+        .left-container {
+          width: 100%;
+        }
+
+        .right-container {
+          width: auto;
+        }
+      }
     }
   }
 }

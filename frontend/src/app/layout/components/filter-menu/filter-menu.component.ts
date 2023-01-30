@@ -17,11 +17,13 @@ export class FilterMenuComponent {
   }
 
   subscribeToRouterEvents(): void {
-    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
-      const segments = this.router.url.split("/");
-      const text = segments.pop();
-      this.displayFilterMenu = text === 'photos' || text === 'collections';
-    });
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        const segments = this.router.url.split('/');
+        const text = segments.pop();
+        this.displayFilterMenu = text === 'photos';
+      });
   }
 
   onChangeCheckbox(value: any, filterOption: string, displayText: string) {

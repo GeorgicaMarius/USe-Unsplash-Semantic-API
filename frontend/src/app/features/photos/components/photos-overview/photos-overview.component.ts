@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { first } from 'rxjs';
-import { ScrollWatchDirective } from 'src/app/shared/directives/scroll-watch.directive';
 import { SearchOptions } from 'src/app/shared/types/search-options.type';
 import { PhotosService } from '../../services/photos.service';
 import { Photo } from '../../types/photo.type';
@@ -20,6 +19,7 @@ export class PhotosOverviewComponent implements OnInit {
   searchOptions: SearchOptions = {} as SearchOptions;
 
   lastScrolledPosition = 0;
+  displaySearchBarError: boolean = false;
 
   photos: Photo[] = [];
   displayedPhotos: Photo[][] = [];
@@ -38,8 +38,19 @@ export class PhotosOverviewComponent implements OnInit {
     this.getPhotos();
   }
 
-  onSearchTermChange(searchOptions: SearchOptions) {
+  onSearchTermChange(searchOptions: SearchOptions): void {
     this.searchOptions = searchOptions;
+
+    this.displaySearchBarError =
+      this.searchOptions.filterOptions.length === 0
+        ? false
+        : this.searchOptions.term.split(',').length !==
+          this.searchOptions.filterOptions.length;
+
+    if (this.displaySearchBarError) {
+      return;
+    }
+
     this.clearPhotos();
     this.getPhotos();
   }

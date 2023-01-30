@@ -1,7 +1,15 @@
 <div class="panel-header-container">
-  <span *ngIf="!displayBackButton; else goBack">
-    {{ title }}
-  </span>
+  <ng-container *ngIf="!displayBackButton; else goBack">
+    <span>
+      {{ title }}
+    </span>
+    <mat-slide-toggle
+      *ngIf="isCollectionMenu"
+      [checked]="true"
+      (change)="onToggleChanged($event)"
+      >Shuffle Photos</mat-slide-toggle
+    >
+  </ng-container>
 </div>
 
 <ng-template #goBack>

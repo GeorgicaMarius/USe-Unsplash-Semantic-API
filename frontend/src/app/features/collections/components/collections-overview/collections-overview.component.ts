@@ -20,6 +20,7 @@ export class CollectionsOverviewComponent {
   searchOptions: SearchOptions = {} as SearchOptions;
 
   lastScrolledPosition = 0;
+  shuffleOnClick = true;
 
   collections: Collection[] = [];
   displayedCollections: Collection[][] = [];
@@ -37,6 +38,10 @@ export class CollectionsOverviewComponent {
     this.collectionsService.resetPagination();
     this.initializeColumns();
     this.getCollections();
+  }
+
+  onToggleChange(value: any): void {
+    this.shuffleOnClick = value;
   }
 
   onSearchTermChange(searchOptions: SearchOptions) {
@@ -75,7 +80,7 @@ export class CollectionsOverviewComponent {
 
   private getCollections(): void {
     this.collectionsService
-      .getCollections(this.searchOptions)
+      .getCollections(this.searchOptions.term)
       .pipe(first())
       .subscribe((collections) => {
         this.collections.push(...collections);
@@ -98,7 +103,7 @@ export class CollectionsOverviewComponent {
           );
           this.collections[index].photoThumbnailUrl = photo.photoImageUrl;
         });
-        
+
         this.updateDisplayedCollections();
       });
   }

@@ -19,14 +19,11 @@ export class CollectionsService {
     this.limit = 100;
   }
 
-  getCollections(searchOptions: SearchOptions): Observable<Collection[]> {
+  getCollections(term: string): Observable<Collection[]> {
     let queryString = `offset=${this.offset}&limit=${this.limit}`;
 
-    if (searchOptions.filterOptions?.length > 0) {
-      queryString = this.updateQueryStringWithSearchOptions(
-        searchOptions,
-        queryString
-      );
+    if (term) {
+      queryString += `&title=${term}`;
     }
 
     const url = `${environment.apiUrl}/collections/search?${queryString}`;
@@ -40,24 +37,5 @@ export class CollectionsService {
     return this.httpClient.get<Collection>(
       `${environment.apiUrl}/collections/${id}`
     );
-  }
-
-  private updateQueryStringWithSearchOptions(
-    searchOptions: SearchOptions,
-    queryString: string
-  ): string {
-    if (searchOptions.filterOptions.length) {
-      const searchValues = searchOptions.term.split(',');
-      const queryStringFilterOptions = searchOptions.filterOptions.map(
-        (element, index) => `${element.option}=${searchValues[index].trim()}`
-      );
-
-      queryString += `&${queryStringFilterOptions.join('&')}`;
-      return queryString;
-    }
-
-    return (queryString = queryString.concat(
-      `&masterKeyword=${searchOptions!.term}`
-    ));
   }
 }
