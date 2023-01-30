@@ -21,6 +21,10 @@ import { Linkify2Pipe } from './pipes/linkify2.pipe';
     LinkifyPipe,
     Linkify2Pipe,
   ],
+  imports: [
+    CommonModule,
+    MaterialDesignModule
+  ],
   exports: [
     MaterialDesignModule,
     SearchBarComponent,
