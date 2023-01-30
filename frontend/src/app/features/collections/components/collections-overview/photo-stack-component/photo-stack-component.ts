@@ -7,10 +7,11 @@ import {first} from "rxjs";
 @Component({
   selector: 'app-photo-stack',
   template: `
-    <div [ngStyle]="{'width' :  (firstImageDimensions.width + 100)+ 'px', 'height' : (firstImageDimensions.height+ 100) + 'px', 'overflow': 'hidden'}">
+    <div
+      [ngStyle]="{'width' :  (maxImageDimension.width + 100)+ 'px', 'height' : (maxImageDimension.height+ 100) + 'px', 'overflow': 'hidden'}">
       <div *ngFor="let photo of photos; let i = index" [ngStyle]="{'z-index': photos.length - i}">
         <img (click)="changeImage()" [src]="photo.photoImageUrl"
-             [ngStyle]="{'width': firstImageDimensions.width + 'px', 'height': firstImageDimensions.height + 'px', 'transform': 'rotate('+i*5+'deg)'}">
+             [ngStyle]="{'transform': 'rotate('+i*5+'deg)', 'margin': '0', 'box-shadow': i === 0 ? '0 0 10px 2px #3B8CE0' : '', 'top': i === 0? '10px': '', 'left': i===0?'10px':''}">
       </div>
     </div>
   `,
@@ -29,7 +30,7 @@ import {first} from "rxjs";
 export class PhotoStackComponent {
   @Input() collection!: Collection;
   photos: Photo[] = [];
-  firstImageDimensions = {width: 0, height: 0};
+  maxImageDimension = {width: 0, height: 0};
 
   constructor(private readonly photosService: PhotosService) {
   }
@@ -44,14 +45,22 @@ export class PhotoStackComponent {
           photo.photoImageUrl = photo.photoImageUrl + '?w=300'
         });
         this.photos = photos.slice(0, 10);
-        const img = new Image();
-        // @ts-ignore
-        img.src = this.photos[0].photoImageUrl;
-        img.onload = () => {
-          this.firstImageDimensions = {width: img.width, height: img.height};
-        };
+        this.find();
       });
   }
+
+  private find() {
+    const img = new Image();
+    // @ts-ignore
+    img.src = this.photos[0].photoImageUrl;
+    img.onload = () => {
+      this.maxImageDimension = {
+        width: Math.max(img.width, this.maxImageDimension.width),
+        height: Math.max(img.height, this.maxImageDimension.height)
+      };
+    };
+  }
+
   shiftArrayToRight(arr: Photo[], places: number) {
     for (var i = 0; i < places; i++) {
       // @ts-ignore
