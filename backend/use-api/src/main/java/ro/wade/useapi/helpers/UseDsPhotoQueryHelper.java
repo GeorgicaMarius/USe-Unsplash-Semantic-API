@@ -86,9 +86,9 @@ public class UseDsPhotoQueryHelper {
         return photo;
     }
 
-    private List<UsePhotoQueryDto> executeBasicQuery(String filterBlock, String sortBlock, Integer offset, Integer limit) {
+    private List<UsePhotoQueryDto> executeBasicQuery(String filterBlock, String orderBlock, Integer offset, Integer limit) {
         if (filterBlock == null) filterBlock = "";
-        if (sortBlock == null) sortBlock = "";
+        if (orderBlock == null) orderBlock = "";
 
         ParameterizedSparqlString pss = new ParameterizedSparqlString();
         pss.setCommandText("" +
@@ -98,7 +98,7 @@ public class UseDsPhotoQueryHelper {
                 createVarsForAllFieldsBlock +
                 filterBlock +
                 "}\n" +
-                sortBlock +
+                orderBlock +
                 "OFFSET ?injectedOffsetLimit\n" +
                 "LIMIT ?injectedEntriesLimit\n");
         pss.setLiteral("injectedOffsetLimit", offset);
@@ -118,6 +118,71 @@ public class UseDsPhotoQueryHelper {
         return photos;
     }
 
+    private static String getPhotoIdsFilter(List<String> photoIds) {
+        StringBuilder filterBlockBuilder = new StringBuilder();
+        filterBlockBuilder.append("FILTER (");
+        for (int i = 0; i < photoIds.size(); i++) {
+            filterBlockBuilder.append(String.format("?photoId = \"%s\"", photoIds.get(i)));
+            if (i < photoIds.size() - 1) {
+                filterBlockBuilder.append(" || ");
+            }
+        }
+        filterBlockBuilder.append(")");
+        return filterBlockBuilder.toString();
+    }
+
+    private static String getPhotoOrderBlock(String orderBy) {
+        String orderBlock = "ORDER BY ASC(?photoSubmittedAt)\n";
+        if (orderBy == null)
+            return orderBlock;
+
+        switch (orderBy) {
+            case "downloads_asc":
+                orderBlock = "ORDER BY ASC(?statsDownloads)\n";
+                break;
+            case "downloads_desc":
+                orderBlock = "ORDER BY DESC(?statsDownloads)\n";
+                break;
+            case "views_asc":
+                orderBlock = "ORDER BY ASC(?statsViews)\n";
+                break;
+            case "views_desc":
+                orderBlock = "ORDER BY DESC(?statsViews)\n";
+                break;
+            case "submitted_asc":
+                orderBlock = "ORDER BY ASC(?photoSubmittedAt)\n";
+                break;
+            case "submitted_desc":
+                orderBlock = "ORDER BY DESC(?photoSubmittedAt)\n";
+                break;
+            case "width_asc":
+                orderBlock = "ORDER BY ASC(?photoWidth)\n";
+                break;
+            case "width_desc":
+                orderBlock = "ORDER BY DESC(?photoWidth)\n";
+                break;
+            case "height_asc":
+                orderBlock = "ORDER BY ASC(?photoHeight)\n";
+                break;
+            case "height_desc":
+                orderBlock = "ORDER BY DESC(?photoHeight)\n";
+                break;
+            case "city_asc":
+                orderBlock = "ORDER BY ASC(?photoLocationCity)\n";
+                break;
+            case "city_desc":
+                orderBlock = "ORDER BY DESC(?photoLocationCity)\n";
+                break;
+            case "country_asc":
+                orderBlock = "ORDER BY ASC(?photoLocationCountry)\n";
+                break;
+            case "country_desc":
+                orderBlock = "ORDER BY DESC(?photoLocationCountry)\n";
+                break;
+        }
+        return orderBlock;
+    }
+
     public UsePhotoQueryDto getPhotoById(String photoId) {
         String filterBlock = "  FILTER (?photoId = \"" + photoId + "\")\n";
         List<UsePhotoQueryDto> photos = executeBasicQuery(filterBlock, "", 0, 1);
@@ -132,12 +197,12 @@ public class UseDsPhotoQueryHelper {
     public List<UsePhotoQueryDto> getPhotosFilter(
             Integer offset,
             Integer limit,
+            String orderBy,
             String photographerFirstName,
             String photographerLastName,
             String cameraMake,
             String country,
-            String city,
-            List<String> photoIds
+            String city
     ) {
         StringBuilder filterBlockBuilder = new StringBuilder();
         if (photographerFirstName != null)
@@ -150,16 +215,14 @@ public class UseDsPhotoQueryHelper {
             filterBlockBuilder.append(String.format("  FILTER (regex (?photoLocationCountry, \"^%s$\", \"i\"))\n", country));
         if (city != null)
             filterBlockBuilder.append(String.format("  FILTER (regex (?photoLocationCity, \"^%s$\", \"i\"))\n", city));
-        if (photoIds.size() > 0) {
-            filterBlockBuilder.append(getPhotoIdsFilter(photoIds));
-        }
-        String sortBlock = "ORDER BY ASC(?photoSubmittedAt)\n";
-        return executeBasicQuery(filterBlockBuilder.toString(), sortBlock, offset, limit);
+        String orderBlock = getPhotoOrderBlock(orderBy);
+        return executeBasicQuery(filterBlockBuilder.toString(), orderBlock, offset, limit);
     }
 
     public List<UsePhotoQueryDto> getPhotosSearch(
             Integer offset,
             Integer limit,
+            String orderBy,
             String photographerFirstName,
             String photographerLastName,
             String cameraMake,
@@ -193,20 +256,7 @@ public class UseDsPhotoQueryHelper {
             }
             filterBlockBuilder.append(")");
         }
-        String sortBlock = "ORDER BY ASC(?photoSubmittedAt)\n";
-        return executeBasicQuery(filterBlockBuilder.toString(), sortBlock, offset, limit);
-    }
-
-    private static String getPhotoIdsFilter(List<String> photoIds) {
-        StringBuilder filterBlockBuilder = new StringBuilder();
-        filterBlockBuilder.append("FILTER (");
-        for (int i = 0; i < photoIds.size(); i++) {
-            filterBlockBuilder.append(String.format("?photoId = \"%s\"", photoIds.get(i)));
-            if (i < photoIds.size() - 1) {
-                filterBlockBuilder.append(" || ");
-            }
-        }
-        filterBlockBuilder.append(")");
-        return filterBlockBuilder.toString();
+        String orderBlock = getPhotoOrderBlock(orderBy);
+        return executeBasicQuery(filterBlockBuilder.toString(), orderBlock, offset, limit);
     }
 }

@@ -16,16 +16,15 @@ public class PhotoController {
     public List<UsePhotoQueryDto> getPhotosFilter(
             @RequestParam(value = "offset", defaultValue = "0") Integer offset,
             @RequestParam(value = "limit", defaultValue = "15") Integer limit,
+            @RequestParam(value = "orderBy", required = false) String orderBy,
             @RequestParam(value = "photographerFirstName", required = false) String filterPhotographerFirstName,
             @RequestParam(value = "photographerLastName", required = false) String filterPhotographerLastName,
             @RequestParam(value = "cameraMake", required = false) String filterCameraMake,
             @RequestParam(value = "country", required = false) String filterCountry,
-            @RequestParam(value = "city", required = false) String filterCity,
-            @RequestParam("photoIds") List<String> photoIds
-            ) {
+            @RequestParam(value = "city", required = false) String filterCity) {
 
-        return useDsPhotoQueryHelper.getPhotosFilter(offset, limit,
-                filterPhotographerFirstName, filterPhotographerLastName, filterCameraMake, filterCountry, filterCity, photoIds);
+        return useDsPhotoQueryHelper.getPhotosFilter(offset, limit, orderBy,
+                filterPhotographerFirstName, filterPhotographerLastName, filterCameraMake, filterCountry, filterCity);
     }
 
     @GetMapping("/photos/{photoId}")
@@ -42,6 +41,7 @@ public class PhotoController {
     public List<UsePhotoQueryDto> getPhotosSearch(
             @RequestParam(value = "offset", defaultValue = "0") Integer offset,
             @RequestParam(value = "limit", defaultValue = "15") Integer limit,
+            @RequestParam(value = "orderBy", required = false) String orderBy,
             @RequestParam(value = "photographerFirstName", required = false) String searchPhotographerFirstName,
             @RequestParam(value = "photographerLastName", required = false) String searchPhotographerLastName,
             @RequestParam(value = "cameraMake", required = false) String searchCameraMake,
@@ -50,7 +50,7 @@ public class PhotoController {
             @RequestParam(value = "keyword", required = false) String searchKeyword,
             @RequestParam(value = "masterKeyword", required = false) String masterKeyword) {
 
-        return useDsPhotoQueryHelper.getPhotosSearch(offset, limit, searchPhotographerFirstName,
+        return useDsPhotoQueryHelper.getPhotosSearch(offset, limit, orderBy, searchPhotographerFirstName,
                 searchPhotographerLastName, searchCameraMake, searchCountry, searchCity, searchKeyword, masterKeyword);
     }
 }

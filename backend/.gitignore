@@ -26,6 +26,4 @@ hs_err_pid*
 # custom rules
 .idea/
 .mvn/
-mvnw
-mvnw.cmd
 use-api/src/main/resources/use_model.rdf
