@@ -17,6 +17,7 @@ export class CollectionComponent {
   indexOfLastLoadedPhoto = 0;
   maxNumberOfDisplayedPhotosPerLoad = 30;
   numberOfColumnsToDisplay: number = 3;
+  displayedPhotosRatio: number[] = Array.from({length: this.numberOfColumnsToDisplay}, () => 0);
   displayedPhotos: Photo[][] = [];
   photos: Photo[] = [];
 
@@ -77,30 +78,17 @@ export class CollectionComponent {
   }
 
   private updatePhotoColumns(): void {
-    for (
-      let columnIndex = 0;
-      columnIndex < this.numberOfColumnsToDisplay;
-      columnIndex++
-    ) {
-      this.updateColumn(columnIndex);
+    for(let i = 0 ;i < this.photos.length; i++){
+      let columnNumber = this.getColumnNumber();
+      this.displayedPhotos[columnNumber].push(this.photos[i])
+      this.displayedPhotosRatio[columnNumber] += this.photos[i].photoHeight / this.photos[i].photoWidth;
     }
+    this.indexOfLastLoadedPhoto += this.maxNumberOfDisplayedPhotosPerLoad
+    this.photos = []
   }
 
-  private updateColumn(columnIndex: number) {
-    let columnPhotos: Photo[] = [];
-    const startIndex = this.indexOfLastLoadedPhoto + columnIndex;
-    const endIndex =
-      this.indexOfLastLoadedPhoto + this.maxNumberOfDisplayedPhotosPerLoad;
-
-    for (
-      let index = startIndex;
-      index < endIndex;
-      index += this.numberOfColumnsToDisplay
-    ) {
-      columnPhotos.push(this.photos[index]);
-    }
-
-    this.displayedPhotos[columnIndex].push(...columnPhotos);
+  private getColumnNumber() {
+    return this.displayedPhotosRatio.reduce((iMin, x, i, arr) => x < arr[iMin] ? i : iMin, 0);
   }
 
   private getCollection(): void {
