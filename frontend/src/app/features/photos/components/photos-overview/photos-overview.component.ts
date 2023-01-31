@@ -14,6 +14,7 @@ import { Photo } from '../../types/photo.type';
 export class PhotosOverviewComponent implements OnInit {
   title = 'Photos';
   numberOfColumnsToDisplay = 3;
+  displayedPhotosRatio: number[] = Array.from({length: this.numberOfColumnsToDisplay}, () => 0);
   indexOfLastLoadedPhoto = 0;
   maxNumberOfDisplayedPhotosPerLoad = 30;
   searchOptions: SearchOptions = {} as SearchOptions;
@@ -109,30 +110,17 @@ export class PhotosOverviewComponent implements OnInit {
   }
 
   private updatePhotoColumns(): void {
-    for (
-      let columnIndex = 0;
-      columnIndex < this.numberOfColumnsToDisplay;
-      columnIndex++
-    ) {
-      this.updateColumn(columnIndex);
+    if (this.indexOfLastLoadedPhoto < this.photos.length) {
+      for (let i = 0; i < this.photos.length; i++) {
+        let columnNumber = this.getColumnNumber();
+        this.displayedPhotos[columnNumber].push(this.photos[i])
+        this.displayedPhotosRatio[columnNumber] += this.photos[i].photoHeight / this.photos[i].photoWidth;
+      }
     }
   }
 
-  private updateColumn(columnIndex: number) {
-    let columnPhotos: Photo[] = [];
-    const startIndex = this.indexOfLastLoadedPhoto + columnIndex;
-    const endIndex =
-      this.indexOfLastLoadedPhoto + this.maxNumberOfDisplayedPhotosPerLoad;
-
-    for (
-      let index = startIndex;
-      index < endIndex;
-      index += this.numberOfColumnsToDisplay
-    ) {
-      columnPhotos.push(this.photos[index]);
-    }
-
-    this.displayedPhotos[columnIndex].push(...columnPhotos);
+  private getColumnNumber() {
+    return this.displayedPhotosRatio.reduce((iMin, x, i, arr) => x < arr[iMin] ? i : iMin, 0);
   }
 
   private shouldRetrieveMorePhotos(): boolean {

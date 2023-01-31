@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs';
-import { PhotosService } from 'src/app/features/photos/services/photos.service';
-import { Photo } from 'src/app/features/photos/types/photo.type';
-import { CollectionsService } from '../../../services/collections.service';
+import {Component} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {first} from 'rxjs';
+import {PhotosService} from 'src/app/features/photos/services/photos.service';
+import {Photo} from 'src/app/features/photos/types/photo.type';
+import {CollectionsService} from '../../../services/collections.service';
 
 @Component({
   selector: 'app-collection',
@@ -78,13 +78,13 @@ export class CollectionComponent {
   }
 
   private updatePhotoColumns(): void {
-    for(let i = 0 ;i < this.photos.length; i++){
-      let columnNumber = this.getColumnNumber();
-      this.displayedPhotos[columnNumber].push(this.photos[i])
-      this.displayedPhotosRatio[columnNumber] += this.photos[i].photoHeight / this.photos[i].photoWidth;
+    if (this.indexOfLastLoadedPhoto < this.photos.length) {
+      for (let i = 0; i < this.photos.length; i++) {
+        let columnNumber = this.getColumnNumber();
+        this.displayedPhotos[columnNumber].push(this.photos[i])
+        this.displayedPhotosRatio[columnNumber] += this.photos[i].photoHeight / this.photos[i].photoWidth;
+      }
     }
-    this.indexOfLastLoadedPhoto += this.maxNumberOfDisplayedPhotosPerLoad
-    this.photos = []
   }
 
   private getColumnNumber() {
