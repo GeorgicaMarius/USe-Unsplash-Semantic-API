@@ -1,18 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+@import "src/app/styles/variables";
 
-body{
+body {
   margin: 0px;
 }
 
 //Color pallete for nature themed photography
-test{
-  color: #40403C;
-  color: #1C3E57;
-  color: #3B8CE0;
-  color: #91CDEC;
-  color: #F0E8E6;
+test {
+  color: #40403c;
+  color: #1c3e57;
+  color: #3b8ce0;
+  color: #91cdec;
+  color: #f0e8e6;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  .cdk-overlay-container {
+    .mat-mdc-dialog-container {
+      border-radius: 16px;
 
+      .mat-mdc-dialog-surface {
+        background-color: white;
+        border-radius: 16px;
+
+        .mdc-slider__track {
+          background-color: lightblue;
+
+          .mdc-slider__track--active_fill {
+            border-color: $regal-blue;
+          }
+        }
+
+        .mdc-slider__thumb-knob {
+          border-color: $regal-blue;
+        }
+      }
+    }
+  }
+}

@@ -1,14 +1,14 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {first} from 'rxjs';
-import {PhotoAdditionalInfoService} from '../../../services/photo-additional-info.service';
-import {PhotosService} from '../../../services/photos.service';
-import {Photo} from '../../../types/photo.type';
-import {ImageAdjustmentComponent} from './image-adjustment/image-adjustment-component';
-import {MatDialog} from '@angular/material/dialog';
-import {AugmentParameters} from '../../../types/augment-parameters';
-import {ViewportRuler} from '@angular/cdk/overlay';
-import {HttpClient} from "@angular/common/http";
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs';
+import { PhotoAdditionalInfoService } from '../../../services/photo-additional-info.service';
+import { PhotosService } from '../../../services/photos.service';
+import { Photo } from '../../../types/photo.type';
+import { ImageAdjustmentComponent } from './image-adjustment/image-adjustment-component';
+import { MatDialog } from '@angular/material/dialog';
+import { AugmentParameters } from '../../../types/augment-parameters';
+import { ViewportRuler } from '@angular/cdk/overlay';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-photo-details',
@@ -51,7 +51,7 @@ export class PhotoDetailsComponent {
 
     const dialogRef = this.dialog.open(ImageAdjustmentComponent, {
       width: width,
-      data: {augmentParameters: this.augmentParameters},
+      data: { augmentParameters: this.augmentParameters },
     });
 
     dialogRef.afterClosed().subscribe((elem) => {
@@ -137,7 +137,7 @@ export class PhotoDetailsComponent {
     link.href = this.photo.photoImageUrl + '?' + this.augmentParametersString;
     link.download = 'image.jpg';
 
-    this.http.get(link.href, { responseType: 'blob' }).subscribe(response => {
+    this.http.get(link.href, { responseType: 'blob' }).subscribe((response) => {
       link.href = URL.createObjectURL(response);
       link.click();
 
