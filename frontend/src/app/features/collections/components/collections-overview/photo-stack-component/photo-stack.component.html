@@ -1,7 +1,7 @@
 <div
   [ngStyle]="{
-    width: maxImageDimension.width + 100 + 'px',
-    height: maxImageDimension.height + 100 + 'px',
+    width: maxImageDimension.width + 'px',
+    height: maxImageDimension.height + (photos.length * 8) + 'px',
     overflow: 'hidden'
   }"
   class="photo-stack"
@@ -13,20 +13,18 @@
     <img
       [src]="photo.photoImageUrl"
       [ngStyle]="{
-        transform: 'rotate(' + i * 5 + 'deg)',
+        top:  (i*8) + 'px',
         margin: '0',
-        'box-shadow': i === 0 ? '0 0 10px 2px #3B8CE0' : '',
-        top: i === 0 ? '10px' : '',
-        left: i === 0 ? '10px' : ''
+        'box-shadow': '0px 5px 10px 2px rgba(0, 0, 0, 1)'
       }"
       class="image__img"
       mat-card-image
     />
     <div
       (click)="onClickImage()"
-      [ngClass]="{ 'single-photo': photos.length === 1 }"
+      [ngClass]="{ 'single-photo': photos.length === 1 , 'no_shuffle_image' : !shuffleOnClick}"
       [ngStyle]="{
-        height: maxImageDimension.height + 100 + 'px'
+        height: maxImageDimension.height + (photos.length * 8) + 'px'
       }"
       class="image__overlay image__overlay--primary"
     >

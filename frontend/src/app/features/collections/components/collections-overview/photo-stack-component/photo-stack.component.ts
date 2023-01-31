@@ -16,6 +16,7 @@ export class PhotoStackComponent {
 
   photos: Photo[] = [];
   maxImageDimension = { width: 0, height: 0 };
+  sortedPhotos : [] = [];
 
   constructor(
     private readonly photosService: PhotosService,
@@ -28,23 +29,29 @@ export class PhotoStackComponent {
       .getPhotosById(this.collection.photoIds)
       .pipe(first())
       .subscribe((photos) => {
+        this.photos = photos.slice(0, 10);
         photos.forEach((photo) => {
           photo.photoImageUrl = photo.photoImageUrl + '?w=300';
+          this.find(photo);
         });
-        this.photos = photos.slice(0, 10);
-        this.find();
       });
   }
 
-  private find() {
+  private find(photo: Photo) {
     const img = new Image();
     // @ts-ignore
-    img.src = this.photos[0].photoImageUrl;
+    img.src = photo.photoImageUrl;
     img.onload = () => {
+      // @ts-ignore
+      this.sortedPhotos.push([img.height, photo])
       this.maxImageDimension = {
         width: Math.max(img.width, this.maxImageDimension.width),
         height: Math.max(img.height, this.maxImageDimension.height),
       };
+      if (this.sortedPhotos.length === this.photos.length) {
+        this.sortedPhotos.sort((a, b) => a[0] - b[0]);
+        this.photos = this.sortedPhotos.map(pair => pair[1])
+      }
     };
   }
 
@@ -55,9 +62,16 @@ export class PhotoStackComponent {
     }
   }
 
+  shiftArrayToLeft(arr: Photo[], places: number) {
+    for (var i = 0; i < places; i++) {
+      // @ts-ignore
+      arr.push(arr.shift());
+    }
+  }
+
   onClickImage() {
     if (this.shuffleOnClick && this.photos.length > 1) {
-      this.shiftArrayToRight(this.photos, 1);
+      this.shiftArrayToLeft(this.photos, 1);
       return;
     }
 
