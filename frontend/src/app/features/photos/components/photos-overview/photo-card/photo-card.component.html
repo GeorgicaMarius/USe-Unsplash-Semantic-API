@@ -1,15 +1,17 @@
 <ng-container *ngIf="photo && !errorOnImageLoading">
   <div class="image">
-    <a href="/photos/{{photo.photoId}}">
-    <img
-      [src]="photo.photoImageUrl + '?w=400'"
-      (error)="onErrorLoadImage()"
-      class="image__img"
-      mat-card-image
-    />
-    <div class="image__overlay image__overlay--primary">
-      <p class="image__description">{{photo.photoDescription | titlecase }}</p>
-    </div>
-  </a>
+    <a [href]="url">
+      <img
+        [src]="photo.photoImageUrl + '?w=400'"
+        (error)="onErrorLoadImage()"
+        class="image__img"
+        mat-card-image
+      />
+      <div class="image__overlay image__overlay--primary">
+        <p class="image__description">
+          {{photo.photoDescription | titlecase }}
+        </p>
+      </div>
+    </a>
   </div>
 </ng-container>

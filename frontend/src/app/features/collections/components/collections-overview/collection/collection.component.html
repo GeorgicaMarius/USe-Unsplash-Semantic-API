@@ -1,6 +1,6 @@
 <div class="collections-container">
   <div class="top-container">
-    <app-search-bar></app-search-bar>
+    <app-search-bar class="hidden-search-bard"></app-search-bar>
   </div>
   <div class="bottom-container">
     <div class="collections-overview-container">
@@ -16,10 +16,7 @@
       >
         <div *ngFor="let columnWithPhotos of displayedPhotos">
           <ng-container *ngFor="let photo of columnWithPhotos">
-            <app-photo-card
-              [photo]="photo"
-            >
-            </app-photo-card>
+            <app-photo-card [photo]="photo"> </app-photo-card>
           </ng-container>
         </div>
       </div>
