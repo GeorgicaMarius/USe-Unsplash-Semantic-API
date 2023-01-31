@@ -1,8 +1,7 @@
 @import "src/app/styles/variables";
 
 :host {
-  .routing-menu-container{
-
+  .routing-menu-container {
     button {
       display: block;
       color: white;
@@ -12,6 +11,11 @@
         transform: scale(2);
         color: $heavy-metal;
       }
+
+      &:hover {
+        background-color: #efefef;
+      }
+
       ::ng-deep {
         .mdc-button__label {
           color: $heavy-metal;

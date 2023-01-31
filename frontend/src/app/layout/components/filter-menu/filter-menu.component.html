@@ -1,25 +1,32 @@
 <div *ngIf="displayFilterMenu">
   <h1>Filter by:</h1>
   <div>
-    <mat-checkbox (change)="onChangeCheckbox($event, 'country', 'country')"
+    <mat-checkbox
+      matRipple
+      (change)="onChangeCheckbox($event, 'country', 'country')"
       >Country</mat-checkbox
     >
-    <mat-checkbox (change)="onChangeCheckbox($event, 'city', 'city')"
+    <mat-checkbox matRipple (change)="onChangeCheckbox($event, 'city', 'city')"
       >City</mat-checkbox
     >
     <mat-checkbox
+      matRipple
       (change)="onChangeCheckbox($event, 'cameraMake', 'camera maker')"
       >Camera Maker
     </mat-checkbox>
     <mat-checkbox
+      matRipple
       (change)="onChangeCheckbox($event, 'photographerFirstName', 'first name')"
       >Photographer First Name</mat-checkbox
     >
     <mat-checkbox
+      matRipple
       (change)="onChangeCheckbox($event, 'photographerLastName', 'last name')"
       >Photographer Last Name</mat-checkbox
     >
-    <mat-checkbox (change)="onChangeCheckbox($event, 'keyword', 'keyword')"
+    <mat-checkbox
+      matRipple
+      (change)="onChangeCheckbox($event, 'keyword', 'keyword')"
       >Keyword</mat-checkbox
     >
   </div>

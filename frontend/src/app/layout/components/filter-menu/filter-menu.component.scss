@@ -20,5 +20,13 @@
         font-size: 18px;
       }
     }
+
+    &:hover {
+      ::ng-deep {
+        .mat-mdc-checkbox-ripple {
+          background-color: #0000000c;
+        }
+      }
+    }
   }
 }
