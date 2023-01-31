@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs';
-import { PhotoAdditionalInfoService } from '../../../services/photo-additional-info.service';
-import { PhotosService } from '../../../services/photos.service';
-import { Photo } from '../../../types/photo.type';
-import { ImageAdjustmentComponent } from './image-adjustment/image-adjustment-component';
-import { MatDialog } from '@angular/material/dialog';
-import { AugmentParameters } from '../../../types/augment-parameters';
-import { ViewportRuler } from '@angular/cdk/overlay';
+import {Component} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {first} from 'rxjs';
+import {PhotoAdditionalInfoService} from '../../../services/photo-additional-info.service';
+import {PhotosService} from '../../../services/photos.service';
+import {Photo} from '../../../types/photo.type';
+import {ImageAdjustmentComponent} from './image-adjustment/image-adjustment-component';
+import {MatDialog} from '@angular/material/dialog';
+import {AugmentParameters} from '../../../types/augment-parameters';
+import {ViewportRuler} from '@angular/cdk/overlay';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-photo-details',
@@ -38,7 +39,8 @@ export class PhotoDetailsComponent {
     private photoService: PhotosService,
     private additionalInfoService: PhotoAdditionalInfoService,
     private dialog: MatDialog,
-    private viewportRuler: ViewportRuler
+    private viewportRuler: ViewportRuler,
+    private http: HttpClient
   ) {
     this.getIdFromUrl();
   }
@@ -49,7 +51,7 @@ export class PhotoDetailsComponent {
 
     const dialogRef = this.dialog.open(ImageAdjustmentComponent, {
       width: width,
-      data: { augmentParameters: this.augmentParameters },
+      data: {augmentParameters: this.augmentParameters},
     });
 
     dialogRef.afterClosed().subscribe((elem) => {
@@ -128,5 +130,20 @@ export class PhotoDetailsComponent {
     let index = this.router.url.lastIndexOf('/');
     index = index == -1 ? this.router.url.length : index;
     return this.router.url.substring(0, index);
+  }
+
+  downloadImage() {
+    const link = document.createElement('a');
+    link.href = this.photo.photoImageUrl + '?' + this.augmentParametersString;
+    link.download = 'image.jpg';
+
+    this.http.get(link.href, { responseType: 'blob' }).subscribe(response => {
+      link.href = URL.createObjectURL(response);
+      link.click();
+
+      setTimeout(() => {
+        URL.revokeObjectURL(link.href);
+      }, 100);
+    });
   }
 }
