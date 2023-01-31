@@ -1,8 +1,8 @@
-<ng-container *ngIf="photo">
-  <div (click)="onOpenPhotoDetails()"
-       class="image">
+<ng-container *ngIf="photo && !errorOnImageLoading">
+  <div (click)="onOpenPhotoDetails()" class="image">
     <img
       [src]="photo.photoImageUrl + '?w=400'"
+      (error)="onErrorLoadImage()"
       class="image__img"
       mat-card-image
     />
@@ -11,4 +11,3 @@
     </div>
   </div>
 </ng-container>
-

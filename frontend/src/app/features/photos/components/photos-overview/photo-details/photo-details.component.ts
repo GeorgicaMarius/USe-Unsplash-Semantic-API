@@ -1,13 +1,13 @@
-import {Component} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {first} from 'rxjs';
-import {PhotoAdditionalInfoService} from '../../../services/photo-additional-info.service';
-import {PhotosService} from '../../../services/photos.service';
-import {Photo} from '../../../types/photo.type';
-import {ImageAdjustmentComponent} from "./image-adjustment/image-adjustment-component";
-import {MatDialog} from '@angular/material/dialog';
-import {AugmentParameters} from "../../../types/augment-parameters";
-import {ViewportRuler} from "@angular/cdk/overlay";
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs';
+import { PhotoAdditionalInfoService } from '../../../services/photo-additional-info.service';
+import { PhotosService } from '../../../services/photos.service';
+import { Photo } from '../../../types/photo.type';
+import { ImageAdjustmentComponent } from './image-adjustment/image-adjustment-component';
+import { MatDialog } from '@angular/material/dialog';
+import { AugmentParameters } from '../../../types/augment-parameters';
+import { ViewportRuler } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-photo-details',
@@ -16,9 +16,12 @@ import {ViewportRuler} from "@angular/cdk/overlay";
 })
 export class PhotoDetailsComponent {
   id: string = '';
+  collectionId: string = '';
   photo!: Photo;
   additionalData: Map<string, any> = new Map<string, any>();
+
   isLoading = true;
+
   augmentParameters: AugmentParameters = {
     brightness: 0,
     contrast: 0,
@@ -26,8 +29,8 @@ export class PhotoDetailsComponent {
     shadow: 0,
     highlight: 0,
     sharpness: 0,
-  }
-  augmentParametersString: string = ''
+  };
+  augmentParametersString: string = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -41,24 +44,33 @@ export class PhotoDetailsComponent {
   }
 
   openImageAdjustment(): void {
-    const width = this.viewportRuler.getViewportSize().width < 768 ? '100%' : '50%';
+    const width =
+      this.viewportRuler.getViewportSize().width < 768 ? '100%' : '50%';
 
     const dialogRef = this.dialog.open(ImageAdjustmentComponent, {
       width: width,
-      data: {augmentParameters: this.augmentParameters}
+      data: { augmentParameters: this.augmentParameters },
     });
 
-    dialogRef.afterClosed().subscribe(elem => {
+    dialogRef.afterClosed().subscribe((elem) => {
       if (elem) {
         this.augmentParameters = elem;
-        this.augmentParametersString = `&bri=${this.augmentParameters.brightness}&con=${this.augmentParameters.contrast}&sat=${this.augmentParameters.saturation}&shad=${this.augmentParameters.shadow}&high=${this.augmentParameters.highlight}&sharp=${this.augmentParameters.sharpness}`
+        this.augmentParametersString = `&bri=${this.augmentParameters.brightness}&con=${this.augmentParameters.contrast}&sat=${this.augmentParameters.saturation}&shad=${this.augmentParameters.shadow}&high=${this.augmentParameters.highlight}&sharp=${this.augmentParameters.sharpness}`;
       }
     });
   }
 
   getIdFromUrl(): void {
     this.activatedRoute.paramMap.pipe(first()).subscribe((map) => {
-      this.id = map.get('id') ?? '';
+      const routeId = map.get('id');
+      this.id = routeId ?? '';
+
+      const routePhotoId = map.get('photoId');
+      if (routePhotoId) {
+        this.id = routePhotoId;
+        this.collectionId = map.get('collectionId') ?? '';
+      }
+
       this.getInformation();
     });
   }
@@ -99,12 +111,16 @@ export class PhotoDetailsComponent {
       .getCountryInformation(this.photo.photoLocationCountry)
       .pipe(first())
       .subscribe((countryInfo) => {
-          this.additionalData.set('country', countryInfo);
-        }
-      );
+        this.additionalData.set('country', countryInfo);
+      });
   }
 
   onClickedBackButton(): void {
+    if (this.collectionId) {
+      this.router.navigateByUrl(`/collections/${this.collectionId}`);
+      return;
+    }
+
     this.router.navigateByUrl(this.getPhotosOverviewPath());
   }
 

@@ -3,18 +3,23 @@
     <div class="photos-overview-container">
       <app-panel-header
         [displayBackButton]="true"
+        [goBackText]="collectionId ? 'Collection' : 'Overview'"
         (clickedBackButton)="onClickedBackButton()"
       ></app-panel-header>
       <div class="photo-details-container">
         <div *ngIf="!isLoading" class="left-container">
           <div class="image-container">
             <img
-              [src]="photo.photoImageUrl + '?w=650&h=650' + augmentParametersString"
+              [src]="
+                photo.photoImageUrl + '?w=650&h=650' + augmentParametersString
+              "
               class="image__img"
               mat-card-image
             />
           </div>
-          <button mat-raised-button  (click)="openImageAdjustment()">Adjust Image</button>
+          <button mat-raised-button (click)="openImageAdjustment()">
+            Adjust Image
+          </button>
           <div class="image-info">
             <app-photo-info [photo]="photo"></app-photo-info>
           </div>

@@ -3,6 +3,7 @@ import { Photo } from '../../../../photos/types/photo.type';
 import { Collection } from '../../../types/collection.type';
 import { PhotosService } from '../../../../photos/services/photos.service';
 import { first } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-photo-stack',
@@ -16,7 +17,10 @@ export class PhotoStackComponent {
   photos: Photo[] = [];
   maxImageDimension = { width: 0, height: 0 };
 
-  constructor(private readonly photosService: PhotosService) {}
+  constructor(
+    private readonly photosService: PhotosService,
+    private readonly router: Router
+  ) {}
 
   ngAfterViewInit() {
     // get the dimensions of the first image
@@ -52,9 +56,13 @@ export class PhotoStackComponent {
   }
 
   onClickImage() {
-    if (this.shuffleOnClick) {
+    if (this.shuffleOnClick && this.photos.length > 1) {
       this.shiftArrayToRight(this.photos, 1);
       return;
     }
+
+    this.router.navigateByUrl(
+      `${this.router.url}/${this.collection.collectionId}`
+    );
   }
 }

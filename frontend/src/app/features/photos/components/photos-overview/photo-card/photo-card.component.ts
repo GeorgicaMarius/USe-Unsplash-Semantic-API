@@ -11,6 +11,12 @@ export class PhotoCardComponent {
 
   @Output() openedDetails: EventEmitter<Photo> = new EventEmitter();
 
+  errorOnImageLoading = false;
+
+  onErrorLoadImage(): void {
+    this.errorOnImageLoading = true;
+  }
+
   onOpenPhotoDetails(): void {
     this.openedDetails.emit(this.photo);
   }

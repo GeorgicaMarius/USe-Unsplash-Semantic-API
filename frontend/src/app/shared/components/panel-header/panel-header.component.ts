@@ -6,13 +6,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./panel-header.component.scss'],
 })
 export class PanelHeaderComponent {
-  @Input() title: string = 'Generic Title';
+  @Input() title: string = '';
   @Input() displayBackButton: boolean = false;
   @Input() isCollectionMenu: boolean = false;
+  @Input() goBackText: string = 'Overview';
+
   @Output() clickedBackButton: EventEmitter<void> = new EventEmitter();
   @Output() toggled: EventEmitter<boolean> = new EventEmitter();
-
-  goBackText: string = 'Overview';
 
   onClickedBackButton(): void {
     this.clickedBackButton.emit();
