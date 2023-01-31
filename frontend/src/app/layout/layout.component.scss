@@ -24,11 +24,11 @@
   }
 }
 
-
 @media screen and (max-width: 1669px) {
   .layout-container {
     .sidenav-content {
-        transition-delay: 1s;
+      margin-left: 32px !important;
+      transition-delay: 1s;
     }
   }
 }

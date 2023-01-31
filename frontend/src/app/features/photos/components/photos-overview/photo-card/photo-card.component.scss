@@ -1,4 +1,4 @@
-@import 'src/app/styles/variables';
+@import "src/app/styles/variables";
 
 .image {
   margin-top: 6px;
@@ -22,7 +22,7 @@ img {
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
   color: #ffffff;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,7 +45,7 @@ img {
   background: #3b3939;
 }
 
-.image__overlay>* {
+.image__overlay > * {
   transform: translateY(20px);
   transition: transform 0.25s;
 }
@@ -55,11 +55,19 @@ img {
   cursor: pointer;
 }
 
-.image__overlay:hover>* {
+.image__overlay:hover > * {
   transform: translateY(0);
 }
 
 .image__description {
   font-size: 1.5em;
   margin-top: 0.25em;
+}
+
+@media screen and (max-width: 507px) {
+  .image__overlay {
+    p {
+      font-size: 18px;
+    }
+  }
 }
