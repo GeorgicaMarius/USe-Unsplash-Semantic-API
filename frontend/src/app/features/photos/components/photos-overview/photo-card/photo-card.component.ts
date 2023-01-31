@@ -9,15 +9,9 @@ import { Photo } from '../../../types/photo.type';
 export class PhotoCardComponent {
   @Input() photo!: Photo;
 
-  @Output() openedDetails: EventEmitter<Photo> = new EventEmitter();
-
   errorOnImageLoading = false;
 
   onErrorLoadImage(): void {
     this.errorOnImageLoading = true;
-  }
-
-  onOpenPhotoDetails(): void {
-    this.openedDetails.emit(this.photo);
   }
 }

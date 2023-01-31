@@ -28,8 +28,7 @@
 
   .bottom-container {
     height: 88%;
-    width: 68.4%;
-    min-width: 1269.5px;
+    width: 1300px;
     display: flex;
     margin-top: 16px;
     margin: auto;
@@ -48,11 +47,15 @@
       height: 88%;
       padding: 16px;
       overflow: auto;
+
+      > div.ng-star-inserted {
+        flex: 32%;
+      }
     }
   }
 }
 
-@media screen and (max-width: 507px) {
+@media screen and (max-width: 1400px) {
   .photos-container {
     .bottom-container {
       width: 100%;
@@ -60,10 +63,22 @@
   }
 }
 
-@media screen and (max-width: 1336px) {
+@media screen and (max-width: 1050px) {
   .photos-container {
     .bottom-container {
-      min-width: 451px;
+      .photos-content > div.ng-star-inserted {
+        flex: 49%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .photos-container {
+    .bottom-container {
+      .photos-content > div.ng-star-inserted {
+        flex: 100%;
+      }
     }
   }
 }

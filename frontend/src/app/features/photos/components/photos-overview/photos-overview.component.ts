@@ -55,10 +55,6 @@ export class PhotosOverviewComponent implements OnInit {
     this.getPhotos();
   }
 
-  onOpenedDetails(photo: Photo): void {
-    this.router.navigateByUrl(`${this.router.url}/${photo.photoId}`);
-  }
-
   updateDisplayedPhotos(): void {
     this.getPhotosToDisplayForCurrentPage();
   }

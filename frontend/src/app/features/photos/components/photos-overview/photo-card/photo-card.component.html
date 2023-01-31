@@ -1,5 +1,6 @@
 <ng-container *ngIf="photo && !errorOnImageLoading">
-  <div (click)="onOpenPhotoDetails()" class="image">
+  <div class="image">
+    <a href="/photos/{{photo.photoId}}">
     <img
       [src]="photo.photoImageUrl + '?w=400'"
       (error)="onErrorLoadImage()"
@@ -9,5 +10,6 @@
     <div class="image__overlay image__overlay--primary">
       <p class="image__description">{{photo.photoDescription | titlecase }}</p>
     </div>
+  </a>
   </div>
 </ng-container>
