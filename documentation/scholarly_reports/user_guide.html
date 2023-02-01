@@ -37,9 +37,9 @@
                 <li><a href="#ref_nav_introduction">Introduction</a> </li>
                 <li><a href="#ref_nav_pages">Web Pages of the Application</a>
                     <ol>
-                        <li><a href="#ref_nav_pages_photo_search">Search and Filter Photos Page</a></li>
+                        <li><a href="#ref_nav_pages_photo_search">Photos Page</a></li>
                         <li><a href="#ref_nav_pages_photo_details">Individual Photo Page</a></li>
-                        <li><a href="#ref_nav_pages_collection_search">Search and Filter Collections Page</a></li>
+                        <li><a href="#ref_nav_pages_collection_search">Collections Page</a></li>
                         <li><a href="#ref_nav_pages_collection_details">Individual Collection Page</a></li>
                     </ol>
                 </li>
@@ -122,14 +122,17 @@
                 functionality.</p>
 
             <section id="ref_nav_pages_photo_search">
-                <h3>Search and Filter Photos Page</h3>
-                <p>This page provides the users with various controls to search photos, for example by description or
-                    keywords, or to filter them by criterias like photographer, country, city, camera make, etc. The
-                    page also displays the search results in a grid-like manner and allows users to click any photo
-                    result, and go to their individual page.</p>
+                <h3>Photos Page</h3>
+                <p>This page provides the users with various controls to search photos by various criterias, for example
+                    by description or keywords, photographer name, country, city, camera, make, etc. The page displays
+                    the search results in a grid-like manner and allows users to click any photo result, and go to their
+                    individual page. Users can also sort the results by downloads, views, date submitted, width, height,
+                    city, country, etc. </p>
                 <figure typeof="sa:image">
-                    <img src="resources/images/user_guide/placeholder_1920_937.png" alt="Search and Filter Photos Page">
-                    <figcaption>Search and Filter Photos Page</figcaption>
+                    <img src="resources/images/user_guide/app_photos_overview.png"
+                        alt="Photos Page - Example search for flowers by keyword, descending by downloads">
+                    <figcaption>Photos Page - Example search for "flower" by keyword, descending by downloads
+                    </figcaption>
                 </figure>
             </section>
 
@@ -141,20 +144,21 @@
                     coordinates, etc. This page is also augmented with data from external datastores like DBpedia about
                     concepts like the photo location country, city, about the place, etc.</p>
                 <figure typeof="sa:image">
-                    <img src="resources/images/user_guide/placeholder_1920_937.png" alt="Individual Photo Page">
-                    <figcaption>Individual Photo Page</figcaption>
+                    <img src="resources/images/user_guide/app_photos_individual.png"
+                        alt="Individual Photo Page Example">
+                    <figcaption>Individual Photo Page - Example</figcaption>
                 </figure>
             </section>
 
             <section id="ref_nav_pages_collection_search">
-                <h3>Search and Filter Collections Page</h3>
+                <h3>Collections Page</h3>
                 <p>This page provides the users with various controls to search collections, for example, by title. The
                     page also displays the results in a grid-like manner and allows users to click the collection
-                    results, which lead to their individual page.</p>
+                    results to shuffle through their content photos, or to go to the collection individual page.</p>
                 <figure typeof="sa:image">
-                    <img src="resources/images/user_guide/placeholder_1920_937.png"
-                        alt="Search and Filter Collections Page">
-                    <figcaption>Search and Filter Collections Page</figcaption>
+                    <img src="resources/images/user_guide/app_collections_overview.png"
+                        alt="Collections Page - Example search by title nature">
+                    <figcaption>Collections Page - Example search by title "nature"</figcaption>
                 </figure>
             </section>
 
@@ -164,8 +168,9 @@
                     photos that make up the collection in a grid-like manner. Users can then click a photo result, and
                     go to its individual page to find out more details.</p>
                 <figure typeof="sa:image">
-                    <img src="resources/images/user_guide/placeholder_1920_937.png" alt="Individual Collection Page">
-                    <figcaption>Individual Collection Page</figcaption>
+                    <img src="resources/images/user_guide/app_collections_individual.png"
+                        alt="Individual Collection Page Example">
+                    <figcaption>Individual Collection Page - Example</figcaption>
                 </figure>
             </section>
         </section>
@@ -192,10 +197,10 @@
             <section id="ref_nav_rest_api_photos">
                 <h3>Photos Endpoints</h3>
                 <p>The information related to photos can be retrieved via a set of endpoints, and can be customized via
-                    query parameters. For example, photos can be searched or filtered via one or multiple criterias, in
-                    a <b>case-insensitive</b> manner for the string query parameters. Pagination support is offered via
-                    <b><code>offset</code></b> (default is 0) and <b><code>limit</code></b> (default is 15) query
-                    parameters.
+                    query parameters. For example, photos can be sorted, searched and filtered via one or multiple
+                    criterias, in a <b>case-insensitive</b> manner for the string query parameters. Pagination support
+                    is offered via <b><code>offset</code></b> (default is 0) and <b><code>limit</code></b> (default is
+                    15) query parameters.
                 </p>
                 <p>The endpoints for photos are:</p>
                 <ul>

@@ -61,8 +61,10 @@
                 <li><a href="#ref_nav_knowledge_modeling">Knowledge Modeling</a>
                     <ol>
                         <li><a href="#ref_nav_knowledge_modeling_vocabularies">Vocabularies</a></li>
+                        <li><a href="#ref_nav_knowledge_modeling_vowl">VOWL Ontology Representation</a></li>
                         <li><a href="#ref_nav_knowledge_modeling_photo">Photos - Ontology and Graph</a></li>
                         <li><a href="#ref_nav_knowledge_modeling_collection">Collections - Ontology and Graph</a></li>
+                        <li><a href="#ref_nav_knowledge_modeling_rdfa">RDFa Usage</a></li>
                     </ol>
                 </li>
                 <li><a href="#ref_nav_data_access">Accessing Data using SPARQL</a>
@@ -619,6 +621,23 @@
                 </figure>
             </section>
 
+            <section id="ref_nav_knowledge_modeling_vowl">
+                <h3>VOWL Ontology Representation</h3>
+                <p>In the following can be found the VOWL: Visual Notation for OWL Ontologies<a
+                        href="#ref_biblio_vowl2"><sup>10</sup></a> representation of the ontology used by our
+                    application. OWL (Web Ontology Language) representation facilitates software interpretation of
+                    content provided by resources available on the Web. More particularly, VOWL was used, which defines
+                    a visual language for the user-oriented representation of ontologies and provides graphical
+                    depictions for elements of the Web Ontology Language that are combined to a force-directed graph
+                    layout visualizing the ontology.
+                </p>
+                <figure typeof="sa:image">
+                    <img src="resources/images/technical_report/owl_use_ontology.svg"
+                        alt="VOWL Representation of the USe Ontology">
+                    <figcaption>VOWL Representation of the USe Ontology</figcaption>
+                </figure>
+            </section>
+
             <section id="ref_nav_knowledge_modeling_photo">
                 <h3>Photos - Ontology and Graph</h3>
                 <p>The Photo conceptual model is built using multiple <a href="https://schema.org">schema.org</a>
@@ -761,6 +780,22 @@
                     <li><b>rdf:li</b> Container membership property that indicates which photos are part of the
                         collection.</li>
                 </ul>
+            </section>
+
+            <section id="ref_nav_knowledge_modeling_rdfa">
+                <h3>RDFa Usage</h3>
+                <p>Our application contains embedded RDFa constructs, which is another way of serializing the RDF model
+                    into structured data and including it in the HTML documents. This also facilitates software
+                    interpretation of content provided by resources available on the Web by programs.
+                </p>
+
+                <p>The following figure represents the output of <a href="https://osds.openlinksw.com/">OpenLink
+                        Structured Data Sniffer</a> browser extension on the page of a photo from our application:</p>
+                <figure typeof="sa:image">
+                    <img src="resources/images/technical_report/openlink_structured_data_sniffer_result.png"
+                        alt="Example of OpenLink Structured Data Sniffer result for a photo page">
+                    <figcaption>Example of OpenLink Structured Data Sniffer result for a photo page</figcaption>
+                </figure>
             </section>
         </section>
 
@@ -1090,6 +1125,27 @@
                         <meta property="schema:actionStatus" content="CompletedActionStatus">
                         (accessed on
                         <time property="schema:endTime" datatype="xsd:date" datetime="2022-11-26">26 Nov 2022</time>)
+                    </span>.
+                </li>
+                <li id="ref_biblio_vowl2" typeof="schema:WebPage" role="doc-biblioentry"
+                    resource="http://vowl.visualdataweb.org/v2/" property="schema:citation">
+                    <cite property="schema:name">
+                        <a href="http://vowl.visualdataweb.org/v2/">VOWL - Specification of Version 2.0</a>
+                    </cite>, by
+                    <span property="schema:author" typeof="schema:Person">
+                        <span property="schema:name">Stefan Negru</span>
+                    </span>,
+                    <span property="schema:author" typeof="schema:Person">
+                        <span property="schema:name">Steffen Lohmann</span>
+                    </span>,
+                    <span property="schema:author" typeof="schema:Person">
+                        <span property="schema:name">Florian Haag</span>
+                    </span>; published in <time property="schema:datePublished" datatype="xsd:gYear"
+                        datetime="2014">2014</time>
+                    <span property="schema:potentialAction" typeof="schema:ReadAction">
+                        <meta property="schema:actionStatus" content="CompletedActionStatus">
+                        (accessed on
+                        <time property="schema:endTime" datatype="xsd:date" datetime="2022-02-01">01 Feb 2023</time>)
                     </span>.
                 </li>
             </ol>
