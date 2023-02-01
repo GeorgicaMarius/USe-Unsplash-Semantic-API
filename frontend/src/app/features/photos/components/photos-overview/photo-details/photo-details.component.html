@@ -1,4 +1,7 @@
 <div class="photos-container">
+  <div class="top-container">
+    <app-search-bar class="hidden-search-bard"></app-search-bar>
+  </div>
   <div class="bottom-container">
     <div class="photos-overview-container">
       <app-panel-header
@@ -20,7 +23,9 @@
           <button mat-raised-button (click)="openImageAdjustment()">
             Adjust Image
           </button>
-          <button mat-raised-button (click)="downloadImage()">Download Image</button>
+          <button mat-raised-button (click)="downloadImage()">
+            Download Image
+          </button>
           <div class="image-info">
             <app-photo-info [photo]="photo"></app-photo-info>
           </div>

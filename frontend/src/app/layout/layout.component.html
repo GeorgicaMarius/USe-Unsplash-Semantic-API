@@ -1,15 +1,15 @@
 <div class="layout-container">
   <app-header (clickedMenu)="onClickMenuIcon()"></app-header>
   <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav  [opened]="isSideMenuOpen"
-                  mode="side"
-                  class="sidenav">
+    <mat-sidenav [opened]="isSideMenuOpen" mode="side" class="sidenav">
       <app-routing-menu></app-routing-menu>
-      <app-filter-menu></app-filter-menu>
+      <ng-container *ngIf="displayFilterAndOrderMenu">
+        <app-filter-menu></app-filter-menu>
+        <app-sort-menu></app-sort-menu>
+      </ng-container>
     </mat-sidenav>
     <mat-sidenav-content class="sidenav-content">
       <ng-content></ng-content>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
-

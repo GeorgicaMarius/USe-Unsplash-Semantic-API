@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FilterMenuComponent } from './components/filter-menu/filter-menu.component';
 import { RoutingMenuComponent } from './components/routing-menu/routing-menu.component';
 import { CoreModule } from '../core/core.module';
+import { SortMenuComponent } from './components/sort-menu/sort-menu.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { CoreModule } from '../core/core.module';
     HeaderComponent,
     FilterMenuComponent,
     RoutingMenuComponent,
+    SortMenuComponent,
   ],
   imports: [CommonModule, SharedModule, CoreModule],
   exports: [LayoutComponent],

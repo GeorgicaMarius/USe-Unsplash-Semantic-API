@@ -1,8 +1,18 @@
 @import "src/app/styles/variables";
 
 .photos-container {
-  height: 85vh;
-  margin-top: 64px;
+  height: calc(100vh - 108px);
+  .top-container {
+    text-align: center;
+
+    .hidden-search-bard {
+      ::ng-deep {
+        .mat-mdc-form-field {
+          visibility: hidden;
+        }
+      }
+    }
+  }
 
   .bottom-container {
     height: 88%;
@@ -14,12 +24,13 @@
   }
 
   .photos-overview-container {
+    height: 100%;
     width: 100%;
     background-color: white;
     border-radius: 16px;
 
     .photo-details-container {
-      height: 88%;
+      height: calc(100% - 112px);
       padding: 16px;
       display: flex;
       overflow: auto;

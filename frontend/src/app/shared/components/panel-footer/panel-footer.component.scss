@@ -1,10 +1,9 @@
-@import 'src/app/styles/variables';
+@import "src/app/styles/variables";
 
 .panel-footer-container {
-    height: 6%;
-    margin: 0px;
-    background-color: $royal-blue;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
+  margin: 0px;
+  min-height: 43px;
+  background-color: $royal-blue;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
 }
-

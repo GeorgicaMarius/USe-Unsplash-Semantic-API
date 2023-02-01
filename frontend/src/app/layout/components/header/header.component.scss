@@ -1,25 +1,25 @@
-@import 'src/app/styles/variables';
+@import "src/app/styles/variables";
 
-.header-container{
+.header-container {
   display: flex;
-  background-color: #3B8CE0;
+  background-color: #3b8ce0;
   height: 10vh;
   max-height: 64px;
-  min-height: 32px;
+  min-height: 48px;
 
-  #header-title{
+  #header-title {
     margin: auto;
     color: $wisp-pink;
     font-size: 24px;
     font-weight: bold;
   }
 
-  button{
-    margin-top: 8px;
-    margin-left: 16px;
+  button {
+    margin: auto 0;
+    margin-left: 24px;
   }
 
-  #menu-icon{
+  #menu-icon {
     color: $wisp-pink;
     transform: scale(2);
   }

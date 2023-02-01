@@ -16,7 +16,7 @@
     }
 
     .sidenav-content {
-      height: 93.2vh;
+      height: calc(100vh - 61px);
       margin-left: 32px;
       margin-right: 32px;
       background-color: $wisp-pink;

@@ -1,7 +1,7 @@
 @import "src/app/styles/variables";
 
 .photos-container {
-  height: 88vh;
+  height: calc(100vh - 108px);
 
   .top-container {
     margin-bottom: 8px;
@@ -34,6 +34,7 @@
     margin: auto;
 
     .photos-overview-container {
+      height: 100%;
       width: 100%;
       background-color: white;
       border-radius: 16px;
@@ -44,7 +45,7 @@
       flex-wrap: wrap;
       flex: 6;
       gap: 10px 10px;
-      height: 88%;
+      height: calc(100% - 112px);
       padding: 16px;
       overflow: auto;
 

@@ -23,14 +23,8 @@ export class PhotosService {
   getPhotos(searchOptions: SearchOptions): Observable<Photo[]> {
     let queryString = `offset=${this.offset}&limit=${this.limit}`;
 
-    if (searchOptions.filterOptions?.length > 0) {
-      queryString = this.updateQueryStringWithSearchOptions(
-        searchOptions,
-        queryString
-      );
-    } else if(searchOptions.term) {
-      queryString = queryString.concat(`&masterKeyword=${searchOptions.term}`);
-    }
+    queryString = this.addFilterOptions(searchOptions, queryString);
+    queryString = this.addSortingOption(searchOptions, queryString);
 
     const url = `${environment.apiUrl}/photos/search?${queryString}`;
 
@@ -47,7 +41,42 @@ export class PhotosService {
     return this.httpClient.get<Photo>(`${environment.apiUrl}/photos/${id}`);
   }
 
-  private updateQueryStringWithSearchOptions(
+  private addSortingOption(
+    searchOptions: SearchOptions,
+    queryString: string
+  ): string {
+    if (searchOptions.sortingOption?.option) {
+      const sortingOption = searchOptions.sortingOption.option;
+      const sortingOrder = searchOptions.sortingOption.isAscending
+        ? 'asc'
+        : 'desc';
+      queryString = queryString.concat(
+        `&orderBy=${sortingOption}_${sortingOrder}`
+      );
+    }
+
+    return queryString;
+  }
+
+  private addFilterOptions(
+    searchOptions: SearchOptions,
+    queryString: string
+  ): string {
+    if (searchOptions.filterOptions?.length > 0) {
+      return (queryString = this.updateQueryStringWithFilterOptions(
+        searchOptions,
+        queryString
+      ));
+    } else if (searchOptions.term) {
+      return (queryString = queryString.concat(
+        `&masterKeyword=${searchOptions.term}`
+      ));
+    }
+
+    return queryString;
+  }
+
+  private updateQueryStringWithFilterOptions(
     searchOptions: SearchOptions,
     queryString: string
   ): string {

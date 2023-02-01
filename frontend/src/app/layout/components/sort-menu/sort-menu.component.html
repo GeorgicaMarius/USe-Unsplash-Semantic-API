@@ -1,0 +1,15 @@
+<div>
+  <h1>Sort by:</h1>
+  <mat-checkbox matRipple [checked]="false" (change)="onCheckboxChange($event)"
+    >Ascending</mat-checkbox
+  >
+  <mat-form-field appearance="fill">
+    <mat-label>Criteria</mat-label>
+    <mat-select (selectionChange)="onSelectingCriteria($event)">
+      <mat-option>-- None --</mat-option>
+      <mat-option *ngFor="let option of options" [value]="option.value">
+        {{option.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

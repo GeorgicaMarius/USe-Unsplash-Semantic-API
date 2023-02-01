@@ -9,22 +9,9 @@ import { SearchService } from 'src/app/core/services/search.service';
   styleUrls: ['./filter-menu.component.scss'],
 })
 export class FilterMenuComponent {
-  displayPhotoFilter: boolean = true;
   displayFilterMenu: boolean = true;
 
-  constructor(private searchService: SearchService, private router: Router) {
-    this.subscribeToRouterEvents();
-  }
-
-  subscribeToRouterEvents(): void {
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
-        const segments = this.router.url.split('/');
-        const text = segments.pop();
-        this.displayFilterMenu = text === 'photos';
-      });
-  }
+  constructor(private searchService: SearchService, private router: Router) {}
 
   onChangeCheckbox(value: any, filterOption: string, displayText: string) {
     this.searchService.addFilterOption({

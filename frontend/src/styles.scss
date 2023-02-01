@@ -44,3 +44,15 @@ body {
     }
   }
 }
+
+.mdc-text-field--filled .mdc-line-ripple::after{
+  border-bottom-color: transparent;
+}
+
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label{
+  color: white !important;
+}
+
+.mdc-text-field .mdc-text-field__input{
+  caret-color: white !important;
+}
