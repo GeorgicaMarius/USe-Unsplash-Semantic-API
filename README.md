@@ -1,6 +1,4 @@
 <div align="center">
-
-  <img src="docs/scholarly_reports/resources/images/logo_use.png" alt="logo" width="200" height="auto" />
   <h1>USe - Unsplash Semantic API</h1>
   
   <p>
@@ -30,7 +28,7 @@
   </p>
      
   <h4>
-    <a href="https://github.com/GeorgicaMarius/USe-Unsplash-Semantic-API/">View Demo</a>
+    <a href="https://youtu.be/CfOrZcPxVBg" target="_blank">View Demo</a>
     <span> · </span>
     <a href="https://github.com/GeorgicaMarius/USe-Unsplash-Semantic-API/tree/main/docs/">Documentation</a>
   </h4>
