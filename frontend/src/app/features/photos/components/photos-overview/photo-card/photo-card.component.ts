@@ -18,7 +18,7 @@ export class PhotoCardComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.url = `/photos/${this.photo.photoId}`;
+    this.url = `./photos/${this.photo.photoId}`;
     this.getRouteParams();
   }
 
