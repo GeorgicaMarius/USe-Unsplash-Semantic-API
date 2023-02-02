@@ -142,11 +142,28 @@
                     source Unsplash URL, it's description, associated keywords, the number of downloads and views, exif
                     data like camera model and ISO, submission date, photo location country and city, the GPS
                     coordinates, etc. This page is also augmented with data from external datastores like DBpedia about
-                    concepts like the photo location country, city, about the place, etc.</p>
+                    concepts like the photo location country and city, when available regarding the photo location.</p>
                 <figure typeof="sa:image">
-                    <img src="resources/images/user_guide/app_photos_individual.png"
-                        alt="Individual Photo Page Example">
+                    <img src="resources/images/user_guide/app_photos_individual_augment_before.png"
+                        alt="Individual Photo Page - Example">
                     <figcaption>Individual Photo Page - Example</figcaption>
+                </figure>
+
+                <p>The applications also allows the users to augment the image by changing properties like brightness,
+                    contrast, saturation, shadow, highlight and sharpness. The users can at any point change these an
+                    see the result, or just revert back to the original image.</p>
+                <figure typeof="sa:image">
+                    <img src="resources/images/user_guide/app_photos_individual_augment_menu.png"
+                        alt="Photo Augment Menu - Example">
+                    <figcaption>Photo Augment Menu - Example</figcaption>
+                </figure>
+
+                <p>The result of the applied options and values can be seen after clicking on the "Augment" button.
+                    There is also the possibility to download the resulting image using the "Download Image" button.</p>
+                <figure typeof="sa:image">
+                    <img src="resources/images/user_guide/app_photos_individual_augment_result.png"
+                        alt="Photo Augment Result - Example">
+                    <figcaption>Photo Augment Result - Example</figcaption>
                 </figure>
             </section>
 
@@ -197,10 +214,10 @@
             <section id="ref_nav_rest_api_photos">
                 <h3>Photos Endpoints</h3>
                 <p>The information related to photos can be retrieved via a set of endpoints, and can be customized via
-                    query parameters. For example, photos can be sorted, searched and filtered via one or multiple
-                    criterias, in a <b>case-insensitive</b> manner for the string query parameters. Pagination support
-                    is offered via <b><code>offset</code></b> (default is 0) and <b><code>limit</code></b> (default is
-                    15) query parameters.
+                    query parameters. For example, photos can be <b>sorted</b>, <b>searched</b> and <b>filtered</b> via
+                    one or multiple criterias, in a <b>case-insensitive</b> manner for the string query parameters.
+                    Pagination support is offered via <b><code>offset</code></b> (default is 0) and
+                    <b><code>limit</code></b> (default is 15) query parameters.
                 </p>
                 <p>The endpoints for photos are:</p>
                 <ul>
@@ -241,9 +258,9 @@
             <section id="ref_nav_rest_api_collections">
                 <h3>Collections Endpoints</h3>
                 <p>Collections can also be retrieved via a set of endpoints, and the queries can be customized via
-                    query parameters. For example, collections can be searched by title in a <b>case-insensitive</b>
-                    manner. Pagination support is offered via <b><code>offset</code></b> (default is 0) and
-                    <b><code>limit</code></b> (default is 15) query parameters.
+                    query parameters. For example, collections can be <b>searched</b> by title in a
+                    <b>case-insensitive</b> manner. Pagination support is offered via <b><code>offset</code></b>
+                    (default is 0) and <b><code>limit</code></b> (default is 15) query parameters.
                 </p>
                 <p>The endpoints for collections are:</p>
                 <ul>

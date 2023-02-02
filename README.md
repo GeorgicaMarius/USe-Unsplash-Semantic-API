@@ -48,6 +48,14 @@ USe - Unsplash Semantic API is a multi-device Web application that follows the L
 
 A public blog recording the project progress is available at [Unsplash Semantic API Work Blog](https://use-wade.github.io/articles.html).
 
+<!-- About the Demo -->
+
+## :movie_camera: Demo
+
+Video demonstration of the features offered by the application can be found on YouTube [here](https://youtu.be/CfOrZcPxVBg).
+
+Also, the application is deployed on :cloud: and can be accessed via [this link](https://georgicamarius.github.io/USe-Unsplash-Semantic-API/photos) (if the images are not loading, please allow ~1 minute until a backend instance starts).
+
 <!-- Team members -->
 
 ## :handshake: Team Members

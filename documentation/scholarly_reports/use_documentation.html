@@ -238,25 +238,31 @@
                     application aims to offer an attractive and easy to use interface for the users in order to access
                     the functionality of the backend in an intuitive manner.</p>
                 <p>Some of the main goals would be to provide the functionality to visualize, augment, filter and
-                    compare photos and collection to the user throught their web browser.</p>
+                    search photos and collection to the user throught their web browser.</p>
 
                 <p>The application is a Single-Page Application<a href="#ref_biblio_mdn_spa"><sup>8</sup></a>
                     organised in a set of pages with well defined functionality:</p>
                 <ul>
-                    <li><b>Home page</b> serves as an entry point for the users, and provides a summary of the
-                        functionalities of the application.</li>
-                    <li><b>Search and Filter page</b> provides the users with various controls to search photos, for
-                        example by description or keywords, or to filter them by criterias like photographer, country,
-                        city, camera make, etc. The page also displays the results in a grid-like manner and allow
-                        users to click them, and go to their individual page.</li>
-                    <li><b>Individual Photo page</b> Allows the user to view the image with a larger size, to see it's
-                        description, source Unsplash URL, data about it's original pixels size, submission date,
-                        location name and GPS coordinates, etc. This page is also augmented with data from external
-                        datastores like DBpedia or Wikidata about concepts like the photo location country, city, about
-                        the place, etc.</li>
-                    <li><b>Compare Photos page</b> allows users to compare two or more photos, side by side, and
-                        highlights the differences between the properties of the images. This enables users to easily
-                        study and find differences between photos of interest.</li>
+                    <li><b>Photos Page</b> provides the users with various controls to search photos by various
+                        criterias, for example by description or keywords, photographer name, country, city, camera,
+                        make, etc. The page displays the search results in a grid-like manner and allows users to click
+                        any photo result, and go to their individual page. Users can also sort the results by downloads,
+                        views, date submitted, width, height, city, country, etc.</li>
+                    <li><b>Individual Photo Page</b> allows the users to view a particular photo with a larger
+                        resolution size, to view it's source Unsplash URL, it's description, associated keywords, the
+                        number of downloads and views, exif data like camera model and ISO, submission date, photo
+                        location country and city, the GPS coordinates, etc. This page is also augmented with data from
+                        external datastores like DBpedia about concepts like the photo location country and city, when
+                        available regarding the photo location. The applications also allows the users to augment the
+                        image by changing properties like brightness, contrast, saturation, shadow, highlight and
+                        sharpness.</li>
+                    <li><b>Collections Page</b> provides the users with various controls to search collections, for
+                        example, by title. The page also displays the results in a grid-like manner and allows users to
+                        click the collection results to shuffle through their content photos, or to go to the collection
+                        individual page.</li>
+                    <li><b>Individual Collection Page</b> allows the users to view a particular collection. It displays
+                        the collection title and the photos that make up the collection in a grid-like manner. Users can
+                        then click a photo result, and go to its individual page to find out more details.</li>
                 </ul>
             </section>
 
